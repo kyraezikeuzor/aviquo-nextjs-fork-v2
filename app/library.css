@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /*COLORS*/
+  --background-color-rgb: #fcfcfc;
+  --background-gradient: radial-gradient(#fceeee, #fffdfb, #fff);
+  --background-gradient: radial-gradient(#fceeee, #fff 50%);
+  --color-1: rgb(252, 252, 252); 
+  --color-2: #3981F6;
+  --color-light-grey:rgb(247, 247, 247);
+  --color-grey: rgb(220, 220, 220);
+  --color-dark-grey:rgb(84, 83, 83);
+  --color-navy: #03121e;
+
+  /*PADDING & MARGIN*/
+  --padding-1: 16vh 8vw;
+  --margin-1: 2vh 8vw;
+
+  /*BORDER*/
+  --border-radius: 8px;
+  --border-primary: 2px solid rgb(247, 247, 247);
+
+  /*SHADOW*/
+  --box-shadow-1: rgba(0,0,0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
+  --box-shadow-2: 0px 2px 4px -2px rgba(0, 0, 0, 0.10);
+  --box-shadow-card: 0px 4px 6px -4px rgba(0, 0, 0, 0.10), 0px 3px 15px -3px rgba(0, 0, 0, 0.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color-rgb: #fcfcfc;
+  }
+}
+
+/*PURE STYLES*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color:#242424;
+  transition: all .2s ease-in;
+}
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-repeat: no-repeat;
+  background: var(--background-gradient);
+  background-size: cover;
+  background-position: center;
+  height: auto;
+}
+
+main {
+  gap: 20px;
+  display:flex;
+  flex-direction:column;
+  padding: var(--padding-1);
+  height: 100vh;
+}
+
+section {
+  gap: 20px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  position: relative;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight:600;
+  line-height: 1;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+a {
+  cursor:pointer;
+  color: #242424;
+  font-weight:600;
+}
+
+
+/*LIBRARY CLASS GLOBALS*/
+.flex-row {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content: center;
+  gap:20px;
+}
+
+.flex-col {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+  gap:10px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+
+.fa {
+  font-size:1rem;
+  width:15px;
+  height:auto;
+}
+
+/*MEDIA QUERIES*/
+/* MOBILE PHONES */
+@media only screen and (max-width: 600px) {
+  /* CSS rules for small screens */
+  h1 {font-size:44px;}
+  h2 {font-size:40px}
+  h3 {font-size:36px}
+  h4 {font-size:32px}
+  h5 {font-size:28px}
+  h6 {font-size:20px}
+  p {font-size:12px; margin-top:0}
+}
+
+/* TABLETS */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  /* CSS rules for medium screens */
+  h1 {font-size:60px}
+  h2 {font-size:44px}
+  h3 {font-size:40px}
+  h4 {font-size:36px}
+  h5 {font-size:28px}
+  h6 {font-size:20px}
+  p {font-size:14px; margin-top:0}
+}
+
+/* LAPTOPS/DESKTOPS */
+@media only screen and (min-width: 1025px) {
+  /* CSS rules for large screens */
+  h1 {font-size:60px}
+  h2 {font-size:44px}
+  h3 {font-size:30px}
+  h4 {font-size:36px}
+  h5 {font-size:28px}
+  h6 {font-size:20px}
+  p {font-size:16px; margin-top:0}
+}

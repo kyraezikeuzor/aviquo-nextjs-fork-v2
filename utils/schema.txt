@@ -1,0 +1,9 @@
+Dashboard/Home Page
+-- Forum
+-- Marketplace
+
+Navigation Sidebar
+-- Profile
+-- Explore
+-- Initiative Guidance
+-- Settings

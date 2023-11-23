@@ -1,0 +1,31 @@
+.sidebar {
+    float:left;
+    height: 100vh;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    border-right: 1px solid var(--color-grey);
+    position:relative;
+}
+
+.sidebar.logo {
+    position: absolute;
+    left:0;
+    cursor: pointer;
+}
+
+.sidebar-link-container {
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding: 4vh 2vw;
+}
+
+.sidebar-link-container a {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:10px;
+    color:#242424;
+}

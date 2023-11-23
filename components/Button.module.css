@@ -1,0 +1,100 @@
+/*BUTTON*/
+.btn-container {
+    font-family:'Inter', sans-serif;
+}
+
+.btn {
+    font-weight:600;
+    white-space: nowrap; /*Never wrap text within button*/
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    gap:8px;
+}
+
+.submit {
+    font-size:14px;
+    border-radius:18px;
+    padding: 12px 20px;
+    width: 300px;
+    background-color:var(--color-2);
+}
+
+
+.btn *, .submit * { /*For coloring icons and images*/
+    color:inherit;
+}
+
+.p {
+    color: #fff;
+    background-color: var(--color-navy);
+}
+
+
+.s {
+    background-color: #fff;
+    border: 1px solid var(--color-grey);
+    color:var(--color-dark-grey);
+}
+
+/*Header styling needs to be here to override the primary & secondary styling*/
+
+.header {
+    border-radius: 24px;
+    font-size: 14px;
+    justify-content:center;
+    padding: 4px 18px;
+    color: var(--color-dark-grey);
+    background-color: var(--color-1);
+    border: 1px solid var(--color-grey);
+    box-shadow: none;
+}
+
+.header a {
+    text-decoration:none;
+}
+
+
+.sm {
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.md {
+    padding: 6px 18px;
+    font-size: 16px;
+}
+
+.lg {
+    
+}
+
+
+.p:hover {
+    opacity:0.9;
+}
+
+.s:hover {
+    background-color:rgb(246, 244, 244);
+}
+
+@media (min-width: 640px) { 
+    
+ }
+@media (min-width: 768px) { 
+    
+ }
+@media (min-width: 1024px) { 
+    
+ }
+@media (min-width: 1280px) { 
+    
+ }
+@media (min-width: 1536px) { 
+    
+ }

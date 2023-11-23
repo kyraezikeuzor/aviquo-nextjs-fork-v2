@@ -1,0 +1,77 @@
+.main {
+    display:flex;
+    flex-direction:column;
+    background-image: url('');
+    background-size: 100%, cover;
+    background-position: center;
+    gap:50px;
+}
+
+.main header {
+    align-self:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:10px;
+}
+
+.main header h1 {
+    font-size: 66px;
+    align-self:center;
+    line-height:1.1;
+    inline-size:75%;
+}
+
+.main header h1 span {
+    background: -webkit-linear-gradient(#FCFAFD, #ee6ba6, #FFB83F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main p {
+    margin-bottom:20px;
+    inline-size:75%;
+    font-size:18px;
+    opacity:0.6;
+    font-weight:500;
+}
+
+.main article {
+    margin: 5vh 0;
+}
+
+.main .landing-main-img {
+    box-shadow: var(--box-shadow-1);
+    border: 1px solid #ee6ba6;
+    border-radius: 8px;
+}
+
+
+.article-card {
+    background-color: #fffcfc;
+    padding: 4vh 2vw;
+    border: 1px solid var(--color-grey);
+    border-radius:12px;
+}
+
+.article-card img {
+    overflow:hidden;
+    border:1px solid red;
+}
+
+@media only screen and (max-width: 600px) {
+    .main header h1 {
+        inline-size:100%;
+    }
+    .main header p {
+        inline-size:100%;
+    }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+}
+@media only screen and (min-width: 1025px) {
+
+}

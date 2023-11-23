@@ -1,0 +1,66 @@
+.logo {
+    display: flex;
+    align-items:center;
+    gap: 10px;
+    text-decoration:none;
+}
+
+.logo p {
+    font-weight:600;
+}
+
+.logo .img-container {
+    display:flex;
+    align-items:center;
+    padding: 5px;
+    border: 1px solid var(--color-grey);
+    border-radius:8px;
+}
+
+.img-container img {
+    width:30px;
+    height:30px;
+    object-fit: cover;
+}
+
+.sm p {
+    font-size: 16px;
+}
+
+.md p {
+    font-size:20px;
+}
+
+.lg p {
+    font-size:32px;
+}
+
+.lg img {
+    width:50px;
+    height: 50px;
+
+}
+
+
+/* Styles for mobile phones */
+@media only screen and (max-width: 600px) {
+    /* CSS rules for small screens */
+    .logo p {
+        font-size:14px;
+    }
+  
+  }
+  
+  /* Styles for tablets */
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* CSS rules for medium screens */
+    
+    
+  }
+  
+  /* Styles for laptops/desktops */
+  @media only screen and (min-width: 1025px) {
+    /* CSS rules for large screens */
+    
+  
+  }
