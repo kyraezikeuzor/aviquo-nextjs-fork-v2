@@ -8,6 +8,7 @@
     top:0;
     width:100%;
     z-index: 999;
+    box-shadow: var(--box-shadow-1);
 }
 
 
@@ -19,29 +20,8 @@
     list-style:none;
 }
 
-.nav li a, .home-nav li a {
+.nav li a {
     font-size:16px;
-    font-weight:600;
-    color:#242424;
-    text-decoration:none;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-}
-
-.home-nav {
-    display:flex;
-    flex-direction:row;
-    padding:2vh 2vw;
-    align-items:center;
-    position:absolute;
-    top:0;
-    width:100%;
-    border-bottom: 1px solid var(--color-grey);
-}
-
-.home-nav li a {
-    font-size:20px;
     font-weight:600;
     color:#242424;
     text-decoration:none;

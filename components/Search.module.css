@@ -1,0 +1,29 @@
+.search {
+    width: 400px;
+    border-radius: 12px;
+    padding: 6px 20px;
+    border: 1px solid var(--color-grey);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    background-color: #fff;
+  }
+  
+.search * {
+    color: #242424;
+}
+  
+.search input {
+    width: inherit;
+    margin:0px;
+    padding:0px;
+    border:none;
+    outline:none;
+    background-color: #fff;
+}
+
+.search input:focus {
+    border: none;
+}

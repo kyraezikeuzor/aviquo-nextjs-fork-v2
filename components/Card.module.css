@@ -1,0 +1,37 @@
+.card {
+    background-color: #fff;
+    border: 1px solid var(--color-grey);
+    box-shadow: var(--box-shadow-card);
+    border-radius:12px;
+    padding:20px;
+    width:300px;
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+    word-wrap: break-word;
+    gap:10px;
+}
+
+.sm {
+    width:100px;
+}
+
+.md {
+    width:300px;
+}
+
+.lg {
+    width:100%;
+}
+
+
+.card h3 {
+    font-size:20px;
+    font-weight:600;
+}
+
+.card p {
+    font-size:12px;
+    word-wrap: break-word
+}
+

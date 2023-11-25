@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React from 'react'
 import styles from './Sidebar.module.css'
 import Link from 'next/link'
 import Button from './Button'
@@ -15,30 +15,32 @@ export const Sidebar = () => {
                 <Logo minimal={false} size='sm'/>
             </div>
             <div className={styles['sidebar-link-container']}>
-                <Link href='/home/'>
+                <Link href='/dashboard'>
                     <FontAwesomeIcon icon={faHouse} className='fa'/>
                     Home
                 </Link>
-                <Link href='/home/'>
+                <Link href='/dashboard/discover'>
+                    <FontAwesomeIcon icon={faGear} className='fa'/>
+                    Discover
+                </Link>
+                <Link href='/dashboard/profile'>
                     <FontAwesomeIcon icon={faHouse} className='fa'/>
                     Profile
                 </Link>
-                <Link href='/home/outreach'>
+                <Link href='/dashboard/notifications'>
                     <FontAwesomeIcon icon={faUser} className='fa'/>
-                    Initiative Guidance
-                </Link>
-                <Link href='/home/applications'>
-                    <FontAwesomeIcon icon={faBriefcase} className='fa'/>
-                    Messages
-                </Link>
-                <Link href='/home/settings'>
-                    <FontAwesomeIcon icon={faGear} className='fa'/>
                     Notifications
                 </Link>
-                <Link href='/home/settings'>
+                <Link href='/dashboard/forum'>
+                    <FontAwesomeIcon icon={faBriefcase} className='fa'/>
+                    Forum
+                </Link>
+                <Link href='/dashboard/settings'>
                     <FontAwesomeIcon icon={faGear} className='fa'/>
                     Settings
                 </Link>
+                
+                <br/>
                 
                 <Button type='btn' style='p' size='md'>Log out</Button>
             </div>

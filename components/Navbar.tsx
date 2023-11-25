@@ -9,10 +9,8 @@ export const Navbar = () => {
     <div className={styles.nav}>
         <ul className='flex-row'>
             <Logo minimal={false} size='md'/>
-            <li><Link href='/explore'>About Us</Link></li>
-            <li><Link href='/explore'>About Us</Link></li>
-            <li><Link href='/database'>Resources</Link></li>
-            <li><Link href='/explore'>About Us</Link></li>
+            <li><Link href='/about-us'>About Us</Link></li>
+            <li><Link href='/resources'>Resources</Link></li>
         </ul>
 
         <ul className='flex-row'>

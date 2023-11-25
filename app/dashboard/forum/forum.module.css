@@ -1,0 +1,4 @@
+.main {
+    gap:20px;
+    margin-left:var(--width-sidebar);
+}

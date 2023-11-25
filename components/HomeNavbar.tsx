@@ -1,16 +1,18 @@
 import React from 'react'
-import styles from './Navbar.module.css'
 import Link from 'next/link'
 import Button from './Button'
 import Logo from './Logo'
+import styles from './HomeNavbar.module.css'
+import Search from './Search'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBell} from "@fortawesome/free-regular-svg-icons";
 
 export default function HomeNavbar() {
   return (
     <nav className={styles['home-nav']}>
-        <ul className='flex-row'>
-            <li><Link href='/explore'>For You</Link></li>
-            <li><Link href='/database'>Marketplace</Link></li>
-        </ul>
+      <Search/>  
+
+      <FontAwesomeIcon icon={faBell} className={styles.bell}/>
     </nav>
   )
 }

@@ -1,0 +1,13 @@
+.toggle {
+    width:100px;
+    cursor:pointer;
+    border-radius:12px;
+}
+
+.toggle.on{
+    background-color:orange;
+}
+
+.toggle.off{
+    background-color:green;
+}

@@ -1,0 +1,34 @@
+[
+    {
+        "id":1,
+        "name": "Bob Roberts",
+        "username": "bob_roberts",
+        "email": "bobroberts@hotmail.com",
+        "address": {
+        "street": "Benevuee 23 Street",
+        "suite": "1221 Suite",
+        "city": "New York City",
+        "zipcode": "90821",
+        "geo": {
+            "lat": "128390810321",
+            "lng": "931203809"
+        }
+        }
+    },
+    {
+        "id":2,
+        "name": "Bobina Roberts",
+        "username": "bob_roberts",
+        "email": "bobroberts@hotmail.com",
+        "address": {
+        "street": "Benevuee 23 Street",
+        "suite": "1221 Suite",
+        "city": "New York City",
+        "zipcode": "90821",
+        "geo": {
+            "lat": "128390810321",
+            "lng": "931203809"
+        }
+        }
+    }
+]

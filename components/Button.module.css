@@ -21,8 +21,14 @@
     font-size:14px;
     border-radius:18px;
     padding: 12px 20px;
-    width: 300px;
+    width: stretch;
     background-color:var(--color-2);
+    cursor:pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    gap:8px;
 }
 
 
@@ -62,7 +68,7 @@
 
 .sm {
     padding: 6px 10px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .md {

@@ -8,11 +8,11 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <header>
-        <Button size='md' style='p' type='header'>Introducing our new enrichment API →</Button>
+        <Button size='md' style='p' type='header'>Join the waitlist →</Button>
         <h1>Meet Aviquo, the #1 platform for <span>managing student life</span></h1>
-        <p>OrbStack is the fast, light, and easy way to run Docker containers. Develop at lightspeed with our Docker Desktop alternative.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
         <div className='flex-row'>
-            <Button type='btn' size='md' style='p'>Learn More</Button>
+            <Button path='/dashboard' type='btn' size='md' style='p'>Learn More</Button>
             <Link href='/auth/login'>Let&apos;s Get Started →</Link>
         </div>
       </header>

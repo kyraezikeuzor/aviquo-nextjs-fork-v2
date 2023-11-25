@@ -14,7 +14,7 @@ export default function RootLayout({
 {
   const pathname = usePathname();
   //Logic to determine when to show the navbar
-  const showNavbar = pathname === '/' || pathname === '/explore' || pathname === '/database' || pathname === '/auth/login' || pathname === '/auth/signup';
+  const showNavbar = pathname === '/' || pathname === '/database' || pathname === '/auth/login' || pathname === '/auth/signup';
 
 
   return (

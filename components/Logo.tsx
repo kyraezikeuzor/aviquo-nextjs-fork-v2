@@ -10,7 +10,7 @@ const Logo = ({minimal, size}: LogoProps) => {
     return (
         <Link href='/' className={`${styles.logo} ${styles[size]}`}>
             <div className={styles['img-container'] }>
-                <img src='https://www.aviato.co/static/media/Aviato.271d4d95950b92c7cb50.png'/>
+                <img src='https://htmlcolorcodes.com/assets/images/colors/purple-color-solid-background-1920x1080.png'/>
             </div>
             {minimal == false ? <p>Aviquo</p> : <></>}
         </Link>
