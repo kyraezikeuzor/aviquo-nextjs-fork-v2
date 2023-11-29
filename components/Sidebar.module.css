@@ -1,5 +1,4 @@
 .sidebar {
-    float:left;
     width: var(--width-sidebar);
     height: 100vh;
     padding:20px;
@@ -9,13 +8,14 @@
     gap:20px;
     border-right: 1px solid var(--color-grey);
     box-shadow: var(--box-shadow-2);
-    position:relative;
-    position:absolute;
+    background-color:var(--color-light-grey);
+    color: var(--color-dark-grey);
+    position:fixed;
+    left:0;
+
 }
 
 .sidebar.logo {
-    position: absolute;
-    left:0;
     cursor: pointer;
 }
 
@@ -33,4 +33,5 @@
     gap:10px;
     color:#242424;
     font-weight:500;
+    font-size:1.2rem;
 }

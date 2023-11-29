@@ -1,23 +1,23 @@
 .card {
-    background-color: #fff;
-    border: 1px solid var(--color-grey);
-    box-shadow: var(--box-shadow-card);
-    border-radius:12px;
+    border: 2px solid var(--color-grey);
+    box-shadow: var(--box-shadow-2);
+    border-radius:16px;
     padding:20px;
-    width:300px;
+    min-width:fit-content;
+    max-width:100%;
     height:fit-content;
     display:flex;
     flex-direction:column;
     word-wrap: break-word;
-    gap:10px;
+    gap:.6em;
 }
 
 .sm {
-    width:100px;
+    
 }
 
 .md {
-    width:300px;
+    
 }
 
 .lg {
@@ -26,7 +26,7 @@
 
 
 .card h3 {
-    font-size:20px;
+    font-size:120%;
     font-weight:600;
 }
 

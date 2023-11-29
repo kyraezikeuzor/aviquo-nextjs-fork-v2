@@ -12,12 +12,11 @@ import Tag from './Tag'
 
 type CardProps = {
     children: React.ReactNode
-    size: 'sm' | 'md' | 'lg'
 }
 
-const Card = ({children, size}: CardProps) => {
+const Card = ({children}: CardProps) => {
   return (
-    <div className={`${styles.card} ${styles[size]}`}>
+    <div className={`${styles.card}`}>
         {children}
     </div>
   )

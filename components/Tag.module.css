@@ -42,22 +42,28 @@
 }
 
 
-.no-start {
+.plain {
     background-color:rgb(255, 251, 248);
     color: #ffaf25;
 }
 
-.start {
+.important {
+    background-color:#fcf8f8;
+    color: #D16EDE;
+    border: 1px solid #D16EDE;
+}
+
+.location {
     background-color:rgb(251, 255, 255);
     color: #3687eb;
 }
 
-.progress {
+.grade {
     background-color:#fff9f8;
     color: #f9786a;
 }
 
-.done {
+.committment {
     background-color:#f3fff8;
     color: #298F60;
     border: 1px solid #AFEAC8;

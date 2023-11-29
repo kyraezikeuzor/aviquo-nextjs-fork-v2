@@ -6,6 +6,9 @@ import PostCard from '@/components/PostCard'
 import Tags from '@/components/Tags'
 import Tag from '@/components/Tag'
 
+import userPostsData from '../../../lib/userPosts.json'
+import userEcsData from '../../../lib/userEcs.json'
+
 export default function ProfilePage() {
   return (
     <main className={styles.main}>
@@ -26,12 +29,27 @@ export default function ProfilePage() {
           </div>
         </section>
           <h1>Username's Posts</h1>
-          <PostCard path='/'poster='username' title='Help me' text='What is Aviquo? My friends told me about it, but I don’t really understand it. Can someone help me? For context, I am a highschool freshman and was told that this platform would set me...'  views={45} likes={34} comments={56} tags={['Engineering', 'Business']}/>
-          <PostCard path='/'poster='username' title='Help me' text='lorem ipsum' views={45} likes={34} comments={56} tags={['Engineering', 'Business']}/>
-        
+
+          {userPostsData.map((item,index)=>(
+            <PostCard
+                poster={'User'}
+                title={item.title}
+                text={item.body}
+                views={item.views}
+                likes={item.likes}
+                comments={item.comments}
+                path={`/posts/${item.id}`}
+                tags={item.tags}
+              />
+          ))}
+          
         
           <h1>Followed Extracurriculars</h1>
-          <Card size='lg'>
+
+          
+
+
+          <Card >
             <h3>Example Extracurricular</h3>
             <p><b>467576</b> follows</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </p>

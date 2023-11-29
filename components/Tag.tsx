@@ -3,8 +3,8 @@ import React from 'react'
 import styles from './Tag.module.css'
 
 type TagProps = {
-    children: React.ReactNode,
-    type: 'not-started' | 'started' | 'progress' | 'done' | 'deadline' | 'tag'
+    children: React.ReactNode
+    type: string
     size: 'sm' | 'md' | 'lg'
 }
 

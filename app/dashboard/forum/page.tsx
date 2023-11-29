@@ -6,6 +6,7 @@ import PostCard from '../../../components/PostCard'
 export default function ForumPage() {
   return (
     <main className={styles.main}>
+      <h1>My Feed</h1>
         {allPosts.map((item,index)=>(
           <PostCard
           poster={item.username}
