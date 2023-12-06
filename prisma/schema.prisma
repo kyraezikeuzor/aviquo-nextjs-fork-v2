@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+//
+// Represents a single post on the forum.
+//
+model Post {
+  id        String  @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
+}
+
+//
+// Represents a user of the aviquo platform
+//
+model User {
+  id           String   @id @default(cuid())
+  firstName    String   @map(name: "first_name")
+  lastName     String   @map(name: "last_name")
+  password     String   
+  email        String   @unique
+  username     String   @unique
+  pfp          String?
+  bio          String?
+  numFollowers Int      @map(name: "num_followers")
+  numFollowing Int      @map(name: "num_following")
+  createdAt    DateTime @default(now()) @map(name: "date_joined")
+  posts        Post[]
+  // Forum        Forum[]
+
+  @@map(name: "users")
+}
+
+//
+// Global list of tags/keywords applicable to opportunities.
+//
+// Examples: scholarship, extracurricular activity, etc.
+//
+model Tag {
+  name            String       @unique @db.VarChar(50)
+  Opportunity     Opportunity? @relation(fields: [opportunityName], references: [name])
+  opportunityName String?      @db.VarChar(200)
+}
+
+model Category {
+  name String @unique @db.VarChar(255)
+}
+
+model Opportunity {
+  name          String @unique @db.VarChar(200)
+  profile_image String
+  url           String
+  tags          Tag[]
+}
+
+model Waitlist {
+  email     String   @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+}
+
+model Forum {
+  // user        User     @relation(fields: [userId], references: [id])
+  id          String   @id @default(cuid())
+  topic       String   @unique @db.VarChar(300)
+  description String? //max_length:1000
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  userId      String
+}
