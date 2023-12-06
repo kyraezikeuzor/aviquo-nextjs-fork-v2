@@ -9,6 +9,7 @@ export default function ForumPage() {
       <h1>My Feed</h1>
         {allPosts.map((item,index)=>(
           <PostCard
+          key={item.id}
           poster={item.username}
           title={item.title}
           text={item.body}
