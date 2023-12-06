@@ -7,7 +7,7 @@ export default function Signup() {
     <main className='align-items-center'>
         <AuthForm>
             <h1>Sign up for Aviquo</h1>
-            <p>Let's get you started.</p>
+            <p>Let&apos;s get you started.</p>
 
             <label>Email</label>
             <input type='email'/>
