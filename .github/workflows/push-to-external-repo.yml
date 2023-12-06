@@ -14,6 +14,6 @@ jobs:
         with:
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
           publish_dir: .
-          external_repository: <your-username>/<destination-repo-name>
+          external_repository: srivatsav-kannan/Aviquo-nextjs-deploy
           publish_branch: main
           allow_empty_commit: true
