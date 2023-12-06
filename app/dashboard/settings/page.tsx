@@ -11,7 +11,7 @@ import Toggle from '@/components/Toggle'
 
 const NotificationView = ({children}: {children: React.ReactNode}) => {
     return (
-      <Card size='lg'>
+      <Card>
          {children} 
       </Card>
     )
@@ -31,7 +31,7 @@ export default function SettingsPage() {
     <main className={styles.main}>
       <h1>Settings</h1>
 
-        {!active && <Card size='lg'>
+        {!active && <Card>
 
           <ul>
             <li className='justify-content-between'>
