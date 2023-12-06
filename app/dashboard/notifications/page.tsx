@@ -5,7 +5,7 @@ import Card from '../../../components/Card'
 export default function NotificationsPage() {
   return (
     <main className={styles.main}>
-        <Card size='lg'>
+        <Card>
           <h2>Math/Science</h2>
         </Card>
     </main>
