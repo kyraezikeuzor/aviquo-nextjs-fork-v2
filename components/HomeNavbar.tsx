@@ -12,7 +12,7 @@ export default function HomeNavbar() {
     <nav className={styles['home-nav']}>
       <Search/>  
 
-      <FontAwesomeIcon icon={faBell} className={styles.bell}/>
+      {/* <FontAwesomeIcon icon={faBell} className={styles.bell}/> */}
     </nav>
   )
 }
