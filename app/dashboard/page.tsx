@@ -29,7 +29,7 @@ export default function Home() {
               <h2>Top Opportunities</h2>
                 <section className={styles.gallery}>
                   {userEcData.map((item,index)=>(
-                    <Card>
+                    <Card key={item.id}>
                     <h3>{item.name}</h3>
                     <Tags>
                       <Tag type='tag' size='md'>Global</Tag>
@@ -47,8 +47,9 @@ export default function Home() {
               <h2>Recent Forum Posts</h2>
               
               <section>
-                {allPosts.map((item,index)=>(
-                  <PostCard
+              {allPosts.map((item, index) => (
+                <PostCard
+                  key={item.id}  
                   poster={item.username}
                   title={item.title}
                   text={item.body}
@@ -83,7 +84,7 @@ export default function Home() {
             <Tags>
               
               {userInterestData && userInterestData.map((item,index)=>(
-                <Tag type='important' size='md'>{item}</Tag>
+                <Tag key={index} type='important' size='md'>{item}</Tag>
               ))}
               
             </Tags>

@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name" : "Key Club",
         "type" : "Activity",
         "location" : "Global",
@@ -12,6 +13,7 @@
         "subjects" : "Service, Leadership"
     },
     {
+        "id":2,
         "name" : "Research Science Institute",
         "type" : "Activity",
         "location" : "Global",

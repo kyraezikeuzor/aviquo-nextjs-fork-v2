@@ -28,10 +28,11 @@ export default function ProfilePage() {
             </div>
           </div>
         </section>
-          <h1>Username's Posts</h1>
+          <h1>Username&apos;s Posts</h1>
 
           {userPostsData.map((item,index)=>(
             <PostCard
+                key={item.id}
                 poster={'User'}
                 title={item.title}
                 text={item.body}
