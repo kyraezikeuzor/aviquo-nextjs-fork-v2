@@ -35,7 +35,7 @@ export default function ForumPost({params: {question_name}}: Params) {
   const postLikes = post ? post.likes : '';
   const userId = post ? post.userId : '';
   const postDate = post ? post.date : '';
-  const postTags = post ? post.tags : [];
+  const postTags: any[] = post ? post.tags : [];
   const postBody = post ? post.body : [];
   const postCommentsCount = post ? post.comments : 0;
 
