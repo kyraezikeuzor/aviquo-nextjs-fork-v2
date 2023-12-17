@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Engineering",
+        "img": "/graphics/engineering.png"
+    },
+    {
+        "name": "Humanities",
+        "img": "/graphics/humanities.png"
+    },
+    {
+        "name": "Math/Science",
+        "img": "/graphics/science.png"
+    },
+    {
+        "name": "STEM",
+        "img": "/graphics/stem.png"
+    },
+    {
+        "name": "Admission Advice",
+        "img": "/graphics/admissions-advice.png"
+    },
+    {
+        "name": "Scholarships",
+        "img": "/graphics/scholarships.png"
+    }
+]

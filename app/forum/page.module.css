@@ -1,0 +1,12 @@
+.forum__content__container {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    gap:40px;
+}
+
+@media screen and (max-width: 960px) {
+    .forum__content__container {
+        display:flex;
+        flex-direction:column;
+    }
+}

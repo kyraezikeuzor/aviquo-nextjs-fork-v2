@@ -1,0 +1,12 @@
+.main {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    gap:40px;
+}
+
+@media screen and (max-width) {
+    .main {
+        display:flex;
+        flex-direction:column;
+    }
+}

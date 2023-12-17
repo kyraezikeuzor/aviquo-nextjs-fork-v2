@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Academic",
+        "sections": ["High School","Undergraduate","Post-Graduate"]
+    },
+    {
+        "name": "Experience Type",
+        "sections": ["Internship", "Research", "Service", "Competition", "Club", "Pre-College"]
+    },
+    {
+        "name": "Grade Level",
+        "sections": ["Freshman", "Sophomore", "Junior", "Senior"]
+    },
+    {
+        "name": "Environment",
+        "sections": ["In-Person", "Remote", "Hybrid"]
+    },
+    {
+        "name": "Company Type",
+        "sections": ["Nonprofit Organization", "Business Enterprise", "Government Agency","Academic Institution"]
+    },
+    {
+        "name": "Duration",
+        "sections": ["Short Term", "Long Term"]
+    },
+    {
+        "name": "Location Type",
+        "sections": ["Global","East Coast (US)", "West Coast (US)", "Mid West (US)", "South (US)"]
+    },
+    {
+        "name": "Areas",
+        "sections": ["All Subjects", "All STEM", "Engineering", "Programming", "All Humanities", "Law", "Creative Writing"]
+    }
+]
