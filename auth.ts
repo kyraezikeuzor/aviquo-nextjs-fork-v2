@@ -1,8 +1,8 @@
-import { z } from 'zod';
+/*import { z } from 'zod';
 
 import prisma from './lib/prisma';
 import NextAuth from "next-auth"
-import type { NextAuthConfig } from "next-auth"
+import type NextAuthConfig from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
  
 async function getUser(username: string) {
@@ -74,8 +74,9 @@ export const config = {
   session: {
     maxAge: 30 * 60, // 30 days (adjust as needed)
   },
-} satisfies NextAuthConfig
+} satisfies typeof NextAuthConfig
 
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config)
+*/
