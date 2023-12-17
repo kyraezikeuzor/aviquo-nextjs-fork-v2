@@ -29,7 +29,7 @@ export default function Discover() {
 
 
   return (
-    <main className='flex flex-col gap-5 px-[10vw]'>
+    <main className='flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl md:text-3xl lg:text-4xl'>Discover</h1>
             <p>Discover new opportunities and activities.</p>

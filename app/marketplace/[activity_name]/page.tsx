@@ -40,7 +40,7 @@ export default function ForumPost({params: {question_name}}: Params) {
   const postCommentsCount = post ? post.comments : 0;
 
   return (
-    <main className='flex flex-col px-[10vw] gap-5'>
+    <main className='flex flex-col px-1/6 md:px-[10vw] lg:px-[10vw] gap-5'>
         <Link href='/marketplace' className='hover:bg-[var(--clr-grey-200)] rounded-xl cursor-pointer text-xs md:text-sm lg:text-sm items-center text-[var(--clr-blue-400)] font-semibold flex gap-2'><Icon icon="arrow-left" fillColor="#3981F6"/> Back to Marketplace</Link>
         
         <Card>

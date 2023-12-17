@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {usePathname} from 'next/navigation'
 import styles from './Navbar.module.css'
 
@@ -14,8 +14,10 @@ export default function Navbar() {
   const pathname = usePathname();
 
 
+
+
   return (
-    <nav className={`${styles.nav} z-50 sticky top-0 flex items-center justify-center gap-10 py-3 px-8 w-full backdrop-blur bg-white/50 border-b-2 border-[color:var(--clr-grey-300)]`}>
+    <nav className={`${styles.nav} z-50 sticky top-0 flex items-center justify-center gap-10 py-3 px-[10vw] w-full backdrop-blur bg-white/50 border-b-2 border-[color:var(--clr-grey-300)]`}>
         <div className='flex items-center gap-5'>
           <Logo minimal={false}/>
         </div>

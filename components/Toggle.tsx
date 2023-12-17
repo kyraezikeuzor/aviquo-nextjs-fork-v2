@@ -16,16 +16,16 @@ const Toggle = ({toggleStatus}: ToggleProps) => {
   return (
     <div onClick={handleClick} className='bg-[var(--clr-purple-500)] rounded-2xl'>
         {toggleStatus && 
-        <div className='w-16 flex flex-row relative'>
+        <div className='w-16 h-fit-content flex flex-row relative'>
           <div className='ml-8'>
             <Icon icon="circle-checked" fillColor="white"/>
           </div>
           
         </div>}
+        
         {!toggleStatus && 
-        <div className='w-16'>
-          
-        <Icon icon="circle-x" fillColor="white"/>
+        <div className='w-16 h-fit-content'>
+          <Icon icon="circle-x" fillColor="white"/>
         </div>}
     </div>
   )

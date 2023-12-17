@@ -22,3 +22,17 @@
 .sidebar__list li:hover {
     background-color: var(--clr-grey-200);
 }
+
+.sidebar--mobile {
+    display:none;
+}
+
+@media screen and (max-width:960px) {
+    .sidebar {
+        display:none;
+    }
+
+    .sidebar--mobile {
+        display:block;
+    }
+}

@@ -4,7 +4,11 @@
     gap:40px;
 }
 
-@media screen and (max-width) {
+.main section {
+    
+}
+
+@media screen and (max-width: 960px) {
     .main {
         display:flex;
         flex-direction:column;

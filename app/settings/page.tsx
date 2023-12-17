@@ -13,23 +13,12 @@ const PageView = ({children}: {children: React.ReactNode}) => {
     )
 }
 
-const NotificationView = ({}) => {
-    return (
-        <Card>
-            <div className='flex justify-between'>
-                <h3 className='text-md md:text-lg lg:text-xl tracking-normal' >Allow Notifications</h3>
-                <Toggle toggleStatus={true}/>
-            </div>
-        </Card>
-    )
-}
-
 const Views = [
     {
         "name": "Account Settings",
         "page":     <div className='flex flex-col'>
-                        <div className='flex justify-between'>
-                            <h3 className='text-md md:text-lg lg:text-xl tracking-normal' >Account Settings</h3>
+                        <div className='flex justify-between items-center'>
+                            <h3 className='text-base md:text-lg lg:text-xl tracking-normal' >Account Settings</h3>
                             <Toggle toggleStatus={true}/>
                         </div>
 
@@ -39,14 +28,14 @@ const Views = [
     {
         "name": "Accessibility",
         "page": <div className='flex justify-between'>  
-                    <h3 className='text-md md:text-lg lg:text-xl tracking-normal' >Accessibility</h3>
+                    <h3 className='text-base md:text-lg lg:text-xl tracking-normal' >Accessibility</h3>
                     <Toggle toggleStatus={true}/>
                 </div>
     },
     {
         "name": "Notifications",
         "page": <div className='flex justify-between'>
-                    <h3 className='text-md md:text-lg lg:text-xl tracking-normal' >Notiifcations</h3>
+                    <h3 className='text-base md:text-lg lg:text-xl tracking-normal' >Notiifcations</h3>
                     <Toggle toggleStatus={true}/>
                 </div>
     }
@@ -65,7 +54,7 @@ export default function Settings() {
   };
 
   return (
-    <main className='flex flex-col gap-5 px-[10vw]'>
+    <main className='flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>
          <h1 className='text-2xl md:text-3xl lg:text-4xl'>Settings</h1>
         {!active && <Card>
             <ul className='flex flex-col gap-10 p-4'>

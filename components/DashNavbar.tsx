@@ -1,19 +1,24 @@
 import React, {useState, useEffect} from 'react'
+import styles from './DashNavbar.module.css'
+
 import Link from 'next/link'
 import SearchBar from './SearchBar'
 import Icon from './Icon'
 import Modal from './Modal'
+import Sidebar from './Sidebar'
 
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import {getPath} from '../lib/utilities'
+import {username} from '../lib/userData'
 
 import ecItems from '../lib/ecItems.json'
 
 export default function DashNavbar() {
     const [navbarIcons, setNavbarIcons] = useState(true)
 
+    //Modify navbar view for smaller screens
     useEffect(() => {
         const handleSmallScreenShowNavbar = () => {
           if(window.innerWidth <= 960) {
@@ -24,14 +29,33 @@ export default function DashNavbar() {
         }
     
         //handleSmallScreenShowSidebar([])
-    
         window.addEventListener('resize', handleSmallScreenShowNavbar);
         
       }, []);
 
 
-      const [searchText, setSearchText] = useState('');
+      // Handle mobile sidebar clicking states
+      const [mobileSidebarClick, setMobileSidebarClick] = useState(false)
 
+      const handleMobileSidebarClick = () => {
+            setMobileSidebarClick(!mobileSidebarClick)
+      }
+
+       // Changing sidebar width in root variable upon sidebar being clicked
+       
+       useEffect(() => {
+        const cssRootSidebarMobileScreenWidth = '--w-sidebar';
+        const root = document.documentElement;
+    
+        // Updates the CSS variable based on the state of the sidebar
+        root.style.setProperty(cssRootSidebarMobileScreenWidth, mobileSidebarClick ? '50px' : '0px');
+      }, [!mobileSidebarClick]);
+
+
+
+
+      //Functionality for searching
+      const [searchText, setSearchText] = useState('');
       const searchDataFiltered = [];
       for (let i = 0; i < ecItems.length; i++) {
           if (ecItems[i].name.toLowerCase().includes(searchText.toLowerCase())) {
@@ -42,7 +66,12 @@ export default function DashNavbar() {
 
   return (
     <nav className='flex flex-row gap-4 p-4 justify-between'>
-        <ul>
+        <ul className='flex flex-row items-center gap-4'>
+            <li>
+                <div onClick={handleMobileSidebarClick} className={`${styles['mobile__sidebar__icon']}`}>
+                    <Icon icon='sidebar' fillColor='black'/>
+                </div>
+            </li>
             <li>
                 <SearchBar placeholder="Search" searchFunction={setSearchText}/>
             </li>
@@ -62,8 +91,52 @@ export default function DashNavbar() {
 
         {navbarIcons && <div className='flex items-center gap-5'>
             <Icon icon='notification-bell' fillColor="black"/>
-            <img className='w-1/3 h-auto rounded-3xl' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'></img>
+            <img className='w-1/4 h-auto rounded-3xl' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'></img>
         </div>}
+
+
+        <div className={`${styles['sidebar--mobile']} border-2 border-[var(--clr-grey-300)] w-[50px] h-full p-2 bg-[#fff] fixed top-0 ${mobileSidebarClick ? 'left-[0px]' : 'left-[-200px]'} `}>
+            <ul className={`flex flex-col items-center gap-10`}>
+                <li>
+                    <Link href='/dashboard'>
+                        <Icon icon="sidebar" fillColor="black"/>
+                        
+                    </Link>   
+                </li>
+                <li>
+                    <Link href='/forum'>
+                        <Icon icon="notifications" fillColor="black"/>
+                        
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/marketplace'>
+                        <Icon icon="house" fillColor="black"/>
+                        
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/discover'>
+                        <Icon icon="search" fillColor="black"/>
+                        
+                    </Link>
+                    
+                </li>
+                <li>
+                    <Link href={`/${username}`}>
+                        <Icon icon="user" fillColor="black"/>
+                        
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/settings'>
+                        <Icon icon="cog" fillColor="black"/>
+                        
+                    </Link>
+                </li>
+            </ul>
+        </div>
+    
     </nav>
   )
 }

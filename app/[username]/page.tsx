@@ -29,7 +29,7 @@ export default function Profile({params: {username}}: Params) {
   const name = user ? user.name : 'Default Name';
 
   return (
-    <main className='m-auto flex flex-col gap-5 px-[10vw]'>  
+    <main className='m-auto flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>  
         <div className='flex flex-col gap-5'>
             <img className='rounded-full w-20 h-auto' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'/>
             <div className='flex flex-col gap-2'>

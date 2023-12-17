@@ -12,32 +12,27 @@ export default function Sidebar() {
     
     const [sidebar, setSidebar] = useState(true)
 
+    
     const handleWideScreenSidebarClick = () => {
         setSidebar(!sidebar)
         
     }
 
-    useEffect(() => {
-        const handleSmallScreenShowSidebar = () => {
-            
+    // Changing sidebar width in root variable upon sidebar being clicked
+      useEffect(() => {
+        const cssRootSidebarWideScreenWidth = '--w-sidebar';
+        const root = document.documentElement;
+    
+        // Updates the CSS variable based on the state of the sidebar
+        root.style.setProperty(cssRootSidebarWideScreenWidth, !sidebar ? '50px' : 'calc(100vw * 1/7)');
+      }, [sidebar]);
 
-          if(window.innerWidth <= 960) {
-            setSidebar(false);
-          } else {
-            setSidebar(true);
-          }
-        }
-    
-        //handleSmallScreenShowSidebar([])
-    
-        window.addEventListener('resize', handleSmallScreenShowSidebar);
-        
-      }, []);
 
   return (
-    <div className='h-[100vh] border-r-2 border-[var(--clr-grey-300)] bg-[#fff] fixed flex flex-col items-center px-1'>
+    <div>
+        <div className='h-[100vh] border-r-2 border-[var(--clr-grey-300)] bg-[#fff] fixed flex flex-col items-center px-1'>
         
-        <div className={sidebar ? `w-[var(--w-sidebar)] px-4` : `w-[50px]`}>
+        <div className={`${styles.sidebar} ${sidebar ? `w-[var(--w-sidebar)] px-4` : `w-[50px]`}`}>
             <div className={`flex flex-row items-center w-full ${sidebar ? 'justify-between' : 'justify-center'} py-4`}>
                 {sidebar && <Logo minimal={false}/>}
                 <div className='' onClick={handleWideScreenSidebarClick}>
@@ -86,10 +81,11 @@ export default function Sidebar() {
                 </li>
             </ul>
         </div>
+        
+        </div>
 
-        
-        
-        
+
     </div>
+
   )
 }

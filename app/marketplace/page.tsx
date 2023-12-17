@@ -12,7 +12,7 @@ import {username} from '../../lib/userData'
 
 export default function Marketplace() {
   return (
-    <main className='flex flex-col gap-5 px-[8vw]'>
+    <main className='flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>
 
         <div className='flex gap-5'>
             <img className='h-auto' src='/graphics/admissions-advice.png'/>
