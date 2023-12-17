@@ -6,7 +6,7 @@ import Button from './Button'
 const AuthForm = ({children}: {children:React.ReactNode}) => {
   return (
     <form className={styles.form}>
-        <Logo minimal={true} size='lg'/>
+        <Logo minimal={true}/>
         {children}
     </form>
   )
