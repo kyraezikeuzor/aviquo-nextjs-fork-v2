@@ -1,0 +1,14 @@
+[
+    {
+        "name" : "Key Club",
+        "type" : "Activity",
+        "location" : "Global",
+        "company" : "Key Club International",
+        "companyType" : "Nonprofit",
+        "education" : "High School",
+        "grade" : "9-12",
+        "duration" : "All Year",
+        "skillLevel" : "None",
+        "subjects" : "Service, Leadership"
+    }
+]

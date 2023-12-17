@@ -9,9 +9,6 @@ import Button from '../components/Button'
 
 import Tag from './Tag'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHeart, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
-
 
 export default function Navbar() {
   const pathname = usePathname();
