@@ -14,7 +14,7 @@ export default function Login() {
             <label>Password</label>
             <input type='password'/>
 
-            <Button type='submit' size='md' style='p'>Continue</Button>
+            <Button type='btn--submit' size='btn--md' style='btn--primary'>Continue</Button>
             <p>Don&apos;t have an account? <a href='/auth/signup'>Sign Up</a></p>
         </AuthForm>     
     </main>
