@@ -44,7 +44,7 @@ export default function Profile({params: {username}}: Params) {
             </div>
             <div className='flex flex-wrap gap-3'>
                 {interestList.map((item,index)=>(
-                    <div className='flex gap-2 items-center justify-center text-center bg-[#fff] p-2 border-2 border-[var(--clr-grey-300)] rounded-xl'>
+                    <div key={index} className='flex gap-2 items-center justify-center text-center bg-[#fff] p-2 border-2 border-[var(--clr-grey-300)] rounded-xl'>
                         <img className='w-6' src={item.img}/>
                         <p className='font-medium'>{item.name}</p>
                     </div>
@@ -55,7 +55,7 @@ export default function Profile({params: {username}}: Params) {
         <h2 className='text-lg md:text-xl lg:text-xl tracking-normal'>My Posts</h2>
         <div className='flex flex-col gap-5'>
             {userPosts.map((item,index)=>(
-            <div className='border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5'>
+            <div key={index} className='border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5'>
                 <div className='w-4 flex flex-col items-center'>
                     <Icon icon='arrow-up' fillColor="black"/>
                     <p className='text-sm font-semibold text-[var(--clr-grey-400)]'>{item.likes}</p>

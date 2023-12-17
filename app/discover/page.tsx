@@ -29,7 +29,7 @@ export default function Discover() {
 
 
   return (
-    <main className='flex flex-col gap-5'>
+    <main className='flex flex-col gap-5 px-[10vw]'>
         <div className='flex flex-col gap-2'>
             <h1 className='text-2xl md:text-3xl lg:text-4xl'>Discover</h1>
             <p>Discover new opportunities and activities.</p>
@@ -41,7 +41,7 @@ export default function Discover() {
 
         <div className='flex flex-row flex-wrap gap-3'>
             {searchDataFiltered.map((item,index)=>(
-                <Card>
+                <Card key={index}>
                     <h2 className='text-base md:text-lg lg:text-xl'>{item.name}</h2>
                     <p className='text-sm'>{item.description}</p>
                     <div className='flex flex-wrap'>

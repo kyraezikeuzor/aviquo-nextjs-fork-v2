@@ -80,7 +80,7 @@ export default function ForumPost({params: {question_name}}: Params) {
 
         <div className='flex flex-col gap-5 cursor-pointer'>
                 {posts.map((item,index)=>(
-                    <div className='border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5'>
+                    <div key={index} className='border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5'>
                         <div className='w-4 flex flex-col items-center'>
                             <Icon icon='arrow-up' fillColor="black"/>
                             <p className='font-semibold text-[var(--clr-grey-400)]'>{item.likes}</p>

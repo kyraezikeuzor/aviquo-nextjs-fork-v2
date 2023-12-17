@@ -15,7 +15,7 @@ type Post = {
     views: number,
     likes: number,
     comments: number,
-    tags: array[string],
+    tags: any,
     date:string,
 
 }

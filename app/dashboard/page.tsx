@@ -20,7 +20,7 @@ export default function Dashboard() {
             
             <div className='flex flex-wrap gap-3'>
                 {interestList.map((item,index)=>(
-                    <div className='flex gap-2 items-center justify-center text-center bg-[#fff] p-2 border-2 border-[var(--clr-grey-300)] rounded-xl'>
+                    <div key={index} className='flex gap-2 items-center justify-center text-center bg-[#fff] p-2 border-2 border-[var(--clr-grey-300)] rounded-xl'>
                         <img className='w-6' src={item.img}/>
                         <p className='font-medium'>{item.name}</p>
                     </div>
@@ -53,7 +53,7 @@ export default function Dashboard() {
             <h6>Recent Posts</h6>
             <div className='flex flex-col gap-2'>
                 {userPosts.map((item,index)=>(
-                    <Card>
+                    <Card key={index}>
                         <p className='font-semibold text-[var(--fs-400)]'>{item.title}</p>
                         <p className='text-xs md:text-sm lg:text-sm'>{item.body}</p>
                     </Card>

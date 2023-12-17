@@ -63,7 +63,7 @@ export default function ForumPost({params: {question_name}}: Params) {
                     
                     <div className='flex flex-wrap mb-10'>
                         {postTags.map((item,index)=>(
-                            <Tag type='tag'>{item}</Tag>
+                            <Tag key={index} type='tag'>{item}</Tag>
                         ))}
                     </div>
                     <Button type='' style='btn--primary' size='btn--sm'>Add a reply</Button>

@@ -45,13 +45,13 @@ export default function MarketplaceShare() {
                     <p className='text-xs md:text-sm lg:text-sm'>Tags</p>
                     <div className='flex flex-wrap gap-2 p-2 border-2 border-[var(--clr-grey-300)] rounded-xl'>
                         {tagList.map((item,index)=>(
-                            <Tag type="tag">{item}</Tag>
+                            <Tag key={index} type="tag">{item}</Tag>
                         ))}
                     </div>
 
                     <select className='focus:outline-none'  multiple onChange={handleOptions}>
                         {interestList.map((item,index)=>(
-                            <option className='text-xs md:text-sm lg:text-sm border-b border-[var(--clr-grey-300)] p-2'>{item.name}</option>
+                            <option key={index} className='text-xs md:text-sm lg:text-sm border-b border-[var(--clr-grey-300)] p-2'>{item.name}</option>
                         ))}
                     </select>
                 </div>

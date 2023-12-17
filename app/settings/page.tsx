@@ -32,7 +32,7 @@ const Views = [
                             <h3 className='text-md md:text-lg lg:text-xl tracking-normal' >Account Settings</h3>
                             <Toggle toggleStatus={true}/>
                         </div>
-                        
+
                     </div>
             
     },
@@ -65,7 +65,7 @@ export default function Settings() {
   };
 
   return (
-    <main className='flex flex-col gap-5'>
+    <main className='flex flex-col gap-5 px-[10vw]'>
          <h1 className='text-2xl md:text-3xl lg:text-4xl'>Settings</h1>
         {!active && <Card>
             <ul className='flex flex-col gap-10 p-4'>
