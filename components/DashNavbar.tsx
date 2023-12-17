@@ -65,7 +65,7 @@ export default function DashNavbar() {
     const modalSearchContent = searchDataFiltered.slice(0, 6);
 
   return (
-    <nav className='flex flex-row gap-4 p-4 justify-between'>
+    <nav className='px-1/6 md:px-[5vw] lg:px-[5vw] py-[2vh] flex flex-row gap-4  justify-between'>
         <ul className='flex flex-row items-center gap-4'>
             <li>
                 <div onClick={handleMobileSidebarClick} className={`${styles['mobile__sidebar__icon']}`}>

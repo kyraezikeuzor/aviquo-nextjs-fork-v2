@@ -43,7 +43,7 @@ export default function Sidebar() {
             
             <ul className={`${styles['sidebar__list']} ${sidebar ? '' : 'items-center'}`}>
                 <li>
-                    <Link href='/dashboard' className='bg-orange-500'>
+                    <Link href='/dashboard'>
                         <Icon icon="sidebar" fillColor="black"/>
                         {sidebar && <p>Dashboard</p>}
                     </Link>   

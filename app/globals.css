@@ -52,7 +52,7 @@
   
 
   /* Width */
-  --w-sidebar: calc(100vw * 1/7);
+  --w-sidebar: 50px;
 
   /* Border */
   --br-base: 8px;
