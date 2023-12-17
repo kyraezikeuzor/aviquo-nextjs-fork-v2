@@ -10,7 +10,7 @@ import {username} from '../lib/userData'
 
 export default function Sidebar() {
     
-    const [sidebar, setSidebar] = useState(true)
+    const [sidebar, setSidebar] = useState(false)
 
     
     const handleWideScreenSidebarClick = () => {
@@ -43,7 +43,7 @@ export default function Sidebar() {
             
             <ul className={`${styles['sidebar__list']} ${sidebar ? '' : 'items-center'}`}>
                 <li>
-                    <Link href='/dashboard'>
+                    <Link href='/dashboard' className='bg-orange-500'>
                         <Icon icon="sidebar" fillColor="black"/>
                         {sidebar && <p>Dashboard</p>}
                     </Link>   
