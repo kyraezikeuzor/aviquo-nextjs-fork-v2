@@ -65,7 +65,7 @@ export default function Profile({params: {username}}: Params) {
                 </div>
                 <div className="flex flex-col gap-2">
                     <span className='text-sm inline-block flex gap-2'>@{item.userId} • {item.date} <Tag type='tag'>{item.type}</Tag> </span>
-                    <h3 className='font-semibold text-lg md:text-xl lg:text-2xl'>{item.title}</h3>
+                    <h3 className='font-semibold text-lg md:text-lg lg:text-lg tracking-tight'>{item.title}</h3>
                     <p className='text-sm'>{item.body}</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@ export default function Profile({params: {username}}: Params) {
         <div className='flex flex-row flex-wrap gap-3'>
             {ecList.map((item,index)=>(
                 <Card key={index}>
-                    <h3 className='text-lg md:text-xl lg:text-2xl'>{item.name}</h3>
+                    <h3 className='text-lg md:text-lg lg:text-lg tracking-tight'>{item.name}</h3>
                     <p className='text-sm'>{item.description}</p>
                     <div className='flex flex-wrap'>
                         <Tag type='pink'>{item.type}</Tag>

@@ -11,7 +11,6 @@ import {username} from '../lib/userData'
 export default function Sidebar() {
     
     const [sidebar, setSidebar] = useState(false)
-
     
     const handleWideScreenSidebarClick = () => {
         setSidebar(!sidebar)
@@ -30,9 +29,9 @@ export default function Sidebar() {
 
   return (
     <div>
-        <div className='h-[100vh] border-r-2 border-[var(--clr-grey-300)] bg-[#fff] fixed flex flex-col items-center px-1'>
+        <div className={`${styles.sidebar} h-[100vh] border-r-2 border-[var(--clr-grey-300)] fixed flex flex-col items-center px-1`}>
         
-        <div className={`${styles.sidebar} ${sidebar ? `w-[var(--w-sidebar)] px-4` : `w-[50px]`}`}>
+        <div className={`${sidebar ? `w-[var(--w-sidebar)] px-4` : `w-[50px]`}`}>
             <div className={`flex flex-row items-center w-full ${sidebar ? 'justify-between' : 'justify-center'} py-4`}>
                 {sidebar && <Logo minimal={false}/>}
                 <div className='' onClick={handleWideScreenSidebarClick}>
@@ -83,8 +82,6 @@ export default function Sidebar() {
         </div>
         
         </div>
-
-
     </div>
 
   )

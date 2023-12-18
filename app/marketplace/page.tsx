@@ -15,7 +15,7 @@ export default function Marketplace() {
     <main className='flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>
 
         <div className='flex gap-5'>
-            <img className='h-1/6 w-1/6' src='/graphics/admissions-advice.png'/>
+            <img className='h-20 w-20' src='/graphics/admissions-advice.png'/>
             
             
 

@@ -65,8 +65,8 @@ export default function DashNavbar() {
     const modalSearchContent = searchDataFiltered.slice(0, 6);
 
   return (
-    <nav className='px-1/6 md:px-[5vw] lg:px-[5vw] py-[1vh] flex flex-row gap-4 items-center'>
-        <ul className='flex flex-row w-full px-[60px] gap-4 items-center'>
+    <nav className='px-[50px] md:px-[6vw] lg:px-[6vw] py-[1vh] flex flex-row items-center w-full'>
+        <ul className='w-full flex flex-row gap-2'>
             <li>
                 <div onClick={handleMobileSidebarClick} className={`${styles['mobile__sidebar__icon']}`}>
                     <Icon icon='sidebar' fillColor='black'/>
@@ -86,6 +86,10 @@ export default function DashNavbar() {
               ))}
               
             </Modal>
+            
+        </ul>
+        
+        <ul className='flex flex-row items-center gap-2 sticky right-0'>
             <li>
                 <Icon icon='notification-bell' fillColor='black'/>
             </li>
@@ -93,11 +97,6 @@ export default function DashNavbar() {
                 <img className='w-1/3 rounded-full' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'/>
             </li>
         </ul>
-        
-
-
-        
-
 
         <div className={`${styles['sidebar--mobile']} border-2 border-[var(--clr-grey-300)] w-[50px] h-full p-2 bg-[#fff] fixed top-0 ${mobileSidebarClick ? 'left-[0px]' : 'left-[-200px]'} `}>
             <ul className={`flex flex-col items-center gap-10`}>
