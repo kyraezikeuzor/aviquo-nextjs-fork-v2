@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import Link from 'next/link'
 import SearchBar from '../../components/SearchBar'
 import Card from '../../components/Card'
-import ecList from '../../lib/ecItems.json'
+
 import Tag from '../../components/Tag'
 import Modal from '../../components/Modal'
 

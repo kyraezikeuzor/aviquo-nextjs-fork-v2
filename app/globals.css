@@ -81,7 +81,7 @@
     --fs--h4: calc(3.75rem * .8);
     --fs--h5: calc(2.25rem * .8);
     --fs--h6: calc(1.75rem * .8);
-    --w-sidebar: 50px;
+    --w-sidebar: 0px;
   }
 }
 

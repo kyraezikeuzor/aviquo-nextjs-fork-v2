@@ -8,6 +8,8 @@ import Tag from '../../components/Tag'
 import users from '../../lib/users.json'
 import userPosts from '../../lib/userPosts.json'
 import interestList from '../../lib/interests.json'
+import ecList from '../../lib/ecItems.json'
+
 
 type Params = {
     params: {
@@ -62,8 +64,8 @@ export default function Profile({params: {username}}: Params) {
                     <Icon icon='arrow-down' fillColor="black"/>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span className='inline-block flex gap-2'>@{item.userId} • {item.date} <Tag type='tag'>{item.type}</Tag> </span>
-                    <h6 className='font-semibold text-md md:text-lg lg:text-xl'>{item.title}</h6>
+                    <span className='text-sm inline-block flex gap-2'>@{item.userId} • {item.date} <Tag type='tag'>{item.type}</Tag> </span>
+                    <h3 className='font-semibold text-lg md:text-xl lg:text-2xl'>{item.title}</h3>
                     <p className='text-sm'>{item.body}</p>
                 </div>
             </div>
@@ -71,6 +73,22 @@ export default function Profile({params: {username}}: Params) {
         </div>
         <h2 className='text-lg md:text-xl lg:text-xl tracking-normal'>My Activities</h2>
         
+        <div className='flex flex-row flex-wrap gap-3'>
+            {ecList.map((item,index)=>(
+                <Card key={index}>
+                    <h3 className='text-lg md:text-xl lg:text-2xl'>{item.name}</h3>
+                    <p className='text-sm'>{item.description}</p>
+                    <div className='flex flex-wrap'>
+                        <Tag type='pink'>{item.type}</Tag>
+                        <Tag type='pink'>{item.location}</Tag>
+                        <Tag type='green'>{item.education}</Tag>
+                        <Tag type='orange'>{item.duration}</Tag>
+                        <Tag type='tag'>{item.subjects}</Tag>
+                        
+                    </div>
+                </Card>
+            ))}
+        </div>
     </main>
   )
 }
