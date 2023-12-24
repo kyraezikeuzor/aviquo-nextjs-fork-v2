@@ -16,6 +16,8 @@ import {getPath} from '../lib/utilities'
 import {username} from '../lib/userData'
 
 import ecItems from '../lib/ecItems.json'
+import { Button } from '@nextui-org/react';
+import axios from 'axios';
 
 export default function DashNavbar() {
     const [navbarIcons, setNavbarIcons] = useState(true)
@@ -97,6 +99,12 @@ export default function DashNavbar() {
             </li>
             <li>
                 <img className='w-1/3 rounded-full' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'/>
+            </li>
+            <li>
+                <Button type="button" onClick={async () => {
+                    const res = axios.post('/api/logout', {});
+                    console.log(res);
+                }}>Logout</Button>
             </li>
         </ul>
 
