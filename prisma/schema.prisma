@@ -11,34 +11,55 @@ datasource db {
 //
 // Represents a single post on the forum.
 //
-model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
-}
+// model Post {
+//   id        String  @id @default(cuid())
+//   title     String
+//   content   String?
+//   published Boolean @default(false)
+//   author    User?   @relation(fields: [authorId], references: [id])
+//   authorId  String?
+// }
 
 //
 // Represents a user of the aviquo platform
 //
 model User {
-  id           String   @id @default(cuid())
-  firstName    String   @map(name: "first_name")
-  lastName     String   @map(name: "last_name")
-  password     String   
-  email        String   @unique
+  id           String    @id @unique
+  auth_session Session[]
+  key          Key[]
+  // firstName    String   @map(name: "first_name")
+  // lastName     String   @map(name: "last_name")
+  // password     String   
+  // email        String   @unique
   username     String   @unique
-  pfp          String?
-  bio          String?
-  numFollowers Int      @map(name: "num_followers")
-  numFollowing Int      @map(name: "num_following")
-  createdAt    DateTime @default(now()) @map(name: "date_joined")
-  posts        Post[]
+  // pfp          String?
+  // bio          String?
+  // numFollowers Int      @map(name: "num_followers")
+  // numFollowing Int      @map(name: "num_following")
+  // createdAt    DateTime @default(now()) @map(name: "date_joined")
+  // posts        Post[]
   // Forum        Forum[]
 
   @@map(name: "users")
+}
+
+model Session {
+  id             String @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Key {
+  id              String  @id @unique
+  hashed_password String?
+  user_id         String
+  user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
 }
 
 //

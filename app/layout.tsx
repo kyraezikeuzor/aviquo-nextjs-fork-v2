@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>Create Next App</title>
       </head>
 
-      {homeLayout && 
+      {/* {homeLayout && 
       <body className={inter.className}>
         <Navbar/>
         {children}
@@ -38,7 +38,10 @@ export default function RootLayout({
           <DashNavbar/>
           {children}
         </main>
-      </body>}
+      </body>} */}
+      <body>
+        {children}
+      </body>
     </html>
   )
 }

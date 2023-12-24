@@ -1,18 +1,18 @@
 import { auth } from "@/auth/lucia";
 import * as context from "next/headers";
 import { NextResponse } from "next/server";
+import { LuciaError } from "lucia";
 
 import type { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-	
 	const formData = await request.formData();
 	const username = formData.get("username");
 	const password = formData.get("password");
 	// basic check
 	if (
 		typeof username !== "string" ||
-		username.length < 4 ||
+		username.length < 1 ||
 		username.length > 31
 	) {
 		return NextResponse.json(
@@ -26,10 +26,9 @@ export const POST = async (request: NextRequest) => {
 	}
 	if (
 		typeof password !== "string" ||
-		password.length < 6 ||
+		password.length < 1 ||
 		password.length > 255
 	) {
-		console.log('here2')
 		return NextResponse.json(
 			{
 				error: "Invalid password"
@@ -40,19 +39,11 @@ export const POST = async (request: NextRequest) => {
 		);
 	}
 	try {
-		console.log('here3')
-		const user = await auth.createUser({
-			key: {
-				providerId: "username", // auth method
-				providerUserId: username.toLowerCase(), // unique id when using "username" auth method
-				password // hashed by Lucia
-			},
-			attributes: {
-				username
-			}
-		});
+		// find user by key
+		// and validate password
+		const key = await auth.useKey("username", username.toLowerCase(), password);
 		const session = await auth.createSession({
-			userId: user.userId,
+			userId: key.userId,
 			attributes: {}
 		});
 		const authRequest = auth.handleRequest(request.method, context);
@@ -64,10 +55,21 @@ export const POST = async (request: NextRequest) => {
 			}
 		});
 	} catch (e) {
-		console.log('here4')
-		// this part depends on the database you're using
-		// check for unique constraint error in user table
-
+		if (
+			e instanceof LuciaError &&
+			(e.message === "AUTH_INVALID_KEY_ID" ||
+				e.message === "AUTH_INVALID_PASSWORD")
+		) {
+			// user does not exist or invalid password
+			return NextResponse.json(
+				{
+					error: "Incorrect username or password"
+				},
+				{
+					status: 400
+				}
+			);
+		}
 		return NextResponse.json(
 			{
 				error: "An unknown error occurred"

@@ -1,11 +1,20 @@
+import { auth } from "@/auth/lucia";
+import * as context from "next/headers";
+import { redirect } from "next/navigation";
+
 import React from 'react'
 import AuthForm from '../../../components/AuthForm'
 import Button from '../../../components/Button'
 
-export default function Login() {
+export default async function Login() {
+  const authRequest = auth.handleRequest("GET", context);
+	const session = await authRequest.validate();
+  console.log(session);
+	if (session) redirect("/");
+
   return (
-    <main className='align-items-center'>
-        <AuthForm>
+    <main className='flex items-center justify-center min-h-screen'>
+        <AuthForm action="/api/login">
             <h1>Welcome back!</h1>
             <p>Welcome back! Please enter your details.</p>
 

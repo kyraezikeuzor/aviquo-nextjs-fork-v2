@@ -85,7 +85,7 @@ const Icon = ({icon, fillColor}: IconProps) => {
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='cursor-pointer p-1 rounded'>
-        <path fill-rule="evenodd" clip-rule="evenodd" d={getIconPath()}  fill={fillColor}/>
+        <path fillRule="evenodd" clipRule="evenodd" d={getIconPath()}  fill={fillColor}/>
     </svg>
   )
 }
