@@ -19,8 +19,11 @@ import ecItems from '../lib/ecItems.json'
 import { Button } from '@nextui-org/react';
 import axios from 'axios';
 
+import { useRouter } from 'next/navigation';
+
 export default function DashNavbar() {
     const [navbarIcons, setNavbarIcons] = useState(true)
+    const router = useRouter();
 
     //Modify navbar view for smaller screens
     useEffect(() => {
@@ -102,8 +105,12 @@ export default function DashNavbar() {
             </li>
             <li>
                 <Button type="button" onClick={async () => {
-                    const res = axios.post('/api/logout', {});
-                    console.log(res);
+                    const response = await fetch('/api/logout', {
+                        method: "POST",
+                        body: null, 
+                        redirect: "manual"
+                      });
+                    router.refresh();
                 }}>Logout</Button>
             </li>
         </ul>

@@ -21,7 +21,7 @@ const AuthForm = ({ children, action }: { children: React.ReactNode, action: str
         const response = await fetch(action, {
           method: "POST",
           body: formData,
-          // redirect: "manual"
+          redirect: "manual"
         });
         console.log(response)
         if (response.status === 0) {

@@ -70,12 +70,12 @@ export default function Sidebar() {
                         {sidebar && <p>Profile</p>}
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link href='/settings'>
                         <Icon icon="cog" fillColor="black"/>
                         {sidebar && <p>Settings</p>}
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </div>
         
