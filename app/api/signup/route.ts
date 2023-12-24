@@ -9,6 +9,9 @@ export const POST = async (request: NextRequest) => {
 	const formData = await request.formData();
 	const username = formData.get("username");
 	const password = formData.get("password");
+	const firstName = formData.get("first_name") as string;
+	const lastName = formData.get("last_name") as string;
+	const email = formData.get("email") as string;
 	// basic check
 	if (
 		typeof username !== "string" ||
@@ -48,9 +51,17 @@ export const POST = async (request: NextRequest) => {
 				password // hashed by Lucia
 			},
 			attributes: {
-				username
+				username,
+				firstName,
+				lastName,
+				email,
+				pfp: '',
+				bio: 'Hi! I\'m new to Aviquo!',
+				numFollowers: 0,
+				numFollowing: 0,
 			}
 		});
+		console.log('here5')
 		const session = await auth.createSession({
 			userId: user.userId,
 			attributes: {}
@@ -64,7 +75,7 @@ export const POST = async (request: NextRequest) => {
 			}
 		});
 	} catch (e) {
-		console.log('here4')
+		console.log(e)
 		// this part depends on the database you're using
 		// check for unique constraint error in user table
 

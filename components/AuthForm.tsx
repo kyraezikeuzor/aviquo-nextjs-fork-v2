@@ -23,11 +23,13 @@ const AuthForm = ({ children, action }: { children: React.ReactNode, action: str
           body: formData,
           redirect: "manual"
         });
-
+        console.log(response)
         if (response.status === 0) {
           // redirected
           // when using `redirect: "manual"`, response status 0 is returned
           return router.refresh();
+        } else {
+          window.alert('Server Received An Error - idk will fine tune error handling sometime')
         } 
       }}
 

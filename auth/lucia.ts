@@ -2,6 +2,7 @@ import { lucia } from "lucia";
 import { nextjs_future } from "lucia/middleware";
 import { prisma } from "@lucia-auth/adapter-prisma";
 import { PrismaClient } from "@prisma/client";
+import { cache } from "react";
 
 const client = new PrismaClient();
 
@@ -14,13 +15,21 @@ export const auth = lucia({
 
 	adapter: prisma(client),
 
-    getUserAttributes: (data) => {
+	getUserAttributes: (data) => {
 		return {
-			username: data.username
+			username: data.username,
+			firstName: data.firstName,
+			lastName: data.lastName,
+			email: data.email,
+			pfp: data.pfp,
+			bio: data.bio,
+			numFollowers: data.numFollowers,
+			numFollowing: data.numFollowing,
 		};
 	}
 
 
 });
+
 
 export type Auth = typeof auth;

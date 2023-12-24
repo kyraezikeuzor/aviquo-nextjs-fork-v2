@@ -6,26 +6,29 @@ import React from 'react'
 import AuthForm from '../../../components/AuthForm'
 import Button from '../../../components/Button'
 
+import { Input } from "@nextui-org/react";
+
 export default async function Login() {
   const authRequest = auth.handleRequest("GET", context);
-	const session = await authRequest.validate();
+  const session = await authRequest.validate();
   console.log(session);
-	if (session) redirect("/");
+  if (session) redirect("/");
 
   return (
     <main className='flex items-center justify-center min-h-screen'>
-        <AuthForm action="/api/login">
-            <h1>Welcome back!</h1>
-            <p>Welcome back! Please enter your details.</p>
+      <AuthForm action="/api/login">
+        <h1>Welcome back!</h1>
+        <p>Welcome back! Please enter your details.</p>
 
-            <label>Email</label>
-            <input type='email'/>
-            <label>Password</label>
-            <input type='password'/>
+        <div className="flex flex-col gap-3 w-full h-auto pb-[5%]">
+          <Input id="username" name="username" type='text' label="Username" labelPlacement="outside" />
+          <Input id="password" name="password" type='password' label="Password" labelPlacement="outside" />
 
-            <Button type='btn--submit' size='btn--md' style='btn--primary'>Continue</Button>
-            <p>Don&apos;t have an account? <a href='/auth/signup'>Sign Up</a></p>
-        </AuthForm>     
+        </div>
+
+        <Button type='btn--submit' size='btn--md' style='btn--primary'>Continue</Button>
+        <p>Don&apos;t have an account? <a href='/auth/signup'>Sign Up</a></p>
+      </AuthForm>
     </main>
   )
 }
