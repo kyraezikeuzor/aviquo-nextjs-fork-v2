@@ -1,26 +1,24 @@
 import React from 'react'
-import styles from './page.module.css'
-import Card from '../../components/Card'
-import Icon from '../../components/Icon'
-import Tag from '../../components/Tag'
 import Link from 'next/link'
+import styles from './page.module.css'
+import Card from '@/components/Card'
+import Icon from '@/components/Icon'
+import Tag from '@/components/Tag'
 
-import interestList from '../../lib/interests.json'
-import postList from '../../lib/allPosts.json'
-import {username} from '../../lib/userData'
 
+import interestList from '@/lib/interests.json'
+import postList from '@/lib/allPosts.json'
+import {username} from '@/lib/userData'
 
-export default function Marketplace() {
+export default function Forum() {
   return (
     <main className='flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>
 
         <div className='flex gap-5'>
             <img className='h-20 w-20' src='/graphics/admissions-advice.png'/>
             
-            
-
             <div className='flex flex-col gap-3'>
-                <h1 className='text-2xl md:text-3xl lg:text-4xl'>Marketplace</h1>
+                <h1 className='text-2xl md:text-3xl lg:text-4xl'>My Feed</h1>
                 <p>Get your questions answered by peers and admissions experts</p>
             </div>
         </div>
@@ -45,13 +43,13 @@ export default function Marketplace() {
             <aside className='flex flex-col gap-5'>
             <h2 className='text-lg md:text-xl lg:text-xl tracking-normal'>Create Post</h2>
                 <Card>
-                    <Link href="/marketplace/share" className='flex flex-row gap-2 items-center'>
-                        <div className='bg-[var(--clr-blue-300)] rounded-full p-4 cursor-pointer flex flex-col items-center'>
+                    <Link href='forum/ask' className='flex flex-row gap-2 items-center'>
+                        <div className='flex flex-col items-center bg-[var(--clr-blue-300)] rounded-full p-4 cursor-pointer'>
                             <Icon icon="pencil-edit" fillColor="#3981F6"/>
                         </div>
                         <div className='flex flex-col gap-2'>
                             <h3 className='text-base md:text-base lg:text-lg tracking-normal'>@{username}</h3>
-                            <p>Submit a post to share an activity.</p>
+                            <p>Ask for advice or share your thoughts.</p>
                         </div>
                     </Link> 
                     
@@ -69,15 +67,18 @@ export default function Marketplace() {
                 <Card>
                     <span className="flex items-center gap-1">
                         <Icon icon="notification-bell" fillColor="#0ABA69"/>
-                        <p><b>10</b> activities</p>
+                        <p><b>10</b> answers</p>
                     </span>
-                   
+                    <span className="flex items-center gap-1">
+                        <Icon icon="check" fillColor="#0ABA69"/>
+                        <p><b>2</b>  most helpful answers</p>
+                    </span>
                     <span className="flex items-center gap-1">
                         <Icon icon="arrow-up" fillColor="#0ABA69"/>
                         <p><b>102</b>  upvotes received</p>
                     </span>
                 </Card>
-                <h2></h2>
+                
             </aside>
         </section>
         
@@ -85,3 +86,4 @@ export default function Marketplace() {
     </main>
   )
 }
+

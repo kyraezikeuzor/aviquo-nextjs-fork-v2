@@ -1,19 +1,19 @@
 'use client'
 import React, {useState} from 'react'
 import Link from 'next/link'
-import SearchBar from '../../components/SearchBar'
-import Card from '../../components/Card'
+import SearchBar from '@/components/SearchBar'
+import Card from '@/components/Card'
 
-import Tag from '../../components/Tag'
-import Modal from '../../components/Modal'
+import Tag from '@/components/Tag'
+import Modal from '@/components/Modal'
 
-import ecItems from '../../lib/ecItems.json'
+import ecItems from '@/lib/ecItems.json'
 
 
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {getPath} from '../../lib/utilities'
+import {getPath} from '@/lib/utilities'
 
 export default function Discover() {
 

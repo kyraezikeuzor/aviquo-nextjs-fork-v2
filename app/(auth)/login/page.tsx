@@ -1,17 +1,16 @@
-import { auth } from "@/auth/lucia";
+import { auth, getPageSession } from "@/auth/lucia";
 import * as context from "next/headers";
 import { redirect } from "next/navigation";
 
 import React from 'react'
-import AuthForm from '../../../components/AuthForm'
-import Button from '../../../components/Button'
+import AuthForm from '@/components/AuthForm'
+import Button from '@/components/Button'
 
 import { Input } from "@nextui-org/react";
 
 export default async function Login() {
-  const authRequest = auth.handleRequest("GET", context);
-  const session = await authRequest.validate();
-  console.log(session);
+  const session = await getPageSession();
+
   if (session) redirect("/");
 
   return (

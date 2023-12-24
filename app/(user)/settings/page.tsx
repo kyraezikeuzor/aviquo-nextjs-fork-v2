@@ -1,7 +1,7 @@
 'use client'
 import React, {useState} from 'react'
-import Card from '../../components/Card'
-import Icon from '../../components/Icon'
+import Card from '@/components/Card'
+import Icon from '@/components/Icon'
 import Toggle from '@/components/Toggle'
 
 

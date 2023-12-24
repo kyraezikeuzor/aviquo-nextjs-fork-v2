@@ -1,16 +1,16 @@
 import React from 'react'
-import Card from '../../components/Card'
+import Card from '@/components/Card'
 import styles from './page.module.css'
-import Tag from '../../components/Tag'
-import Button from '../../components/Button'
+import Tag from '@/components/Tag'
+import Button from '@/components/Button'
 
-import friendsList from '../../lib/friends.json'
-import interestList from '../../lib/interests.json'
-import userPosts from '../../lib/userPosts.json'
+import friendsList from '@/lib/friends.json'
+import interestList from '@/lib/interests.json'
+import userPosts from '@/lib/userPosts.json'
 
-import Icon from '../../components/Icon'
+import Icon from '@/components/Icon'
 
-import {username} from '../../lib/userData'
+import {username} from '@/lib/userData'
 
 export default function Dashboard() {
   return (

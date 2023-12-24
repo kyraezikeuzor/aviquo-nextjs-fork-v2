@@ -1,14 +1,14 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 
-import Card from '../../../components/Card'
-import Icon from '../../../components/Icon'
-import Tag from '../../../components/Tag'
+import Card from '@/components/Card'
+import Icon from '@/components/Icon'
+import Tag from '@/components/Tag'
 
-import users from '../../../lib/users.json'
-import userPosts from '../../../lib/userPosts.json'
-import interestList from '../../../lib/interests.json'
-import ecList from '../../../lib/ecItems.json'
+import users from '@/lib/users.json'
+import userPosts from '@/lib/userPosts.json'
+import interestList from '@/lib/interests.json'
+import ecList from '@/lib/ecItems.json'
 
 
 type Params = {

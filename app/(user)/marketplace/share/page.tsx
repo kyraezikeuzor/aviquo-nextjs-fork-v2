@@ -1,12 +1,12 @@
 'use client'
 import React, {useState} from 'react'
 import Link from 'next/link'
-import Card from '../../../components/Card'
-import Icon from '../../../components/Icon'
-import Tag from '../../../components/Tag'
-import interestList from '../../../lib/interests.json'
+import Card from '@/components/Card'
+import Icon from '@/components/Icon'
+import Tag from '@/components/Tag'
+import interestList from '@/lib/interests.json'
 
-import Button from '../../../components/Button'
+import Button from '@/components/Button'
 
 export default function MarketplaceShare() {
     const [tags, setTags] = useState<any[]>([]);
