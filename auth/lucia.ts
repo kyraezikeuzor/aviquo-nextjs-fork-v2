@@ -40,3 +40,9 @@ export const getPageSession = cache(() => {
 	const authRequest = auth.handleRequest("GET", context);
 	return authRequest.validate();
 });
+
+export async function loadUser() {
+	"use server";
+	const user = (await getPageSession())?.user;
+	return user;
+}

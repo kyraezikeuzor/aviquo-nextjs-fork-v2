@@ -1,4 +1,3 @@
-'use client'
 import React, {useState, useEffect} from 'react'
 
 import Card from '@/components/Card'
@@ -10,39 +9,25 @@ import userPosts from '@/lib/userPosts.json'
 import interestList from '@/lib/interests.json'
 import ecList from '@/lib/ecItems.json'
 
+import { getPageSession } from '@/auth/lucia'
 
-type Params = {
-    params: {
-        username:string;
-    }
-}
 
-export default function Profile({params: {username}}: Params) {
-    const [user, setUser] = useState<User | null>(null);
-
-  useEffect(()=>{
-    for (let i = 0; i < users.length; i++) {
-      if ((users[i].username) === username) {
-        setUser(users[i])
-      }
-    }
-  })
-
-  const name = user ? user.name : 'Default Name';
+export default async function Profile() {
+const user = (await getPageSession())?.user;
 
   return (
     <main className='m-auto flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]'>  
         <div className='flex flex-col gap-5'>
             <img className='rounded-full w-20 h-auto' src='https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c'/>
             <div className='flex flex-col gap-2'>
-                <h1 className='text-2xl md:text-3xl lg:text-4xl'>{name}</h1>
+                <h1 className='text-2xl md:text-3xl lg:text-4xl'>{user?.firstName} {user?.lastName}</h1>
                 <div className='flex gap-2'>
                     <Tag type='tag'><b>1</b>follower</Tag>
                     <Tag type='tag'><b>29</b>following</Tag>
                     <Tag type='tag'><b>23</b>posts</Tag>
                     <Tag type='tag'><b>108</b>likes</Tag>
                 </div>
-                <p>Chapter of @global.girls.convergence And were hiring! Google form will drop soon! If you want to become a general team member, you can also DM us!</p>
+                <p>{user?.bio}</p>
             </div>
             <div className='flex flex-wrap gap-3'>
                 {interestList.map((item,index)=>(

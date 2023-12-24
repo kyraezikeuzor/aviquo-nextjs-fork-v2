@@ -1,17 +1,17 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
-import Card from '../@/components/Card'
+import Card from '@/components/Card'
 
 import users from '@/lib/users.json'
 import posts from '@/lib/allPosts.json'
-import Tag from '../@/components/Tag'
+import Tag from '@/components/Tag'
 
 import {getPath} from '@/lib/utilities'
 
-import Icon from '../@/components/Icon'
+import Icon from '@/components/Icon'
 
-import Button from '../@/components/Button'
+import Button from '@/components/Button'
 
 type Params = {
     params: {

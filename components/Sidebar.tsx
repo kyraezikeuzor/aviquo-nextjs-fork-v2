@@ -6,8 +6,6 @@ import Logo from './Logo'
 import styles from './Sidebar.module.css'
 import Link from 'next/link'
 
-import {username} from '../lib/userData'
-
 export default function Sidebar() {
     
     const [sidebar, setSidebar] = useState(false)
@@ -67,7 +65,7 @@ export default function Sidebar() {
                     
                 </li>
                 <li>
-                    <Link href={`/${username}`}>
+                    <Link href={`/profile`}>
                         <Icon icon="user" fillColor="black"/>
                         {sidebar && <p>Profile</p>}
                     </Link>
