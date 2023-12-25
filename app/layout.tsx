@@ -13,7 +13,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Create Next App</title>
+        <title>Aviquo</title>
       </head>
 
       <body>
