@@ -1,16 +1,15 @@
 .main {
-    display:grid;
-    grid-template-columns: 2fr 1fr;
-    gap:40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
 }
 
 .main section {
-    
 }
 
 @media screen and (max-width: 960px) {
-    .main {
-        display:flex;
-        flex-direction:column;
-    }
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
 }

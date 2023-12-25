@@ -1,60 +1,59 @@
 .tags {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: inherit;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: inherit;
 }
 
 .tag {
-    white-space: nowrap; /*Never wrap text within tag*/
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 8px;
-    font-size: 14px;
-    font-weight: 500;
-    width: fit-content;
-    height: fit-content;
-    gap: 5px;
-    cursor: pointer;
-    border-radius: 8px;
+  white-space: nowrap; /*Never wrap text within tag*/
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  height: fit-content;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 8px;
 
-    background-color: rgb(248, 248, 248);
-    color:var(--clr-grey-500);
-    border: 1px solid var(--clr-grey-300);
+  background-color: rgb(248, 248, 248);
+  color: var(--clr-grey-500);
+  border: 1px solid var(--clr-grey-300);
 }
 
-
 .orange {
-    background-color:rgb(255, 251, 248);
-    color: #ffaf25;
-    /*border:1px solid #fac871;*/
+  background-color: rgb(255, 251, 248);
+  color: #ffaf25;
+  /*border:1px solid #fac871;*/
 }
 
 .pink {
-    background-color: prgb(255, 248, 245);
-    color: var(--clr-pink-400);
-    /*border: 1px solid #eaa8f3;*/
+  background-color: prgb(255, 248, 245);
+  color: var(--clr-pink-400);
+  /*border: 1px solid #eaa8f3;*/
 }
 
 .green {
-    background-color:#f3fff8;
-    color: var(--clr-green-400);
-    /*border: 1px solid #AFEAC8;*/
+  background-color: #f3fff8;
+  color: var(--clr-green-400);
+  /*border: 1px solid #AFEAC8;*/
 }
 
 .blue {
-    background-color: rgb(245, 252, 255);
-    color: var(--clr-blue-300);
-    /*border: 1px solid rgb(130, 181, 233);*/
+  background-color: rgb(245, 252, 255);
+  color: var(--clr-blue-300);
+  /*border: 1px solid rgb(130, 181, 233);*/
 }
 
 .red {
-    background-color:#fff9f8;
-    color: rgb(236, 77, 77);
-    /*border: 1px solid rgb(247, 147, 147);*/
+  background-color: #fff9f8;
+  color: rgb(236, 77, 77);
+  /*border: 1px solid rgb(247, 147, 147);*/
 }
