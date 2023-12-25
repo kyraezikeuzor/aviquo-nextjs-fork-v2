@@ -1,18 +1,18 @@
 [
-    {
-        "name": "Home",
-        "url": "/"
-    },
-    {
-        "name": "Explore",
-        "url": "/explore"
-    },
-    {
-        "name": "Discover",
-        "url": "/discover"
-    },
-    {
-        "name": "My List",
-        "url": "/list"
-    }
+  {
+    "name": "Home",
+    "url": "/"
+  },
+  {
+    "name": "Explore",
+    "url": "/explore"
+  },
+  {
+    "name": "Discover",
+    "url": "/discover"
+  },
+  {
+    "name": "My List",
+    "url": "/list"
+  }
 ]

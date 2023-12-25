@@ -1,28 +1,26 @@
 .mobile__sidebar__icon {
-    display:none;
+  display: none;
 }
 
 .sidebar--mobile {
-    display:none;
+  display: none;
 }
 
 @media screen and (max-width: 960px) {
-    .mobile__sidebar__icon {
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        
-    }
+  .mobile__sidebar__icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .sidebar--mobile {
-        display:block;
-        transition: left 0.3s ease;
-    }
+  .sidebar--mobile {
+    display: block;
+    transition: left 0.3s ease;
+  }
 
-    .sidebar--mobile li a {
-        display:flex;
-        flex-direction:row;
-        gap:2px;
-    }
-
+  .sidebar--mobile li a {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+  }
 }

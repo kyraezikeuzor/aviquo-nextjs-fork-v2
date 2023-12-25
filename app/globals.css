@@ -8,19 +8,19 @@
   --clr-text: #232323;
 
   --clr-blue-500: #0b2439;
-  --clr-blue-400: #3981F6;
+  --clr-blue-400: #3981f6;
   --clr-blue-300: #f3f8fc;
-  --clr-seablue-400: #1088C9;
+  --clr-seablue-400: #1088c9;
 
   --clr-purple-500: #3f1c3d;
-  --clr-pink-400: #D16EDE;
+  --clr-pink-400: #d16ede;
 
   --clr-grey-500: rgb(84, 83, 83);
   --clr-grey-400: rgb(173, 168, 168);
   --clr-grey-300: #e7e9ec;
-  --clr-grey-200: #F9FAFB;
+  --clr-grey-200: #f9fafb;
 
-  --clr-green-400: #84D463;
+  --clr-green-400: #84d463;
 
   /* Font Families */
   --ff-base: "Inter", sans-serif;
@@ -40,7 +40,7 @@
   --fs--h5: 2.25rem;
   --fs--h6: 1.75rem;
 
-  --fs-200: .75rem;
+  --fs-200: 0.75rem;
   --fs-300: 1rem;
   --fs-400: 1.125rem;
   --fs-500: 1.375rem;
@@ -49,7 +49,6 @@
 
   /* Padding */
   --p-base: 8vh 6vw;
-  
 
   /* Width */
   --w-sidebar: 50px;
@@ -59,9 +58,10 @@
   --b-primary: 2px solid rgb(247, 247, 247);
 
   /* Shdaows */
-  --bs-base: rgba(0,0,0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
-  --bs-secondary: 0px 2px 4px -2px rgba(0, 0, 0, 0.10);
-  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.10), 0px 3px 15px -3px rgba(0, 0, 0, 0.10);
+  --bs-base: rgba(0, 0, 0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
+  --bs-secondary: 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
+    0px 3px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,15 +72,15 @@
   }
 }
 
-@media screen and (max-width:960px) {
+@media screen and (max-width: 960px) {
   :root {
     /*Font Sizes */
-    --fs--h1: calc(5.25rem * .8);
-    --fs--h2: calc(4.75rem * .8) ;
-    --fs--h3: calc(4.25rem * .8);
-    --fs--h4: calc(3.75rem * .8);
-    --fs--h5: calc(2.25rem * .8);
-    --fs--h6: calc(1.75rem * .8);
+    --fs--h1: calc(5.25rem * 0.8);
+    --fs--h2: calc(4.75rem * 0.8);
+    --fs--h3: calc(4.25rem * 0.8);
+    --fs--h4: calc(3.75rem * 0.8);
+    --fs--h5: calc(2.25rem * 0.8);
+    --fs--h6: calc(1.75rem * 0.8);
     --w-sidebar: 0px;
   }
 }
@@ -90,50 +90,69 @@
   box-sizing: border-box;
 }
 
-
 svg {
-  box-sizing:content-box;
+  box-sizing: content-box;
 }
 
 body {
   font-size: 1.125rem;
-  line-height:1.5;
+  line-height: 1.5;
 }
-
-
 
 main {
   width: min(120ch, 100% - 4rem);
-  margin-inline:auto;
-  padding-top:5vh;
+  margin-inline: auto;
+  padding-top: 5vh;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  line-height:1;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
   font-weight: var(--fw-semibold);
 }
 
-h1 {font-size: var(--fs--h1);letter-spacing:-0.04em;}
-h2 {font-size: var(--fs--h2);letter-spacing:-0.04em;}
-h3 {font-size: var(--fs--h3);letter-spacing:-0.04em;}
-h4 {font-size: var(--fs--h4);letter-spacing:-0.03em;}
-h5 {font-size: var(--fs--h5);}
-h6 {font-size: var(--fs--h6);}
-
-p {font-size: var(--fs-300);}
-
-a, li a {
-  cursor:pointer;
+h1 {
+  font-size: var(--fs--h1);
+  letter-spacing: -0.04em;
+}
+h2 {
+  font-size: var(--fs--h2);
+  letter-spacing: -0.04em;
+}
+h3 {
+  font-size: var(--fs--h3);
+  letter-spacing: -0.04em;
+}
+h4 {
+  font-size: var(--fs--h4);
+  letter-spacing: -0.03em;
+}
+h5 {
+  font-size: var(--fs--h5);
+}
+h6 {
+  font-size: var(--fs--h6);
 }
 
+p {
+  font-size: var(--fs-300);
+}
+
+a,
+li a {
+  cursor: pointer;
+}
 
 img,
 svg,
 video {
-  max-width:100%;
-  display:block;
+  max-width: 100%;
+  display: block;
 }
-
 
 /* Define the styles for the scrollbar */
 ::-webkit-scrollbar {
@@ -147,7 +166,7 @@ video {
 
 /* Define the styles for the scrollbar track */
 ::-webkit-scrollbar-track {
-  margin-top:10px;
+  margin-top: 10px;
   background: var(--lightgrey); /* color of the scrollbar track */
 }
 
