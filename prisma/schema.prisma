@@ -81,6 +81,7 @@ model Opportunity {
   name          String @unique @db.VarChar(200)
   profile_image String
   url           String
+  description   String
   tags          Tag[]
 }
 
