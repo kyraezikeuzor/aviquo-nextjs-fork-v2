@@ -5,10 +5,7 @@ import { redirect } from "next/navigation";
 import AuthForm from "@/components/AuthForm";
 
 const Page = async () => {
-  const authRequest = auth.handleRequest("GET", context);
-  const session = await authRequest.validate();
-  console.log(session);
-  if (!session) redirect("/login");
+
   return (
     <div className="flex flex-col min-h-screen">
       <section className="flex-grow">
