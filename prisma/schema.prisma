@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-} 
+}
 
 datasource db {
   provider  = "postgresql"
@@ -14,13 +14,12 @@ datasource db {
 model Post {
   id        String  @id @default(cuid())
   title     String
-  body   String?
+  body      String?
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
-  authorId String?
+  authorId  String?
   likes     Int
 }
-
 
 //
 // Represents a user of the aviquo platform
@@ -29,15 +28,15 @@ model User {
   id           String    @id @unique
   auth_session Session[]
   key          Key[]
-  firstName    String   
-  lastName     String  
-  email        String   @unique
-  username     String   @unique
+  firstName    String
+  lastName     String
+  email        String    @unique
+  username     String    @unique
   pfp          String?
   bio          String?
-  numFollowers Int      
-  numFollowing Int      
-  createdAt    DateTime @default(now()) @map(name: "date_joined")
+  numFollowers Int
+  numFollowing Int
+  createdAt    DateTime  @default(now()) @map(name: "date_joined")
   posts        Post[]
 
   @@map(name: "users")
@@ -62,27 +61,25 @@ model Key {
   @@index([user_id])
 }
 
-//
-// Global list of tags/keywords applicable to opportunities.
-//
-// Examples: scholarship, extracurricular activity, etc.
-//
-model Tag {
-  name            String       @unique @db.VarChar(50)
-  Opportunity     Opportunity? @relation(fields: [opportunityName], references: [name])
-  opportunityName String?      @db.VarChar(200)
-}
-
-model Category {
-  name String @unique @db.VarChar(255)
+model Company {
+  name        String        @unique @db.VarChar(200)
+  type        String        @db.VarChar(100)
+  Opportunity Opportunity[]
 }
 
 model Opportunity {
-  name          String @unique @db.VarChar(200)
-  profile_image String
-  url           String
-  description   String
-  tags          Tag[]
+  name        String  @unique @db.VarChar(200)
+  description String
+  url         String
+  type        String
+  education   String?
+  company     Company @relation(fields: [companyName], references: [name])
+
+  location    String?
+  duration    String?
+  deadline    DateTime?
+  subjects    String?
+  companyName String    @db.VarChar(200)
 }
 
 model Waitlist {
