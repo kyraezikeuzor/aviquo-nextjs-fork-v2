@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 
 export async function GET(request: Request): Promise<NextResponse> {
-  const result = await prisma.post.findMany();
+  const result = await prisma.post.findMany({
+    include: {
+      author: true,
+    },
+  });
 
   if (result != null) {
-    return NextResponse.json({ status: "success", ...result });
+    return NextResponse.json({ ...result });
   }
 
   return NextResponse.json({ status: "fail" });

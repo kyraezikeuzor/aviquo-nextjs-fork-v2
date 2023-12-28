@@ -9,19 +9,21 @@ import Card from "@/components/Card";
 
 export default function Discover({user}: {user: any}) {
   const [searchText, setSearchText] = useState("");
-  const [ecItems, setEcItems] = useState({});
+  const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
+  const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const raw_response = await axios.get(`/api/ecs`);
-        console.log(raw_response.data);
         const response = raw_response.data;
 
         setEcItems((prevState) => ({
           ...prevState,
           ...response,
         }));
+
+        setSearchDataFiltered(Object.values(response));
       }catch (error) {
         console.error('Error fetching data: ', error);
       };
@@ -29,17 +31,11 @@ export default function Discover({user}: {user: any}) {
 
     fetchData();
   }, []); 
-
-  const searchDataFiltered = [];
   
-  for (let i = 0; i < Object.keys(ecItems).length - 1; i++) {
-    if (ecItems[i].name.toLowerCase().includes(searchText.toLowerCase())) {
-      searchDataFiltered.push(ecItems[i]);
-    }
-  }
+  
 
   return (
-    <main className="flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]">
+    <main className="flex flex-col gap-5 px-1/6 md:px-1/6 lg:px-1/6">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl md:text-3xl lg:text-4xl">Discover</h1>
         <p>Discover new opportunities and activities.</p>
@@ -47,7 +43,7 @@ export default function Discover({user}: {user: any}) {
       </div>
 
       <div className="flex flex-row flex-wrap gap-3">
-        {searchDataFiltered.map((item, index) => (
+        {searchDataFiltered.map((item: any, index: number) => (
           <Card key={index}>
             <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
             <p className="text-sm">{item.description}</p>

@@ -5,7 +5,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const result = await prisma.opportunity.findMany();
 
   if (result != null) {
-    return NextResponse.json({ status: "success", ...result });
+    return NextResponse.json({ ...result });
   }
 
   return NextResponse.json({ status: "fail" });

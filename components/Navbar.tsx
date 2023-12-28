@@ -1,69 +1,154 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import styles from "./Navbar.module.css";
+'use client'
 
-import Logo from "./Logo";
-import Link from "next/link";
-import Button from "../components/Button";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarContent
+} from 'react-pro-sidebar';
+import {
+  FaUser,
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaTachometerAlt,
+  FaGem,
+  FaList,
+  FaRegLaughWink,
+  FaHeart
+} from 'react-icons/fa';
+import React, { useState } from 'react';
+import Link from 'next/link';
 
-import Tag from "./Tag";
+// import './NavbarStyles.scss';
 
-export default function Navbar() {
-  const pathname = usePathname();
+interface SidebarProps {
+  collapsed: boolean;
+  toggled: boolean;
+  handleToggleSidebar: () => void;
+  handleCollapsedChange: () => void;
+};
 
+
+const Sidebar: React.FC<SidebarProps> = ({
+  collapsed,
+  toggled,
+  handleToggleSidebar,
+  handleCollapsedChange
+}) => {
   return (
-    <nav
-      className={`${styles.nav} z-50 sticky top-0 flex items-center justify-center gap-10 py-3 px-[10vw] w-full backdrop-blur bg-white/50 border-b-2 border-[color:var(--clr-grey-300)]`}
+    <ProSidebar
+      collapsed={collapsed}
+      toggled={toggled}
+      onToggle={handleToggleSidebar}
     >
-      <div className="flex items-center gap-5">
-        <Logo minimal={false} />
-      </div>
+      {/* Header */}
+      <SidebarHeader>
+        <Menu iconShape="circle">
+          {collapsed ? (
+            <MenuItem
+              icon={<FaAngleDoubleRight />}
+              onClick={handleCollapsedChange}
+            ></MenuItem>
+          ) : (
+            <MenuItem
+              suffix={<FaAngleDoubleLeft />}
+              onClick={handleCollapsedChange}
+            >
+              <div
+                style={{
+                  padding: '9px',
+                  textTransform: 'uppercase',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  letterSpacing: '1px'
+                }}
+              >
+                Pro Sidebar
+              </div>
+            </MenuItem>
+          )}
+        </Menu>
+      </SidebarHeader>
+      {/* Content */}
+      <SidebarContent>
+        <Menu iconShape="circle">
+          <MenuItem
+            icon={<FaTachometerAlt />}
+            suffix={<span className="badge red">NEW</span>}
+          >
+            Dashboard
+          </MenuItem>
+          {/* <MenuItem icon={<FaGem />}>Components </MenuItem> */}
+          <MenuItem icon={<FaGem />}>
+            Components <Link href="/components" />
+          </MenuItem>
+          <SubMenu
+            suffix={<span className="badge yellow">3</span>}
+            title={'With Suffix'}
+            icon={<FaRegLaughWink />}
+          >
+            <MenuItem>Submenu 1</MenuItem>
+            <MenuItem>Submenu 2</MenuItem>
+            <MenuItem>Submenu 3</MenuItem>
+          </SubMenu>
+          <SubMenu
+            title={'With Prefix'}
+            icon={<FaHeart />}
+          >
+            <MenuItem>Submenu 1</MenuItem>
+            <MenuItem>Submenu 2</MenuItem>
+            <MenuItem>Submenu 3</MenuItem>
+          </SubMenu>
+          <SubMenu title={'Multi Level'} icon={<FaList />}>
+            <MenuItem>Submenu 1 </MenuItem>
+            <MenuItem>Submenu 2 </MenuItem>
+            <SubMenu title={'Submenu 3'}>
+              <MenuItem>Submenu 3.1 </MenuItem>
+              <MenuItem>Submenu 3.2 </MenuItem>
+            </SubMenu>
+          </SubMenu>
+        </Menu>
+      </SidebarContent>
 
-      <ul className="flex items-center justify-between gap-5 font-medium text-base">
-        <li
-          className={
-            pathname == "/match"
-              ? "border-b-2 border-[var(--clr-blue-400)] text-[var(--clr-blue-400)]"
-              : "hover:border-b-2 hover:border-[var(--clr-blue-300)]"
-          }
-        >
-          <Link href="/math" className="flex items-center gap-2">
-            Get Matched
+      <SidebarFooter style={{ textAlign: 'center' }}>
+        <div className="sidebar-btn-wrapper" style={{ padding: '16px' }}>
+          <Link
+            className="sidebar-btn"
+            style={{ cursor: 'pointer' }}
+            href="/profile"
+          >
+            <FaUser />
+            <span>My Account</span>
           </Link>
-        </li>
-        <li
-          className={
-            pathname == "/match"
-              ? "border-b-2 border-[var(--clr-blue-400)] text-[var(--clr-blue-400)]"
-              : "hover:border-b-2 hover:border-[var(--clr-blue-300)]"
-          }
-        >
-          <Link href="/math" className="flex items-center gap-2">
-            Get Matched
-          </Link>
-        </li>
-      </ul>
-
-      <ul className="flex items-center justify-between gap-5 font-medium text-base">
-        <li
-          className={
-            pathname == "/match"
-              ? "border-b-2 border-[var(--clr-blue-400)] text-[var(--clr-blue-400)]"
-              : "hover:border-b-2 hover:border-[var(--clr-blue-300)]"
-          }
-        >
-          <Link href="/math" className="flex items-center gap-2">
-            Get Matched
-          </Link>
-        </li>
-
-        <li>
-          <Button type="" size="btn--md" style="btn--primary">
-            Sign up
-          </Button>
-        </li>
-      </ul>
-    </nav>
+        </div>
+      </SidebarFooter>
+    </ProSidebar>
   );
+};
+
+const Navbar = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [toggled, setToggled] = useState(false);
+
+  const handleCollapsedChange = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleToggleSidebar = () => {
+    setToggled(!toggled);
+  };
+
+  return(
+    <Sidebar
+        collapsed={collapsed}
+        toggled={toggled}
+        handleToggleSidebar={handleToggleSidebar}
+        handleCollapsedChange={handleCollapsedChange}
+    />
+  )
 }
+
+export default Navbar;

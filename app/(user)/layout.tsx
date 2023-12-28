@@ -1,8 +1,9 @@
 import { redirect, usePathname } from "next/navigation";
 
 import DashNavbar from "@/components/DashNavbar";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/Navbar";
 import { getPageSession } from "@/auth/lucia";
+import Navbar from "@/components/Navbar";
 
 export default async function UserLayout({
   children,
@@ -13,12 +14,9 @@ export default async function UserLayout({
   if (!session) redirect("/login");
 
   return (
-    <>
-      <Sidebar />
-      <main className={`p-0 w-full ml-[var(--w-sidebar)]`}>
-        <DashNavbar />
-        {children}
-      </main>
-    </>
+    <div className='app'>
+    <Navbar/>
+      {children}
+    </div>
   );
 }

@@ -185,3 +185,8 @@ video {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #aaa; /* color of the scrollbar handle when inactive */
 }
+
+[data-overlay-container=true] {
+  height: 100%;
+  width: 100%;
+}

@@ -2,7 +2,8 @@
 
 'use client';
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Link from "next/link";
 import styles from "./page.module.css";
 import Card from "@/components/Card";
@@ -13,8 +14,33 @@ import interestList from "@/lib/interests.json";
 import postList from "@/lib/allPosts.json";
 import { username } from "@/lib/userData";
 
-export default function Forum({user}: {user: any}) {
-  console.log(user);
+
+
+export default function Forum({ user }: { user: any }) {
+  const [searchText, setSearchText] = useState("");
+  const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
+  const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const raw_response = await axios.get(`/api/posts`);
+        const response = raw_response.data;
+
+        setEcItems((prevState) => ({
+          ...prevState,
+          ...response,
+        }));
+
+        setSearchDataFiltered(Object.values(response));
+        // console.log(response);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      };
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <main className="flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]">
@@ -29,7 +55,7 @@ export default function Forum({user}: {user: any}) {
 
       <section className={`${styles["forum__content__container"]}`}>
         <div className="flex flex-col gap-5 cursor-pointer">
-          {postList.map((item, index) => (
+          {searchDataFiltered.map((item: any, index: number) => (
             <div
               key={index}
               className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5"
@@ -43,8 +69,7 @@ export default function Forum({user}: {user: any}) {
               </div>
               <div className="flex flex-col gap-2">
                 <span className="inline-block flex gap-2 text-xs md:text-sm lg:text-sm">
-                  @{item.username} • {item.date}{" "}
-                  <Tag type="tag">{item.type}</Tag>{" "}
+                  @{item.author.username} • {item.date}{" "}
                 </span>
                 <h2 className="font-semibold text-base md:text-lg lg:text-xl">
                   {item.title}

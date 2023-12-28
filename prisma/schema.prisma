@@ -15,7 +15,7 @@ model Post {
   id        String  @id @default(cuid())
   title     String
   body      String?
-  published Boolean @default(false)
+  date      String?
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
   likes     Int

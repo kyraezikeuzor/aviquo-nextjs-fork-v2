@@ -15,14 +15,16 @@ export default function ForumPage() {
   const [content, setContent] = useState("");
 
   const handleOptions = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(Array.from(e.target.options));
     const selectedOptions = Array.from(e.target.options)
       .filter((option) => (option as HTMLOptionElement).selected)
       .map((option) => (option as HTMLOptionElement).value);
 
+    console.log(selectedOptions);
+
     setTags(selectedOptions);
   };
 
-  const tagList = tags ? tags : [];
 
   return (
     <main className="flex flex-col px-1/6 md:px-[10vw] lg:px-[10vw] gap-5">
@@ -39,28 +41,31 @@ export default function ForumPage() {
         <form className="flex flex-col p-2 gap-5 w-full">
           <div className="w-full">
             <h2 className="text-[var(--clr-grey-500)] tracking-tight text-sm md:text-base lg:text-lg">
-              Question summary
+              Title
             </h2>
             <input
               className="focus:outline-none w-full border-2 border-[var(--clr-grey-300)] rounded-xl p-2 text-xs md:text-sm lg:text-sm"
-              placeholder="Enter your main activty (up to 100 characters)"
+              placeholder="Add a memorable title"
+              value={title}
+              onChange={(v) => setTitle(v.target.value)}
             />
           </div>
           <div className="w-full">
             <h2 className="text-[var(--clr-grey-500)] tracking-tight text-sm md:text-base lg:text-lg">
-              Question description
+              Content
             </h2>
             <textarea
               className="focus:outline-none w-full border-2 border-[var(--clr-grey-300)] rounded-xl p-2 text-xs md:text-sm lg:text-sm"
-              placeholder="Add a description to provide more details"
+              placeholder="Add a description to provide more details or elaborate"
               value={content}
+              onChange={(v) => setContent(v.target.value)}
             />
           </div>
 
           <div className="flex flex-col gap-2">
             <p className="text-xs md:text-sm lg:text-sm">Tags</p>
             <div className="flex flex-wrap gap-2 p-2 border-2 border-[var(--clr-grey-300)] rounded-xl">
-              {tagList.map((item, index) => (
+              {tags.map((item, index) => (
                 <Tag key={index} type="tag">
                   {item}
                 </Tag>
@@ -71,6 +76,7 @@ export default function ForumPage() {
               className="focus:outline-none"
               multiple
               onChange={handleOptions}
+              value={tags}
             >
               {interestList.map((item, index) => (
                 <option

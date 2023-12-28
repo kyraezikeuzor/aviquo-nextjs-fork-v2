@@ -7,7 +7,7 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import Icon from "./Icon";
 import Modal from "./Modal";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Navbar";
 
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
