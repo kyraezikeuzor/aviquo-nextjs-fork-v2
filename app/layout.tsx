@@ -17,7 +17,7 @@ export default async function RootLayout({
         <title>Aviquo</title>
       </head>
 
-      <body className="min-h-screen">
+      <body className={`min-h-screen ${inter.className}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

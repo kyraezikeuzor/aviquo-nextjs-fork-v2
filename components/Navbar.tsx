@@ -9,6 +9,7 @@ import {
   SidebarFooter,
   SidebarContent
 } from 'react-pro-sidebar';
+
 import {
   FaUser,
   FaAngleDoubleLeft,
@@ -17,10 +18,13 @@ import {
   FaGem,
   FaList,
   FaRegLaughWink,
-  FaHeart
+  FaHeart,
+  FaDoorOpen,
+  FaDoorClosed
 } from 'react-icons/fa';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/navigation';
 
 // import './NavbarStyles.scss';
 
@@ -38,6 +42,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   handleToggleSidebar,
   handleCollapsedChange
 }) => {
+  const router = useRouter();
+
   return (
     <ProSidebar
       collapsed={collapsed}
@@ -66,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   letterSpacing: '1px'
                 }}
               >
-                Pro Sidebar
+                Aviquo
               </div>
             </MenuItem>
           )}
@@ -75,54 +81,35 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Content */}
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem
-            icon={<FaTachometerAlt />}
-            suffix={<span className="badge red">NEW</span>}
-          >
-            Dashboard
-          </MenuItem>
-          {/* <MenuItem icon={<FaGem />}>Components </MenuItem> */}
           <MenuItem icon={<FaGem />}>
-            Components <Link href="/components" />
+            Discover <Link href="/discover" />
           </MenuItem>
-          <SubMenu
-            suffix={<span className="badge yellow">3</span>}
-            title={'With Suffix'}
-            icon={<FaRegLaughWink />}
-          >
-            <MenuItem>Submenu 1</MenuItem>
-            <MenuItem>Submenu 2</MenuItem>
-            <MenuItem>Submenu 3</MenuItem>
-          </SubMenu>
-          <SubMenu
-            title={'With Prefix'}
-            icon={<FaHeart />}
-          >
-            <MenuItem>Submenu 1</MenuItem>
-            <MenuItem>Submenu 2</MenuItem>
-            <MenuItem>Submenu 3</MenuItem>
-          </SubMenu>
-          <SubMenu title={'Multi Level'} icon={<FaList />}>
-            <MenuItem>Submenu 1 </MenuItem>
-            <MenuItem>Submenu 2 </MenuItem>
-            <SubMenu title={'Submenu 3'}>
-              <MenuItem>Submenu 3.1 </MenuItem>
-              <MenuItem>Submenu 3.2 </MenuItem>
-            </SubMenu>
-          </SubMenu>
+          <MenuItem icon={<FaTachometerAlt/>}>
+            Forums <Link href="/forum" />
+          </MenuItem>
+          <MenuItem icon={<FaUser />}>
+            Profile <Link href="/profile" />
+          </MenuItem>
         </Menu>
       </SidebarContent>
 
       <SidebarFooter style={{ textAlign: 'center' }}>
         <div className="sidebar-btn-wrapper" style={{ padding: '16px' }}>
-          <Link
+          <button
             className="sidebar-btn"
             style={{ cursor: 'pointer' }}
-            href="/profile"
+            onClick={async () => {
+              const response = await fetch("/api/logout", {
+                method: "POST",
+                body: null,
+                redirect: "manual",
+              });
+              router.refresh();
+            }}
           >
-            <FaUser />
-            <span>My Account</span>
-          </Link>
+            <FaDoorOpen />
+            <span>Log Out</span>
+          </button>
         </div>
       </SidebarFooter>
     </ProSidebar>
