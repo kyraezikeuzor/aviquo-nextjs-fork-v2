@@ -26,7 +26,7 @@ function Onboarding({ user }: { user: any }) {
     return (
         <div className=" bg-gradient-to-tr from-pink-500 to-yellow-500 shadow-lg flex justify-center items-center h-screen w-screen">
             <div className="rounded-sm bg-[rgba(255,255,255,0.5)] p-12 shadow-2xl w-[60%]">
-                <h1 className="font-bold text-center block text-2xl pb-[8%]">What's Your Name?</h1>
+                <h1 className="font-bold text-center block text-2xl pb-[8%]">What&apos;s Your Name?</h1>
                 <Input
                     isClearable
                     radius="lg"
