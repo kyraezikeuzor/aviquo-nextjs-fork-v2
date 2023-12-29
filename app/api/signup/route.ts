@@ -8,9 +8,7 @@ export const POST = async (request: NextRequest) => {
   const formData = await request.formData();
   const username = formData.get("username");
   const password = formData.get("password");
-  const firstName = formData.get("first_name") as string;
-  const lastName = formData.get("last_name") as string;
-  const email = formData.get("email") as string;
+
   // basic check
   if (
     typeof username !== "string" ||
@@ -31,7 +29,7 @@ export const POST = async (request: NextRequest) => {
     password.length < 6 ||
     password.length > 255
   ) {
-    console.log("here2");
+
     return NextResponse.json(
       {
         error: "Invalid password",
@@ -42,7 +40,6 @@ export const POST = async (request: NextRequest) => {
     );
   }
   try {
-    console.log("here3");
     const user = await auth.createUser({
       key: {
         providerId: "username", // auth method
@@ -51,16 +48,16 @@ export const POST = async (request: NextRequest) => {
       },
       attributes: {
         username,
-        firstName,
-        lastName,
-        email,
+        firstName: "",
+        lastName: "",
+        email: "",
         pfp: "",
         bio: "Hi! I'm new to Aviquo!",
         numFollowers: 0,
         numFollowing: 0,
       },
     });
-    console.log("here5");
+    
     const session = await auth.createSession({
       userId: user.userId,
       attributes: {},

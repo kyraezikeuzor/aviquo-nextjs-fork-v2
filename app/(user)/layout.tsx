@@ -11,7 +11,8 @@ export default async function UserLayout({
   children: React.ReactNode;
 }) {
   const session = await getPageSession();
-  if (!session) redirect("/login");
+  if (!session) redirect("/auth");
+  if (session.user.email == "" && session.user.firstName == "" && session.user.lastName == "") redirect("/onboarding");
 
   return (
     <div className='app'>

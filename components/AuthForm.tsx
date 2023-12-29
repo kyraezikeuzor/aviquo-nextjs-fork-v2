@@ -1,10 +1,6 @@
 "use client";
 
 import React from "react";
-import styles from "./AuthForm.module.css";
-import Logo from "./Logo";
-import Button from "./Button";
-
 import { useRouter } from "next/navigation";
 
 const AuthForm = ({
@@ -18,7 +14,7 @@ const AuthForm = ({
 
   return (
     <form
-      className={styles.form}
+      className='hidden'
       action={action}
       method="post"
       onSubmit={async (e) => {
@@ -41,7 +37,6 @@ const AuthForm = ({
         }
       }}
     >
-      <Logo minimal={true} />
       {children}
     </form>
   );

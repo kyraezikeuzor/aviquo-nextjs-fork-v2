@@ -1,12 +1,18 @@
+"use client"
+
 import { Button, Stack, TextField, Typography, colors } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenMode } from './SigninPage';
+import AuthForm from '@/components/AuthForm';
 
 interface SignUpProps {
     onSwitchMode: (e: any) => void;
   }
 
 const SigninForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <Stack
       justifyContent="center"
@@ -25,19 +31,19 @@ const SigninForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
             Welcome back
           </Typography>
           <Typography color={colors.grey[600]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
+            We cannot wait to have you join us again!
           </Typography>
         </Stack>
 
         <Stack spacing={4}>
           <Stack spacing={2}>
             <Stack spacing={1}>
-              <Typography color={colors.grey[800]}>Email</Typography>
-              <TextField />
+              <Typography color={colors.grey[800]}>Username</Typography>
+              <TextField value={username} onChange={(e) => {setUsername(e.target.value)}} />
             </Stack>
             <Stack spacing={1}>
               <Typography color={colors.grey[800]}>Password</Typography>
-              <TextField type='password' />
+              <TextField type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
             </Stack>
           </Stack>
           <Button
@@ -48,6 +54,10 @@ const SigninForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
               "&:hover": {
                 bgcolor: `${colors.grey[600]} !important`
               }
+            }}
+            onClick={() => {
+              const submit = document.getElementById('form-submit');
+              submit?.click();
             }}
           >
             Sign in
@@ -68,6 +78,21 @@ const SigninForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
           </Typography>
         </Stack>
       </Stack>
+      <AuthForm action="/api/login">
+          <input
+            id="username"
+            name="username"
+            type="text"
+            value={username}
+          />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            value={password}
+          />
+          <button id="form-submit" type="submit"></button>
+      </AuthForm>
     </Stack>
   );
 };

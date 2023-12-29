@@ -18,6 +18,7 @@
     "@mui/material": "^5.15.2",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.7.1",
+    "@vercel/blob": "^0.16.1",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
     "lucia": "^2.7.6",
