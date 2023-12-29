@@ -31,6 +31,14 @@ model Comment {
   post    Post    @relation(fields: [postId], references: [id])
 }
 
+model Notification {
+  id           String    @id @unique
+  title        String 
+  description  String
+  userId  String?
+  user    User?   @relation(fields: [userId], references: [id])
+}
+
 //
 // Represents a user of the aviquo platform
 //
@@ -49,6 +57,7 @@ model User {
   createdAt    DateTime  @default(now()) @map(name: "date_joined")
   posts        Post[]
   comments     Comment[]
+  notifications Notification[]
 
   @@map(name: "users")
 }
