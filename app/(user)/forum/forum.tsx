@@ -17,8 +17,7 @@ import { username } from "@/lib/userData";
 
 
 export default function Forum({ user }: { user: any }) {
-  const [searchText, setSearchText] = useState("");
-  const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
+  const [posts, setPosts] = useState<Record<number | string, any>>({});
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function Forum({ user }: { user: any }) {
         const raw_response = await axios.get(`/api/posts`);
         const response = raw_response.data;
 
-        setEcItems((prevState) => ({
+        setPosts((prevState) => ({
           ...prevState,
           ...response,
         }));
@@ -48,7 +47,7 @@ export default function Forum({ user }: { user: any }) {
         <img className="h-20 w-20" src="/graphics/admissions-advice.png" />
 
         <div className="flex flex-col gap-3">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl">My Feed</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl">Forums</h1>
           <p>Get your questions answered by peers and admissions experts</p>
         </div>
       </div>
@@ -77,6 +76,7 @@ export default function Forum({ user }: { user: any }) {
                 <p className="text-xs md:text-sm lg:text-sm">{item.body}</p>
               </div>
             </div>
+            
           ))}
         </div>
         <aside className="flex flex-col gap-5">
@@ -95,41 +95,6 @@ export default function Forum({ user }: { user: any }) {
                 <p>Ask for advice or share your thoughts.</p>
               </div>
             </Link>
-          </Card>
-          <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
-            Topics
-          </h2>
-          <Card>
-            <div className="flex flex-wrap gap-2">
-              {interestList.map((item, index) => (
-                <Tag key={index} type="tag">
-                  {item.name}
-                </Tag>
-              ))}
-            </div>
-          </Card>
-          <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
-            Contributions
-          </h2>
-          <Card>
-            <span className="flex items-center gap-1">
-              <Icon icon="notification-bell" fillColor="#0ABA69" />
-              <p>
-                <b>10</b> answers
-              </p>
-            </span>
-            <span className="flex items-center gap-1">
-              <Icon icon="check" fillColor="#0ABA69" />
-              <p>
-                <b>2</b> most helpful answers
-              </p>
-            </span>
-            <span className="flex items-center gap-1">
-              <Icon icon="arrow-up" fillColor="#0ABA69" />
-              <p>
-                <b>102</b> upvotes received
-              </p>
-            </span>
           </Card>
         </aside>
       </section>

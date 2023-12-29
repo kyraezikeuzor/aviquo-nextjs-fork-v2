@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
+import { getCurrentDateTimeString } from "@/utils";
 
 export async function GET(request: Request): Promise<NextResponse> {
   const result = await prisma.post.findMany({
@@ -17,8 +18,14 @@ export async function GET(request: Request): Promise<NextResponse> {
 
 export async function POST(request: Request): Promise<NextResponse> {
   if (request.body) {
+    const dt = getCurrentDateTimeString();
+
     const body = await request.json();
-    const result = await prisma.post.create({ data: body });
+    const result = await prisma.post.create({ data: {
+      ...body,
+      likes: 0,
+      date: dt,
+    } });
 
     return NextResponse.json(result);
   } else {
