@@ -1,0 +1,22 @@
+diff --git a/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js b/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
+index 64924ab..6307dae 100644
+--- a/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
++++ b/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
+@@ -1,5 +1,8 @@
++import { Prisma } from '@prisma/client';
++
+ export const prismaAdapter = (client, modelNames) => {
+     const getModels = () => {
++        console.log("Account fields:", Prisma.dmmf.datamodel.models.find(model => model.name === "User").fields)
+         if (!modelNames) {
+             return {
+                 User: client["user"],
+@@ -21,7 +24,7 @@ export const prismaAdapter = (client, modelNames) => {
+             getUser: async (userId) => {
+                 return await User.findUnique({
+                     where: {
+-                        id: userId
++                        'id': userId
+                     }
+                 });
+             },

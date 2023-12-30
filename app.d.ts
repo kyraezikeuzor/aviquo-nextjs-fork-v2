@@ -10,6 +10,9 @@ declare namespace Lucia {
     bio: string;
     numFollowers: int;
     numFollowing: int;
+    posts: Array<any>;
+    notifications: Array<any>;
+    comments: Array<any>;
   };
   type DatabaseSessionAttributes = {};
 }
