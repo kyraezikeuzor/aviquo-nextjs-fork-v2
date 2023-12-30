@@ -15,6 +15,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        snow: "#fff6f7",
+        white: "#fff",
+        darkslateblue: {
+          "100": "#6c4889",
+          "200": "#7c3c75",
+          "300": "#311041",
+          "400": "#471360",
+        },
+
+        
+        midnightblue: "#471360",
+        slategray: "#796682",
+      },
     },
   },
   darkMode: "class",

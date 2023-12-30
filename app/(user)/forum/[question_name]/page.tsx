@@ -12,6 +12,7 @@ import { getPath } from "@/lib/utilities";
 import Icon from "@/components/Icon";
 
 import Button from "@/components/Button";
+import axios from "axios";
 
 type Params = {
   params: {
@@ -20,7 +21,20 @@ type Params = {
 };
 
 export default function ForumPost({ params: { question_name } }: Params) {
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<any | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/post?id=${question_name}`);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [])
 
   useEffect(() => {
     for (let i = 0; i < posts.length; i++) {
@@ -64,7 +78,7 @@ export default function ForumPost({ params: { question_name } }: Params) {
             <p className="text-sm md:text-base lg:text-base">{postBody}</p>
 
             <div className="flex flex-wrap mb-10">
-              {postTags.map((item, index) => (
+              {postTags.map((item: any, index: any) => (
                 <Tag key={index} type="tag">
                   {item}
                 </Tag>

@@ -12,7 +12,7 @@ export default async function UserLayout({
 }) {
   const session = await getPageSession();
   if (!session) redirect("/auth");
-  if (session.user.email == "" && session.user.firstName == "" && session.user.lastName == "") redirect("/onboarding");
+  if (session.user.username == "" || session.user.firstName == "" || session.user.lastName == "") redirect("/onboarding");
 
   return (
     <div className='app'>

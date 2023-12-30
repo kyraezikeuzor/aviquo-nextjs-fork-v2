@@ -7,13 +7,13 @@ import type { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
   const formData = await request.formData();
-  const username = formData.get("username");
+  const email = formData.get("email");
   const password = formData.get("password");
   // basic check
   if (
-    typeof username !== "string" ||
-    username.length < 1 ||
-    username.length > 31
+    typeof email !== "string" ||
+    email.length < 1 ||
+    email.length > 31
   ) {
     return NextResponse.json(
       {
@@ -41,7 +41,7 @@ export const POST = async (request: NextRequest) => {
   try {
     // find user by key
     // and validate password
-    const key = await auth.useKey("username", username.toLowerCase(), password);
+    const key = await auth.useKey("email", email.toLowerCase(), password);
     const session = await auth.createSession({
       userId: key.userId,
       attributes: {},
@@ -55,6 +55,7 @@ export const POST = async (request: NextRequest) => {
       },
     });
   } catch (e) {
+    console.log(e)
     if (
       e instanceof LuciaError &&
       (e.message === "AUTH_INVALID_KEY_ID" ||

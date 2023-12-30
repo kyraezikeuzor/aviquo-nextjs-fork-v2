@@ -6,15 +6,16 @@ import type { NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
   const formData = await request.formData();
-  const username = formData.get("username");
+  const email = formData.get("email");
   const password = formData.get("password");
 
   // basic check
   if (
-    typeof username !== "string" ||
-    username.length < 4 ||
-    username.length > 31
+    typeof email !== "string" ||
+    email.length < 4 ||
+    email.length > 31
   ) {
+    console.log('a)')
     return NextResponse.json(
       {
         error: "Invalid username",
@@ -29,7 +30,7 @@ export const POST = async (request: NextRequest) => {
     password.length < 6 ||
     password.length > 255
   ) {
-
+    console.log('b)')
     return NextResponse.json(
       {
         error: "Invalid password",
@@ -42,15 +43,15 @@ export const POST = async (request: NextRequest) => {
   try {
     const user = await auth.createUser({
       key: {
-        providerId: "username", // auth method
-        providerUserId: username.toLowerCase(), // unique id when using "username" auth method
+        providerId: "email", // auth method
+        providerUserId: email.toLowerCase(), // unique id when using "username" auth method
         password, // hashed by Lucia
       },
       attributes: {
-        username,
+        username: "",
         firstName: "",
         lastName: "",
-        email: "",
+        email,
         pfp: "",
         bio: "Hi! I'm new to Aviquo!",
         numFollowers: 0,

@@ -9,7 +9,7 @@ interface SignUpProps {
 }
 
 const SignupForm: React.FC<SignUpProps> = ({ onSwitchMode}) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   
@@ -38,8 +38,8 @@ const SignupForm: React.FC<SignUpProps> = ({ onSwitchMode}) => {
         <Stack spacing={4}>
           <Stack spacing={2}>
             <Stack spacing={1}>
-              <Typography color={colors.grey[800]}>Username</Typography>
-              <TextField value={username} onChange={(e) => {setUsername(e.target.value)}} />
+              <Typography color={colors.grey[800]}>Email</Typography>
+              <TextField value={email} onChange={(e) => {setEmail(e.target.value)}} />
             </Stack>
             <Stack spacing={1}>
               <Typography color={colors.grey[800]}>Password</Typography>
@@ -80,10 +80,10 @@ const SignupForm: React.FC<SignUpProps> = ({ onSwitchMode}) => {
       </Stack>
       <AuthForm action="/api/signup">
           <input
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             type="text"
-            value={username}
+            value={email}
           />
           <input
             id="password"

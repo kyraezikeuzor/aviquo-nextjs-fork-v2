@@ -8,17 +8,14 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Card from "@/components/Card";
 import Icon from "@/components/Icon";
-import Tag from "@/components/Tag";
-
-import interestList from "@/lib/interests.json";
-import postList from "@/lib/allPosts.json";
-import { username } from "@/lib/userData";
+import { useRouter } from "next/navigation";
 
 
 
 export default function Forum({ user }: { user: any }) {
   const [posts, setPosts] = useState<Record<number | string, any>>({});
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +54,8 @@ export default function Forum({ user }: { user: any }) {
           {searchDataFiltered.map((item: any, index: number) => (
             <div
               key={index}
-              className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5"
+              className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5 hover:border-[rgb(0,0,255)] hover:border-dashed hover:border-3"
+              onClick={(e) => router.replace(`/forum/${item.id}`, )}
             >
               <div className="w-4 flex flex-col items-center">
                 <Icon icon="arrow-up" fillColor="black" />
@@ -90,7 +88,7 @@ export default function Forum({ user }: { user: any }) {
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-base md:text-base lg:text-lg tracking-normal">
-                  @{username}
+                  @{user.username}
                 </h3>
                 <p>Ask for advice or share your thoughts.</p>
               </div>

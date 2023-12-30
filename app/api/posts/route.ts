@@ -7,6 +7,9 @@ export async function GET(request: Request): Promise<NextResponse> {
     include: {
       author: true,
     },
+    orderBy: {
+      date: 'desc'
+    }
   });
 
   if (result != null) {
@@ -18,13 +21,11 @@ export async function GET(request: Request): Promise<NextResponse> {
 
 export async function POST(request: Request): Promise<NextResponse> {
   if (request.body) {
-    const dt = getCurrentDateTimeString();
 
     const body = await request.json();
     const result = await prisma.post.create({ data: {
       ...body,
       likes: 0,
-      date: dt,
     } });
 
     return NextResponse.json(result);
