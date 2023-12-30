@@ -84,8 +84,9 @@ function Onboarding({ user }: { user: any }) {
 
     const handleUpdateInformation = async () => {
         const data = {
+            email: user.email,
             username: username,
-            pfp: pfp!.url,
+            pfp: pfp ? pfp.url : '',
             firstName: name.firstName,
             lastName: name.lastName,
         }
