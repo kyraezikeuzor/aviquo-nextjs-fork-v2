@@ -1,3 +1,5 @@
+//TODO bug fix regarding router
+
 "use client"
 
 import { Input } from "@nextui-org/react"
@@ -5,12 +7,16 @@ import { PutBlobResult, HeadBlobResult } from "@vercel/blob";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { promisify } from 'util';
+
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 
 function Button({ value, className, onClick, disabled }: { value: any, className: any, onClick: (e: any) => void, disabled: any }) {
     return (
         <button
+            type={'button'}
             onClick={(e) => onClick(e)}
             className={disabled ? `${className} mt-6 transition transition-all block py-3 px-4 w-1/4 text-white font-bold rounded-md cursor-pointer bg-slate-700 h-auto` : `${className} mt-6 transition transition-all block py-3 px-4 w-1/4 text-white font-bold rounded-md cursor-pointer bg-gradient-to-r from-indigo-600 to-purple-400 hover:from-indigo-700 hover:to-purple-500 focus:bg-indigo-900 transform hover:-translate-y-1 hover:shadow-lg h-auto`}
             disabled={disabled}
@@ -82,7 +88,7 @@ function Onboarding({ user }: { user: any }) {
         }
     }
 
-    const handleUpdateInformation = async () => {
+    const handleUpdateInformation = () => {
         const data = {
             email: user.email,
             username: username,
@@ -91,13 +97,16 @@ function Onboarding({ user }: { user: any }) {
             lastName: name.lastName,
         }
 
-        const res = axios.put('/api/user', {
-            ...data
+        axios.put('/api/user', { ...data })
+        .then((res) => {
+            console.log(res);
+            location.reload()
+        })
+        .catch((error) => {
+            // Handle errors
+            console.error(error);
+            toast.error('Onboarding Failed!')
         });
-
-        console.log(res);
-
-        return true;
     }
 
     return (
@@ -223,22 +232,21 @@ function Onboarding({ user }: { user: any }) {
                         setStage(stage - 1)
                         console.log('here')
                     }} />
-                    <Button value={stage == 1 ? 'Complete' : 'Continue'} className={"self-end"} disabled={false} onClick={async (e) => {
+                    <Button value={stage == 1 ? 'Complete' : 'Continue'} className={"self-end"} disabled={false} onClick={(e) => {
+                        e.preventDefault();
+
                         if (stage == 0) {
+                            console.log('stage a')
                             if (name.firstName == '' || name.lastName == '') {
                                 toast.error('Some fields are empty!')
                             } else {
                                 setStage(1)
                             }
                         } else {
-                            setIsLoading(true)
-                            const res = await handleUpdateInformation();
-                            setIsLoading(false);
-                            if (res) {
-                                router.push('/profile');
-                            } else {
-                                toast.error('Onboarding Failed!')
-                            }
+                            console.log('wstage b')
+                            // setIsLoading(true)
+                            handleUpdateInformation();
+                            // setIsLoading(false);
                         }
                     }} />
                 </div>

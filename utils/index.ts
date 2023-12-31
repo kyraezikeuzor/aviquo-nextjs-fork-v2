@@ -35,3 +35,9 @@ export const getCurrentDateTimeString = (): string => {
 
     return dateTimeString;
 };
+
+export const toDateTimeString = (date: Date): string => {
+  const dateTimeString: string = date.toISOString().replace('T', ' ').slice(0, 19);
+
+  return dateTimeString;
+};

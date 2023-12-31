@@ -11,11 +11,14 @@ export default async function UserLayout({
   children: React.ReactNode;
 }) {
   const session = await getPageSession();
-
   if (!session) redirect("/auth");
-  if (session.user.username == "" || session.user.firstName == "" || session.user.lastName == "") redirect("/onboarding");
 
   console.log(session.user);
+  console.log('reached!')
+
+  
+  if (session.user.username == "" || session.user.firstName == "" || session.user.lastName == "") redirect("/onboarding");
+
   return (
     <div className='app'>
       <Navbar />
