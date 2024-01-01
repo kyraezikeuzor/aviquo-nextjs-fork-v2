@@ -8,7 +8,7 @@ import * as context from "next/headers";
 const client = new PrismaClient();
 
 export const auth = lucia({
-  env: "DEV", // "PROD" if deployed to HTTPS
+  env: "PROD", // "PROD" if deployed to HTTPS
   middleware: nextjs_future(),
   sessionCookie: {
     expires: false,
