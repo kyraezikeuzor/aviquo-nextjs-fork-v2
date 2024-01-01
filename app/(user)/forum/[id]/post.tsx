@@ -4,38 +4,56 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Card from "@/components/Card";
 
-import users from "@/lib/users.json";
 import posts from "@/lib/allPosts.json";
 import Tag from "@/components/Tag";
 
-import { getPath } from "@/lib/utilities";
-
 import Icon from "@/components/Icon";
 
-import Button from "@/components/Button";
 import axios from "axios";
-import { Textarea } from "@nextui-org/react";
+import { Button, Textarea } from "@nextui-org/react";
+import { Button as CustomButton } from "@/components/Button"
 
 
 export default function Post({ user, postId }: { user: any, postId: string }) {
   const [post, setPost] = useState<any | null>({ comments: 0 });
+  const [reply, setReply] = useState('');
+  const [replies, setReplies] = useState<Array<any>>([]);
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/post?id=${postId}`);
-        console.log(response.data);
-        setPost(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+    if (reply == '') {
+      const fetchData = async () => {
+
+        try {
+          const postResponse = await axios.get(`/api/post?id=${postId}`);
+          setPost(postResponse.data);
+
+          const repliesResponse = await axios.get(`/api/comments?id=${postId}`);
+
+          if (repliesResponse.data.length != 0) {
+            console.log(Object.values(repliesResponse.data))
+            setReplies(Object.values(repliesResponse.data));
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+
+
       }
 
-    };
+      fetchData();
+    }
+  }, [reply])
+  const sendReply = async () => {
+    console.log('reply', reply)
+    const data = await axios.post('/api/comments', {
+      content: reply,
+      postId: postId,
+      authorId: user.userId,
+    })
 
-    fetchData();
-  }, [])
-
-
+    setReply('');
+  }
 
 
   return (
@@ -62,9 +80,9 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
             <h1 className="text-xl md:text-3xl lg:text-4xl">{post.title}</h1>
             <p className="text-sm md:text-base lg:text-base">{post.body}</p>
 
-            <Button type="" style="btn--primary" size="btn--sm">
+            <CustomButton type="" style="btn--primary" size="btn--sm">
               Add a reply
-            </Button>
+            </CustomButton>
           </div>
         </div>
       </Card>
@@ -83,39 +101,33 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
               classNames={{
                 label: '!mb-0'
               }}
+              value={reply}
+              onValueChange={(v) => setReply(v)}
             />
-            
 
+            <Button color='primary' variant='bordered' onClick={sendReply}>
+              Send Comment
+            </Button>
           </div>
 
         </div>
       </Card>
 
       <h2 className="text-base md:text-xl lg:text-xl tracking-tight">
-        {post.comments} Comments
+        {post.comments.length} Comment{post.comments.length == 1 ? '' : 's'}
       </h2>
 
       <div className="flex flex-col gap-5 cursor-pointer">
-        {posts.map((item, index) => (
+        {replies.map((item: any, index: number) => (
           <div
             key={index}
             className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5"
           >
-            <div className="w-4 flex flex-col items-center">
-              <Icon icon="arrow-up" fillColor="black" />
-              <p className="font-semibold text-[var(--clr-grey-400)]">
-                {item.likes}
-              </p>
-              <Icon icon="arrow-down" fillColor="black" />
-            </div>
             <div className="flex flex-col gap-2">
               <span className="inline-block flex gap-2 text-xs md:text-sm lg:text-sm">
-                @{item.username} • {item.date} <Tag type="tag">{item.type}</Tag>{" "}
+                @{item.author.username} • {item.date} <Tag type="tag">Comment</Tag>{" "}
               </span>
-              <h2 className="font-semibold text-base md:text-lg lg:text-xl">
-                {item.title}
-              </h2>
-              <p className="text-xs md:text-sm lg:text-sm">{item.body}</p>
+              <p className="text-xs md:text-sm lg:text-sm">{item.content}</p>
             </div>
           </div>
         ))}

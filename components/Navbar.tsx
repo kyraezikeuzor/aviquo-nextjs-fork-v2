@@ -20,7 +20,8 @@ import {
   FaRegLaughWink,
   FaHeart,
   FaDoorOpen,
-  FaDoorClosed
+  FaDoorClosed,
+  FaCog
 } from 'react-icons/fa';
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -89,6 +90,9 @@ const Sidebar: React.FC<SidebarProps> = ({
           </MenuItem>
           <MenuItem icon={<FaUser />}>
             Profile <Link href="/profile" />
+          </MenuItem>
+          <MenuItem icon={<FaCog />}>
+            Settings <Link href="/settings" />
           </MenuItem>
         </Menu>
       </SidebarContent>

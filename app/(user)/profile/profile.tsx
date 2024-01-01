@@ -78,13 +78,13 @@ export default function Profile({ user }: { user: any }) {
               <h3 className="font-semibold text-lg md:text-lg lg:text-lg tracking-tight">
                 {item.title}
               </h3>
-              <p className="text-sm">{item.body}</p>
+              <p className="text-sm">{item.type == 'Question' ? item.body : item.content}</p>
             </div>
           </div>
         ))}
       </div>
       <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
-        My Liked Oppurtunities
+        My Liked Opportunities
       </h2>
       <div className="flex flex-row flex-wrap gap-3">
         {likedActivities.map((item: any, index: number) => (

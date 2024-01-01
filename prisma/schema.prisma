@@ -12,51 +12,52 @@ datasource db {
 // Represents a single post on the forum.
 //
 model Post {
-  id        String  @id @default(cuid())
-  title     String
-  body      String?
-  date    DateTime  @default(now())
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
-  likes     Int
+  id       String    @id @default(cuid())
+  title    String
+  body     String?
+  date     DateTime  @default(now())
+  author   User?     @relation(fields: [authorId], references: [id])
+  authorId String?
+  likes    Int
   comments Comment[]
 }
 
 model Comment {
-  id      String  @id @default(cuid())
-  content String
-  postId  String
-  authorId  String?
-  author    User?   @relation(fields: [authorId], references: [id])
-  post    Post    @relation(fields: [postId], references: [id])
+  id       String   @id @default(cuid())
+  content  String
+  postId   String
+  authorId String?
+  author   User?    @relation(fields: [authorId], references: [id])
+  post     Post     @relation(fields: [postId], references: [id])
+  date     DateTime @default(now())
 }
 
 model Notification {
-  id           String    @id @unique
-  title        String 
-  description  String
-  userId  String?
-  user    User?   @relation(fields: [userId], references: [id])
+  id          String  @id @unique
+  title       String
+  description String
+  userId      String?
+  user        User?   @relation(fields: [userId], references: [id])
 }
 
 //
 // Represents a user of the aviquo platform
 //
 model User {
-  id           String    @id @unique
-  auth_session Session[]
-  key          Key[]
-  firstName    String
-  lastName     String
-  email        String    @unique
-  username     String    @unique
-  pfp          String?
-  bio          String?
-  numFollowers Int
-  numFollowing Int
-  createdAt    DateTime  @default(now()) @map(name: "date_joined")
-  posts        Post[]
-  comments     Comment[]
+  id            String         @id @unique
+  auth_session  Session[]
+  key           Key[]
+  firstName     String
+  lastName      String
+  email         String         @unique
+  username      String         @unique
+  pfp           String?
+  bio           String?
+  numFollowers  Int
+  numFollowing  Int
+  createdAt     DateTime       @default(now()) @map(name: "date_joined")
+  posts         Post[]
+  comments      Comment[]
   notifications Notification[]
 
   @@map(name: "users")
