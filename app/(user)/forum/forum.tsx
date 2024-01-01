@@ -28,6 +28,8 @@ export default function Forum({ user }: { user: any }) {
           ...response,
         }));
 
+        console.log(Object.values(response))
+
         setSearchDataFiltered(Object.values(response));
         // console.log(response);
       } catch (error) {
