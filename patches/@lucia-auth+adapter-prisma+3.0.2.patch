@@ -1,5 +1,5 @@
 diff --git a/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js b/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
-index 64924ab..e0b0a0b 100644
+index 64924ab..191e1ad 100644
 --- a/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
 +++ b/node_modules/@lucia-auth/adapter-prisma/dist/prisma.js
 @@ -1,3 +1,11 @@
@@ -14,10 +14,11 @@ index 64924ab..e0b0a0b 100644
  export const prismaAdapter = (client, modelNames) => {
      const getModels = () => {
          if (!modelNames) {
-@@ -16,14 +24,23 @@ export const prismaAdapter = (client, modelNames) => {
+@@ -16,14 +24,24 @@ export const prismaAdapter = (client, modelNames) => {
          };
      };
      const { User, Session, Key } = getModels();
++    console.log('patch working')
 +
 +    const relationalKeys = getObjectsWithRelationName(Prisma.dmmf.datamodel.models.find(model => model.name === "User").fields);
 +
