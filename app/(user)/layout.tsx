@@ -14,7 +14,7 @@ export default async function UserLayout({
   if (!session) redirect("/auth");
 
   console.log(session.user);
-  console.log('reached!')
+  console.log('reach')
 
   
   if (session.user.username == "" || session.user.firstName == "" || session.user.lastName == "") redirect("/onboarding");
