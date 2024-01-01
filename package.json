@@ -24,6 +24,7 @@
     "lucia": "^2.7.6",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
+    "patch-package": "^8.0.0",
     "prettier": "^3.1.1",
     "prisma": "^5.7.1",
     "pusher": "^5.2.0",
@@ -33,7 +34,6 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "4.2.0",
     "react-pro-sidebar": "^0.6.0",
-    "patch-package": "^8.0.0",
     "sass": "^1.69.5",
     "zod": "^3.22.4"
   },
