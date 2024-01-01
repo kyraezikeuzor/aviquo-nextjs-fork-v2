@@ -50,7 +50,7 @@ model User {
   firstName     String
   lastName      String
   email         String         @unique
-  username      String         @unique
+  username      String         
   pfp           String?
   bio           String?
   numFollowers  Int
