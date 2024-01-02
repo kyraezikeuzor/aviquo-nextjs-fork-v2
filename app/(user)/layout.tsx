@@ -22,7 +22,7 @@ export default async function UserLayout({
   return (
     <div className='app'>
       <Navbar />
-      <div className="overflow-y-auto w-4/5 max-h-screen">
+      <div className="overflow-y-auto w-full max-h-screen">
         {children}
       </div>
     </div>

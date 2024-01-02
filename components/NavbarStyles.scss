@@ -1,4 +1,4 @@
-$sidebar-bg-color: #1d1d1d;
+$sidebar-bg-color: #fff9f9;
 $submenu-bg-color: rgba(255, 255, 255, 0.05);
 $submenu-bg-color-collapsed: rgba(29, 29, 29, 0.95);
 $sidebar-color: #adadad;
@@ -13,6 +13,10 @@ body {
   height: 100vh;
   color: #353535;
   font-family: sans-serif;
+}
+
+.pro-sidebar {
+  color: rgb(0, 0, 0) !important;
 }
 
 #root {
