@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import AuthForm from "@/components/AuthForm";
 
 const Page = async () => {
-
   return (
     <div className="flex flex-col min-h-screen">
       <section className="flex-grow">

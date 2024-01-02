@@ -4,16 +4,19 @@ import * as context from "next/headers";
 import { redirect } from "next/navigation";
 import Onboarding from "./onboarding";
 
-
-
 export default async function OnboardingPage() {
-    const session = await getPageSession();
-    if (!session) redirect("/auth");
-    if (session.user.username != "" || session.user.firstName != "" || session.user.lastName != "") redirect("/profile");
+  const session = await getPageSession();
+  if (!session) redirect("/auth");
+  if (
+    session.user.username != "" ||
+    session.user.firstName != "" ||
+    session.user.lastName != ""
+  )
+    redirect("/profile");
 
-    return (
-        <>
-            <Onboarding user={session.user} />
-        </>
-    )
+  return (
+    <>
+      <Onboarding user={session.user} />
+    </>
+  );
 }

@@ -6,32 +6,25 @@
   /* Colors */
   --clr-surface: #fefdfd;
   --clr-text: #232323;
-
   --clr-blue-500: #0b2439;
   --clr-blue-400: #3981f6;
   --clr-blue-300: #f3f8fc;
   --clr-seablue-400: #1088c9;
-
   --clr-purple-500: #3f1c3d;
   --clr-pink-400: #d16ede;
-
   --clr-grey-500: rgb(84, 83, 83);
   --clr-grey-400: rgb(173, 168, 168);
   --clr-grey-300: #e7e9ec;
   --clr-grey-200: #f9fafb;
-
   --clr-green-400: #84d463;
-
   /* Font Families */
   --ff-base: "Inter", sans-serif;
   --ff-accent: "Young Serif", serif;
-
   /*Font Weights*/
   --fw-normal: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-black: 800;
-
   /* Font Sizes */
   --fs--h1: 5.25rem;
   --fs--h2: 4.75rem;
@@ -39,29 +32,23 @@
   --fs--h4: 3.75rem;
   --fs--h5: 2.25rem;
   --fs--h6: 1.75rem;
-
   --fs-200: 0.75rem;
   --fs-300: 1rem;
   --fs-400: 1.125rem;
   --fs-500: 1.375rem;
   --fs-600: 1.75rem;
   --fs-700: 2.25rem;
-
   /* Padding */
   --p-base: 8vh 6vw;
-
   /* Width */
   --w-sidebar: 50px;
-
   /* Border */
   --br-base: 8px;
   --b-primary: 2px solid rgb(247, 247, 247);
-
   /* Shdaows */
   --bs-base: rgba(0, 0, 0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
   --bs-secondary: 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
-    0px 3px 15px -3px rgba(0, 0, 0, 0.1);
+  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 3px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -119,21 +106,26 @@ h1 {
   font-size: var(--fs--h1);
   letter-spacing: -0.04em;
 }
+
 h2 {
   font-size: var(--fs--h2);
   letter-spacing: -0.04em;
 }
+
 h3 {
   font-size: var(--fs--h3);
   letter-spacing: -0.04em;
 }
+
 h4 {
   font-size: var(--fs--h4);
   letter-spacing: -0.03em;
 }
+
 h5 {
   font-size: var(--fs--h5);
 }
+
 h6 {
   font-size: var(--fs--h6);
 }
@@ -154,36 +146,55 @@ video {
   display: block;
 }
 
+
 /* Define the styles for the scrollbar */
+
 ::-webkit-scrollbar {
-  width: 10px; /* width of the scrollbar */
+  width: 10px;
+  /* width of the scrollbar */
 }
+
 
 /* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* color of the scrollbar handle on hover */
+  background: #555;
+  /* color of the scrollbar handle on hover */
 }
+
 
 /* Define the styles for the scrollbar track */
+
 ::-webkit-scrollbar-track {
   margin-top: 10px;
-  background: var(--lightgrey); /* color of the scrollbar track */
+  background: var(--lightgrey);
+  /* color of the scrollbar track */
 }
+
 
 /* Define the styles for the scrollbar handle */
+
 ::-webkit-scrollbar-thumb {
-  background: var(--lightblue); /* color of the scrollbar handle */
-  border-radius: 10px; /* rounded corners for the scrollbar handle */
+  background: var(--lightblue);
+  /* color of the scrollbar handle */
+  border-radius: 10px;
+  /* rounded corners for the scrollbar handle */
 }
+
 
 /* Define the styles for the scrollbar track when the handle is being dragged */
+
 ::-webkit-scrollbar-track-piece:end {
-  background-color: #f1f1f1; /* color of the scrollbar track when dragged */
+  background-color: #f1f1f1;
+  /* color of the scrollbar track when dragged */
 }
 
+
 /* Define the styles for the scrollbar handle when the handle is being dragged */
+
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #aaa; /* color of the scrollbar handle when inactive */
+  background: #aaa;
+  /* color of the scrollbar handle when inactive */
 }
 
 [data-overlay-container=true] {
