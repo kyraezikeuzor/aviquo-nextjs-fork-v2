@@ -15,8 +15,13 @@ body {
   font-family: sans-serif;
 }
 
-.pro-sidebar {
-  color: rgb(0, 0, 0) !important;
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-icon-wrapper > .pro-icon > svg {
+  width: 80% !important;
+  height: 80% !important;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+  color: black !important;
 }
 
 #root {

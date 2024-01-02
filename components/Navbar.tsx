@@ -16,13 +16,13 @@ import {
   FaAngleDoubleRight,
   FaTachometerAlt,
   FaGem,
-  FaList,
-  FaRegLaughWink,
-  FaHeart,
   FaDoorOpen,
   FaDoorClosed,
   FaCog
 } from 'react-icons/fa';
+
+import { HiOutlineCog, HiOutlineUser } from "react-icons/hi";
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div
                 style={{
                   padding: '9px',
-                  textTransform: 'uppercase',
+                  // textTransform: 'uppercase',
                   fontWeight: 'bold',
                   fontSize: 15,
                   letterSpacing: '1px'
@@ -88,10 +88,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           <MenuItem icon={<FaTachometerAlt/>}>
             Forums <Link href="/forum" />
           </MenuItem>
-          <MenuItem icon={<FaUser />}>
+          <MenuItem icon={<HiOutlineUser />}>
             Profile <Link href="/profile" />
           </MenuItem>
-          <MenuItem icon={<FaCog />}>
+          <MenuItem icon={<HiOutlineCog />} className='w-full'>
             Settings <Link href="/settings" />
           </MenuItem>
         </Menu>
