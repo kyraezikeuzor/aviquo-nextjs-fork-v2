@@ -15,7 +15,9 @@ import { Button as CustomButton } from "@/components/Button"
 
 
 export default function Post({ user, postId }: { user: any, postId: string }) {
-  const [post, setPost] = useState<any | null>({ comments: 0 });
+  const [post, setPost] = useState<any | null>({ comments: 0, author: {
+    username: ''
+  } });
   const [reply, setReply] = useState('');
   const [replies, setReplies] = useState<Array<any>>([]);
 
@@ -74,15 +76,15 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
-              @{user.username}
+              @{post.author.username}
               <Tag type="green">{post.date}</Tag>
             </div>
             <h1 className="text-xl md:text-3xl lg:text-4xl">{post.title}</h1>
             <p className="text-sm md:text-base lg:text-base">{post.body}</p>
 
-            <CustomButton type="" style="btn--primary" size="btn--sm">
+            {/* <CustomButton type="" style="btn--primary" size="btn--sm">
               Add a reply
-            </CustomButton>
+            </CustomButton> */}
           </div>
         </div>
       </Card>

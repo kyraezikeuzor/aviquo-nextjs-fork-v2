@@ -82,7 +82,7 @@ export default function Discover({ user }: { user: any }) {
 
   return (
     <div className="flex flex-row w-full h-full">
-      <div className="flex flex-col gap-5 pl-[5%] pr-[5%] w-[80%]">
+      <div className="flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Discover</h1>
           <p>Discover new opportunities and activities.</p>
@@ -105,7 +105,7 @@ export default function Discover({ user }: { user: any }) {
           ))}
         </div>
       </div>
-      <div className="flex flex-col w-[20%] rounded-md border-black border-2 px-[2.5%] h-auto">
+      <div className="flex flex-col w-[20%] rounded-md border-black border-2 px-[2.5%] !mr-[5%] h-fit ">
         <FilterBox values={['Activity', 'Internship']} sector={'Type'} callback={filterData}></FilterBox>
         <Divider />
         <FilterBox values={['Global', 'America']} sector={'Location'} callback={filterData}></FilterBox>

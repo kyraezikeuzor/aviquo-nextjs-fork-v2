@@ -27,7 +27,7 @@ export default function Profile({ user }: { user: any }) {
       }, []);
 
   return (
-    <main className="m-auto flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]">
+    <main className="m-auto flex flex-col gap-5 !px-1/6 md:!px-[10vw] lg:!px-[10vw]">
       <div className="flex flex-col gap-5">
         <img
           className="rounded-full w-20 h-auto"

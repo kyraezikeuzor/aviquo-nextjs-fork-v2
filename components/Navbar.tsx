@@ -21,7 +21,7 @@ import {
   FaCog
 } from 'react-icons/fa';
 
-import { HiOutlineCog, HiOutlineUser } from "react-icons/hi";
+import { HiOutlineCog, HiOutlineNewspaper, HiOutlineSearch, HiOutlineSearchCircle, HiOutlineUser, HiOutlineUserCircle } from "react-icons/hi";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -82,13 +82,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Content */}
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem icon={<FaGem />}>
+          <MenuItem icon={<HiOutlineSearch />}>
             Discover <Link href="/discover" />
           </MenuItem>
-          <MenuItem icon={<FaTachometerAlt/>}>
+          <MenuItem icon={<HiOutlineNewspaper/>}>
             Forums <Link href="/forum" />
           </MenuItem>
-          <MenuItem icon={<HiOutlineUser />}>
+          <MenuItem icon={<HiOutlineUserCircle />}>
             Profile <Link href="/profile" />
           </MenuItem>
           <MenuItem icon={<HiOutlineCog />} className='w-full'>

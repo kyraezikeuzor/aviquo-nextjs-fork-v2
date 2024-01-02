@@ -11,6 +11,7 @@ export async function GET(request: Request): Promise<NextResponse> {
             where: { id: id },
             include: {
                 comments: true,
+                author: true,
             },
         });
         if (result != null) {
