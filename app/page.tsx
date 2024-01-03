@@ -20,7 +20,7 @@ const Page = async () => {
             help high schoolers succeed in the college admissions process.
           </p>
           <a
-            href="/login"
+            href="/auth/"
             className="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors duration-200"
           >
             Get Started
@@ -84,7 +84,7 @@ const Page = async () => {
             towards your college goals.
           </p>
           <a
-            href="/signup"
+            href="/auth/"
             className="bg-white text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
             Sign Up
