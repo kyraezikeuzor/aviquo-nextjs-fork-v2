@@ -35,17 +35,15 @@ const SigninPage = () => {
     const timeout1 = setTimeout(() => {
       setCurrMode(mode);
       setBackgroundImage(
-        mode === ScreenMode.SIGN_IN
-          ? assets.images.signinBg
-          : assets.images.signupBg
+        mode === SIGN_IN ? assets.images.signinBg : assets.images.signupBg
       );
-    }, 1100);
+    }, 1000);
 
     const timeout2 = setTimeout(() => {
       setLeft("unset");
       setRight(0);
       setWidth(0);
-    }, 1200);
+    }, 1100);
 
     const timeout3 = setTimeout(() => {
       setRight("unset");
@@ -61,7 +59,7 @@ const SigninPage = () => {
 
   return (
     <Grid container sx={{ height: "100vh" }}>
-      <Grid item xs={4} sx={{ position: "relative", padding: 3 }}>
+      <Grid item xs={5} sx={{ position: "relative", padding: 3 }}>
         {currMode === ScreenMode.SIGN_IN ? (
           <SigninForm onSwitchMode={onSwitchMode} />
         ) : (
@@ -79,13 +77,13 @@ const SigninPage = () => {
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            transition: "all 1s ease-in-out",
+            transition: "all 1s ease-in",
           }}
         />
       </Grid>
       <Grid
         item
-        xs={8}
+        xs={7}
         sx={{
           position: "relative",
         }}
@@ -102,7 +100,7 @@ const SigninPage = () => {
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            transition: "all 1s ease-in-out",
+            transition: "all 1s ease-out",
           }}
         />
       </Grid>
