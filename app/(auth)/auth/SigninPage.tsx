@@ -1,7 +1,10 @@
 "use client";
 
 import { Box, Grid, colors } from "@mui/material";
+
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import assets from "@/assets";
 import SigninForm from "./SignInForm";
 import SignupForm from "./SignUpForm";
@@ -11,6 +14,8 @@ export const ScreenMode = {
   SIGN_UP: "SIGN_UP",
 };
 
+const { SIGN_IN, SIGN_UP } = ScreenMode;
+
 const SigninPage = () => {
   const [left, setLeft] = useState<string | number>(0);
   const [right, setRight] = useState<string | number>("unset");
@@ -19,7 +24,10 @@ const SigninPage = () => {
   const [backgroundImage, setBackgroundImage] = useState(
     assets.images.signinBg
   );
-  const [currMode, setCurrMode] = useState(ScreenMode.SIGN_IN);
+
+  const loginPage = typeof useSearchParams().get("l") == "string";
+
+  const [currMode, setCurrMode] = useState(loginPage ? SIGN_IN : SIGN_UP);
 
   const onSwitchMode = (mode: any) => {
     setWidth(100);
@@ -50,7 +58,6 @@ const SigninPage = () => {
       clearTimeout(timeout3);
     };
   };
-  console.log(assets.images);
 
   return (
     <Grid container sx={{ height: "100vh" }}>
