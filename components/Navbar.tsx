@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   ProSidebar,
@@ -7,8 +7,8 @@ import {
   SubMenu,
   SidebarHeader,
   SidebarFooter,
-  SidebarContent
-} from 'react-pro-sidebar';
+  SidebarContent,
+} from "react-pro-sidebar";
 
 import {
   FaUser,
@@ -18,14 +18,21 @@ import {
   FaGem,
   FaDoorOpen,
   FaDoorClosed,
-  FaCog
-} from 'react-icons/fa';
+  FaCog,
+} from "react-icons/fa";
 
-import { HiOutlineCog, HiOutlineNewspaper, HiOutlineSearch, HiOutlineSearchCircle, HiOutlineUser, HiOutlineUserCircle } from "react-icons/hi";
+import {
+  HiOutlineCog,
+  HiOutlineNewspaper,
+  HiOutlineSearch,
+  HiOutlineSearchCircle,
+  HiOutlineUser,
+  HiOutlineUserCircle,
+} from "react-icons/hi";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import {useRouter} from 'next/navigation';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // import './NavbarStyles.scss';
 
@@ -34,14 +41,13 @@ interface SidebarProps {
   toggled: boolean;
   handleToggleSidebar: () => void;
   handleCollapsedChange: () => void;
-};
-
+}
 
 const Sidebar: React.FC<SidebarProps> = ({
   collapsed,
   toggled,
   handleToggleSidebar,
-  handleCollapsedChange
+  handleCollapsedChange,
 }) => {
   const router = useRouter();
 
@@ -66,11 +72,11 @@ const Sidebar: React.FC<SidebarProps> = ({
             >
               <div
                 style={{
-                  padding: '9px',
+                  padding: "9px",
                   // textTransform: 'uppercase',
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                   fontSize: 15,
-                  letterSpacing: '1px'
+                  letterSpacing: "1px",
                 }}
               >
                 Aviquo
@@ -85,23 +91,23 @@ const Sidebar: React.FC<SidebarProps> = ({
           <MenuItem icon={<HiOutlineSearch />}>
             Discover <Link href="/discover" />
           </MenuItem>
-          <MenuItem icon={<HiOutlineNewspaper/>}>
+          <MenuItem icon={<HiOutlineNewspaper />}>
             Forums <Link href="/forum" />
           </MenuItem>
           <MenuItem icon={<HiOutlineUserCircle />}>
             Profile <Link href="/profile" />
           </MenuItem>
-          <MenuItem icon={<HiOutlineCog />} className='w-full'>
+          <MenuItem icon={<HiOutlineCog />} className="w-full">
             Settings <Link href="/settings" />
           </MenuItem>
         </Menu>
       </SidebarContent>
 
-      <SidebarFooter style={{ textAlign: 'center' }}>
-        <div className="sidebar-btn-wrapper" style={{ padding: '16px' }}>
+      <SidebarFooter style={{ textAlign: "center" }}>
+        <div className="sidebar-btn-wrapper" style={{ padding: "16px" }}>
           <button
             className="sidebar-btn"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={async () => {
               const response = await fetch("/api/logout", {
                 method: "POST",
@@ -132,14 +138,14 @@ const Navbar = () => {
     setToggled(!toggled);
   };
 
-  return(
+  return (
     <Sidebar
-        collapsed={collapsed}
-        toggled={toggled}
-        handleToggleSidebar={handleToggleSidebar}
-        handleCollapsedChange={handleCollapsedChange}
+      collapsed={collapsed}
+      toggled={toggled}
+      handleToggleSidebar={handleToggleSidebar}
+      handleCollapsedChange={handleCollapsedChange}
     />
-  )
-}
+  );
+};
 
 export default Navbar;

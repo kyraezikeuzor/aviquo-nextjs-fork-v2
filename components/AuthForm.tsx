@@ -14,7 +14,7 @@ const AuthForm = ({
 
   return (
     <form
-      className='hidden'
+      className="hidden"
       action={action}
       method="post"
       onSubmit={async (e) => {
@@ -32,7 +32,7 @@ const AuthForm = ({
           return router.refresh();
         } else {
           window.alert(
-            "Server Received An Error - idk will fine tune error handling sometime",
+            "Server Received An Error - idk will fine tune error handling sometime"
           );
         }
       }}

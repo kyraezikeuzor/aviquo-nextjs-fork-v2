@@ -8,8 +8,8 @@ export async function GET(request: Request): Promise<NextResponse> {
       author: true,
     },
     orderBy: {
-      date: 'desc'
-    }
+      date: "desc",
+    },
   });
 
   if (result != null) {
@@ -21,12 +21,13 @@ export async function GET(request: Request): Promise<NextResponse> {
 
 export async function POST(request: Request): Promise<NextResponse> {
   if (request.body) {
-
     const body = await request.json();
-    const result = await prisma.post.create({ data: {
-      ...body,
-      likes: 0,
-    } });
+    const result = await prisma.post.create({
+      data: {
+        ...body,
+        likes: 0,
+      },
+    });
 
     return NextResponse.json(result);
   } else {

@@ -6,16 +6,14 @@ import * as context from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function Login() {
-    const session = await getPageSession();
-  
-    if (session) redirect("/profile");
+  const session = await getPageSession();
 
-    return(
-        <>
-        <CssBaseline />
-        <SigninPage />
-        </>
-        
-    )
+  if (session) redirect("/profile");
 
+  return (
+    <>
+      <CssBaseline />
+      <SigninPage />
+    </>
+  );
 }

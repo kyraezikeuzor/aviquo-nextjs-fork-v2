@@ -14,17 +14,19 @@ export default async function UserLayout({
   if (!session) redirect("/auth");
 
   console.log(session.user);
-  console.log('reach')
+  console.log("reach");
 
-  
-  if (session.user.username == "" || session.user.firstName == "" || session.user.lastName == "") redirect("/onboarding");
+  if (
+    session.user.username == "" ||
+    session.user.firstName == "" ||
+    session.user.lastName == ""
+  )
+    redirect("/onboarding");
 
   return (
-    <div className='app'>
+    <div className="app">
       <Navbar />
-      <div className="overflow-y-auto w-full max-h-screen">
-        {children}
-      </div>
+      <div className="overflow-y-auto w-full max-h-screen">{children}</div>
     </div>
   );
 }

@@ -55,7 +55,7 @@ export default function DashNavbar() {
     // Updates the CSS variable based on the state of the sidebar
     root.style.setProperty(
       cssRootSidebarMobileScreenWidth,
-      mobileSidebarClick ? "0px" : "0px",
+      mobileSidebarClick ? "0px" : "0px"
     );
   }, [!mobileSidebarClick]);
 

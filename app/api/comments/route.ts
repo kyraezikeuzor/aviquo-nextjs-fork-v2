@@ -3,19 +3,19 @@ import prisma from "../../../lib/prisma";
 import { getCurrentDateTimeString } from "@/utils";
 
 export async function GET(request: Request): Promise<NextResponse> {
-const { searchParams } = new URL(request.url);
-const id = searchParams.get('id');
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
 
   const result = await prisma.comment.findMany({
     where: {
-        postId: id!,
+      postId: id!,
     },
     include: {
-        author: true,
+      author: true,
     },
     orderBy: {
-      date: 'desc'
-    }
+      date: "desc",
+    },
   });
 
   if (result != null) {
@@ -27,11 +27,12 @@ const id = searchParams.get('id');
 
 export async function POST(request: Request): Promise<NextResponse> {
   if (request.body) {
-
     const body = await request.json();
-    const result = await prisma.comment.create({ data: {
-      ...body,
-    } });
+    const result = await prisma.comment.create({
+      data: {
+        ...body,
+      },
+    });
 
     return NextResponse.json(result);
   } else {

@@ -11,21 +11,21 @@ import Icon from "@/components/Icon";
 
 import axios from "axios";
 import { Button, Textarea } from "@nextui-org/react";
-import { Button as CustomButton } from "@/components/Button"
+import { Button as CustomButton } from "@/components/Button";
 
-
-export default function Post({ user, postId }: { user: any, postId: string }) {
-  const [post, setPost] = useState<any | null>({ comments: 0, author: {
-    username: ''
-  } });
-  const [reply, setReply] = useState('');
+export default function Post({ user, postId }: { user: any; postId: string }) {
+  const [post, setPost] = useState<any | null>({
+    comments: 0,
+    author: {
+      username: "",
+    },
+  });
+  const [reply, setReply] = useState("");
   const [replies, setReplies] = useState<Array<any>>([]);
 
-
   useEffect(() => {
-    if (reply == '') {
+    if (reply == "") {
       const fetchData = async () => {
-
         try {
           const postResponse = await axios.get(`/api/post?id=${postId}`);
           setPost(postResponse.data);
@@ -33,30 +33,27 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
           const repliesResponse = await axios.get(`/api/comments?id=${postId}`);
 
           if (repliesResponse.data.length != 0) {
-            console.log(Object.values(repliesResponse.data))
+            console.log(Object.values(repliesResponse.data));
             setReplies(Object.values(repliesResponse.data));
           }
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error("Error fetching data:", error);
         }
-
-
-      }
+      };
 
       fetchData();
     }
-  }, [reply])
+  }, [reply]);
   const sendReply = async () => {
-    console.log('reply', reply)
-    const data = await axios.post('/api/comments', {
+    console.log("reply", reply);
+    const data = await axios.post("/api/comments", {
       content: reply,
       postId: postId,
       authorId: user.userId,
-    })
+    });
 
-    setReply('');
-  }
-
+    setReply("");
+  };
 
   return (
     <main className="flex flex-col px-1/6 md:px-[10vw] lg:px-[10vw] gap-5">
@@ -92,31 +89,28 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
       <Card>
         <div className="flex gap-10">
           <div className="flex flex-col gap-2 pl-[5%] pr-[5%] w-full h-full">
-            <div className="flex gap-2">
-
-            </div>
+            <div className="flex gap-2"></div>
             <Textarea
               label="What do you wanna say?"
               labelPlacement="outside"
               placeholder="Enter your description"
               className="w-full h-full"
               classNames={{
-                label: '!mb-0'
+                label: "!mb-0",
               }}
               value={reply}
               onValueChange={(v) => setReply(v)}
             />
 
-            <Button color='primary' variant='bordered' onClick={sendReply}>
+            <Button color="primary" variant="bordered" onClick={sendReply}>
               Send Comment
             </Button>
           </div>
-
         </div>
       </Card>
 
       <h2 className="text-base md:text-xl lg:text-xl tracking-tight">
-        {post.comments.length} Comment{post.comments.length == 1 ? '' : 's'}
+        {post.comments.length} Comment{post.comments.length == 1 ? "" : "s"}
       </h2>
 
       <div className="flex flex-col gap-5 cursor-pointer">
@@ -127,7 +121,8 @@ export default function Post({ user, postId }: { user: any, postId: string }) {
           >
             <div className="flex flex-col gap-2">
               <span className="inline-block flex gap-2 text-xs md:text-sm lg:text-sm">
-                @{item.author.username} • {item.date} <Tag type="tag">Comment</Tag>{" "}
+                @{item.author.username} • {item.date}{" "}
+                <Tag type="tag">Comment</Tag>{" "}
               </span>
               <p className="text-xs md:text-sm lg:text-sm">{item.content}</p>
             </div>

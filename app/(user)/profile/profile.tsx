@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState, useEffect } from "react";
 
@@ -10,21 +10,22 @@ import interestList from "@/lib/interests.json";
 
 import { toDateTimeString } from "@/utils";
 
-
 export default function Profile({ user }: { user: any }) {
-    const [forumData, setForumData] = useState<any>([]);
-    const [likedActivities, setLikedActivities] = useState<any>([]);
+  const [forumData, setForumData] = useState<any>([]);
+  const [likedActivities, setLikedActivities] = useState<any>([]);
 
-    useEffect(() => {
-        let posts = user.posts.map((obj: any) => ({ ...obj, type: 'Question' }));
-        let replies = user.comments.map((obj: any) => ({ ...obj, type: 'Reply' }));
+  useEffect(() => {
+    let posts = user.posts.map((obj: any) => ({ ...obj, type: "Question" }));
+    let replies = user.comments.map((obj: any) => ({ ...obj, type: "Reply" }));
 
-        const combined = [...posts, ...replies].sort((a: any, b: any) => b.date - a.date);
+    const combined = [...posts, ...replies].sort(
+      (a: any, b: any) => b.date - a.date
+    );
 
-        setForumData(combined)
-            // setSearchDataFiltered(Object.values(response));
-            // console.log(response);
-      }, []);
+    setForumData(combined);
+    // setSearchDataFiltered(Object.values(response));
+    // console.log(response);
+  }, []);
 
   return (
     <main className="m-auto flex flex-col gap-5 !px-1/6 md:!px-[10vw] lg:!px-[10vw]">
@@ -53,7 +54,6 @@ export default function Profile({ user }: { user: any }) {
           </div>
           <p>{user?.bio}</p>
         </div>
-
       </div>
       <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
         My Posts
@@ -73,12 +73,15 @@ export default function Profile({ user }: { user: any }) {
             </div>
             <div className="flex flex-col gap-2">
               <span className="text-sm inline-block flex gap-2">
-                @{item.username} • {toDateTimeString(item.date)} <Tag type="tag">{item.type}</Tag>{" "}
+                @{item.username} • {toDateTimeString(item.date)}{" "}
+                <Tag type="tag">{item.type}</Tag>{" "}
               </span>
               <h3 className="font-semibold text-lg md:text-lg lg:text-lg tracking-tight">
                 {item.title}
               </h3>
-              <p className="text-sm">{item.type == 'Question' ? item.body : item.content}</p>
+              <p className="text-sm">
+                {item.type == "Question" ? item.body : item.content}
+              </p>
             </div>
           </div>
         ))}

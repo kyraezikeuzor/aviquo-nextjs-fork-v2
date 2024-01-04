@@ -8,7 +8,8 @@
 }
 
 .tag {
-  white-space: nowrap; /*Never wrap text within tag*/
+  white-space: nowrap;
+  /*Never wrap text within tag*/
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
@@ -22,7 +23,6 @@
   gap: 5px;
   cursor: pointer;
   border-radius: 8px;
-
   background-color: rgb(248, 248, 248);
   color: var(--clr-grey-500);
   border: 1px solid var(--clr-grey-300);

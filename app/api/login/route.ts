@@ -10,18 +10,14 @@ export const POST = async (request: NextRequest) => {
   const email = formData.get("email");
   const password = formData.get("password");
   // basic check
-  if (
-    typeof email !== "string" ||
-    email.length < 1 ||
-    email.length > 31
-  ) {
+  if (typeof email !== "string" || email.length < 1 || email.length > 31) {
     return NextResponse.json(
       {
         error: "Invalid username",
       },
       {
         status: 400,
-      },
+      }
     );
   }
   if (
@@ -35,7 +31,7 @@ export const POST = async (request: NextRequest) => {
       },
       {
         status: 400,
-      },
+      }
     );
   }
   try {
@@ -55,7 +51,7 @@ export const POST = async (request: NextRequest) => {
       },
     });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     if (
       e instanceof LuciaError &&
       (e.message === "AUTH_INVALID_KEY_ID" ||
@@ -68,7 +64,7 @@ export const POST = async (request: NextRequest) => {
         },
         {
           status: 400,
-        },
+        }
       );
     }
     return NextResponse.json(
@@ -77,7 +73,7 @@ export const POST = async (request: NextRequest) => {
       },
       {
         status: 500,
-      },
+      }
     );
   }
 };

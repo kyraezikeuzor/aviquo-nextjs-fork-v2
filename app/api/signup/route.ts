@@ -10,19 +10,15 @@ export const POST = async (request: NextRequest) => {
   const password = formData.get("password");
 
   // basic check
-  if (
-    typeof email !== "string" ||
-    email.length < 4 ||
-    email.length > 31
-  ) {
-    console.log('a)')
+  if (typeof email !== "string" || email.length < 4 || email.length > 31) {
+    console.log("a)");
     return NextResponse.json(
       {
         error: "Invalid username",
       },
       {
         status: 400,
-      },
+      }
     );
   }
   if (
@@ -30,14 +26,14 @@ export const POST = async (request: NextRequest) => {
     password.length < 6 ||
     password.length > 255
   ) {
-    console.log('b)')
+    console.log("b)");
     return NextResponse.json(
       {
         error: "Invalid password",
       },
       {
         status: 400,
-      },
+      }
     );
   }
   try {
@@ -58,7 +54,7 @@ export const POST = async (request: NextRequest) => {
         numFollowing: 0,
       },
     });
-    
+
     const session = await auth.createSession({
       userId: user.userId,
       attributes: {},
@@ -82,7 +78,7 @@ export const POST = async (request: NextRequest) => {
       },
       {
         status: 500,
-      },
+      }
     );
   }
 };
