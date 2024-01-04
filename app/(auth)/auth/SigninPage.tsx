@@ -11,6 +11,8 @@ import SignupForm from "./SignUpForm";
 
 import styles from "./page.module.css";
 
+import clsx from "clsx";
+
 export const ScreenMode = {
   SIGN_IN: "SIGN_IN",
   SIGN_UP: "SIGN_UP",
@@ -26,18 +28,19 @@ const SigninPage = () => {
   const loginPage = typeof useSearchParams().get("l") == "string";
 
   const [currMode, setCurrMode] = useState(loginPage ? SIGN_IN : SIGN_UP);
-  const [currAnim, setCurrAnim] = useState("");
+  const [currAnim, setCurrAnim] = useState("none");
   const [animLock, setAnimLock] = useState(false);
 
   const onSwitchMode = (mode: "SIGN_IN" | "SIGN_UP") => {
     if (animLock) {
       return;
     }
-    setCurrAnim("");
-    setCurrAnim(styles.sliding);
+
+    setCurrAnim("none");
+    setCurrAnim(styles.slide);
+    setAnimLock(true);
 
     const timeout1 = setTimeout(() => {
-      setAnimLock(true);
       setCurrMode(mode);
       setBackgroundImage(
         mode === SIGN_IN ? assets.images.signinBg : assets.images.signupBg
@@ -46,6 +49,7 @@ const SigninPage = () => {
 
     const timeout2 = setTimeout(() => {
       setAnimLock(false);
+      setCurrAnim("none");
     }, 2000);
 
     return () => {
@@ -71,7 +75,10 @@ const SigninPage = () => {
             backgroundImage: `url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8N3wxNTE5NjQ4fHxlbnwwfHx8fHw%3D)`,
             backgroundPosition: "center",
             backgroundSize: "cover",
-            backgroundRepeat: "no-repeat", // TODO: Add currAnim class, it will fix everything fr
+            backgroundRepeat: "no-repeat",
+            animationName: currAnim,
+            animationDuration: "2s",
+            animationTimingFunction: "ease-in-out",
           }}
         />
       </Grid>
