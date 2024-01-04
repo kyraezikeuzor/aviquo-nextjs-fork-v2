@@ -93,8 +93,14 @@ const SignupForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
         </Stack>
       </Stack>
       <AuthForm action="/api/signup">
-        <input id="email" name="email" type="text" value={email} />
-        <input id="password" name="password" type="password" value={password} />
+        <input id="email" name="email" type="text" value={email} readOnly />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={password}
+          readOnly
+        />
         <button id="form-submit" type="submit"></button>
       </AuthForm>
     </Stack>
