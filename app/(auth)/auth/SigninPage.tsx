@@ -4,6 +4,7 @@ import { Box, Grid, colors } from "@mui/material";
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Router, { useRouter } from "next/navigation";
 
 import assets from "@/assets";
 import SigninForm from "./SignInForm";
@@ -21,6 +22,8 @@ export const ScreenMode = {
 const { SIGN_IN, SIGN_UP } = ScreenMode;
 
 const SigninPage = () => {
+  const router = useRouter();
+
   const [backgroundImage, setBackgroundImage] = useState(
     assets.images.signinBg
   );
@@ -45,6 +48,8 @@ const SigninPage = () => {
       setBackgroundImage(
         mode === SIGN_IN ? assets.images.signinBg : assets.images.signupBg
       );
+
+      router.push(mode === "SIGN_IN" ? "/auth?l" : "/auth");
     }, 1000);
 
     const timeout2 = setTimeout(() => {
