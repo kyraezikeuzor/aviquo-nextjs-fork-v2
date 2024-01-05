@@ -32,7 +32,7 @@ const AuthForm = ({
           return router.refresh();
         } else {
           window.alert(
-            "Server Received An Error - idk will fine tune error handling sometime"
+            "HAL 9000 ERROR - This mission is too imporant for me to allow you to jeopardize it"
           );
         }
       }}
