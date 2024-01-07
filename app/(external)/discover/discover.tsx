@@ -110,11 +110,11 @@ export default function Discover({ user }: { user: any }) {
               <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
               <p className="text-sm">{item.description}</p>
               <div className="flex flex-wrap">
-                <Tag type="pink">{item.type}</Tag>
-                <Tag type="pink">{item.location}</Tag>
-                <Tag type="green">{item.education}</Tag>
-                <Tag type="orange">{item.deadline}</Tag>
-                <Tag type="tag">{item.subjects}</Tag>
+                <Tag type="pink">💼 {item.type}</Tag>
+                <Tag type="pink">🌍 {item.location}</Tag>
+                <Tag type="green">🎓 {item.education}</Tag>
+                <Tag type="orange">⏰ {item.deadline}</Tag>
+                <Tag type="tag">📖 {item.subjects}</Tag>
               </div>
             </Card>
           ))}

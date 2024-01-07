@@ -40,16 +40,16 @@ export default function Profile({ user }: { user: any }) {
           </h1>
           <div className="flex gap-2">
             <Tag type="tag">
-              <b>1</b>follower
+              <b>1</b>Upvotes
             </Tag>
             <Tag type="tag">
-              <b>29</b>following
+              <b>29</b>Downvotes
             </Tag>
             <Tag type="tag">
-              <b>23</b>posts
+              <b>23</b>Posts
             </Tag>
             <Tag type="tag">
-              <b>108</b>likes
+              <b>108</b>Liked Items
             </Tag>
           </div>
           <p>{user?.bio}</p>
