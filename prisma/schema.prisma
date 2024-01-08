@@ -18,7 +18,8 @@ model Post {
   date     DateTime  @default(now())
   author   User?     @relation(fields: [authorId], references: [id])
   authorId String?
-  likes    Int
+  upvotes  String[]
+  downvotes String[]
   comments Comment[]
 }
 

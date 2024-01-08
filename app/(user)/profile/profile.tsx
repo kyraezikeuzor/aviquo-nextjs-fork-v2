@@ -67,7 +67,7 @@ export default function Profile({ user }: { user: any }) {
             <div className="w-4 flex flex-col items-center">
               <Icon icon="arrow-up" fillColor="black" />
               <p className="text-sm font-semibold text-[var(--clr-grey-400)]">
-                {item.likes}
+                {item.upvotes == undefined ? 0 : item.upvotes.length - item.downvotes.length}
               </p>
               <Icon icon="arrow-down" fillColor="black" />
             </div>

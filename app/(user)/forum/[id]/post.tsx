@@ -19,9 +19,16 @@ export default function Post({ user, postId }: { user: any; postId: string }) {
     author: {
       username: "",
     },
+    upvotes: [],
+    downvotes: [],
   });
   const [reply, setReply] = useState("");
   const [replies, setReplies] = useState<Array<any>>([]);
+  const [refreshToggle, setRefreshToggle] = useState<boolean>(true);
+
+  useEffect(() => {
+    console.log(post.upvotes)
+  }, [post])
 
   useEffect(() => {
     if (reply == "") {
@@ -33,7 +40,7 @@ export default function Post({ user, postId }: { user: any; postId: string }) {
           const repliesResponse = await axios.get(`/api/comments?id=${postId}`);
 
           if (repliesResponse.data.length != 0) {
-            console.log(Object.values(repliesResponse.data));
+            // console.log(Object.values(repliesResponse.data));
             setReplies(Object.values(repliesResponse.data));
           }
         } catch (error) {
@@ -43,7 +50,12 @@ export default function Post({ user, postId }: { user: any; postId: string }) {
 
       fetchData();
     }
-  }, [reply]);
+  }, [reply, refreshToggle]);
+
+  // useEffect(() => {
+  //   setRefreshToggle(!refreshToggle);
+  // }, [post])
+
   const sendReply = async () => {
     console.log("reply", reply);
     const data = await axios.post("/api/comments", {
@@ -67,9 +79,55 @@ export default function Post({ user, postId }: { user: any; postId: string }) {
       <Card>
         <div className="flex gap-10">
           <div className="flex flex-col items-center text-xs md:text-sm lg:text-sm">
-            <Icon icon="arrow-up" fillColor="black" />
-            {post.likes}
-            <Icon icon="arrow-down" fillColor="black" />
+            <div onClick={async () => {
+                if (post.downvotes.includes(user.username)) {
+                  setPost((prev:any) => ({
+                    ...prev,
+                    downvotes: post.downvotes.filter((element: string) => element !== user.username),
+                    upvotes: post.upvotes.concat(user.username)
+                  }))
+                } else if(!post.upvotes.includes(user.username)) {
+                  setPost((prev:any) => ({
+                    ...prev,
+                    upvotes: post.upvotes.concat(user.username)
+                  }))
+                } else {
+                  setPost((prev:any) => ({
+                    ...prev,
+                    upvotes: post.upvotes.filter((element: string) => element !== user.username),
+                  }))
+                }
+                const res = await axios.put('/api/vote/update', {
+                  postId: post.id,
+                  upvotes: post.upvotes,
+                  downvotes: post.downvotes,
+                })
+            }}><Icon icon="arrow-up" fillColor={post.upvotes.includes(user.username) ? "green" : "black"} size={post.upvotes.includes(user.username) ? 36 : 24}  /></div>
+            {post.upvotes.length - post.downvotes.length}
+            <div onClick={async () => {
+              if (post.upvotes.includes(user.username)) {
+                setPost((prev:any) => ({
+                  ...prev,
+                  upvotes: post.upvotes.filter((element: string) => element !== user.username),
+                  downvotes: post.downvotes.concat(user.username)
+                }))
+              } else if(!post.downvotes.includes(user.username)) {
+                setPost((prev:any) => ({
+                  ...prev,
+                  downvotes: post.downvotes.concat(user.username)
+                }))
+              } else {
+                setPost((prev:any) => ({
+                  ...prev,
+                  downvotes: post.downvotes.filter((element: string) => element !== user.username),
+                }))
+              }
+              const res = await axios.put('/api/vote/update', {
+                postId: post.id,
+                upvotes: post.upvotes,
+                downvotes: post.downvotes,
+              })
+            }}><Icon icon="arrow-down" fillColor={post.downvotes.includes(user.username) ? "red" : "black"} size={post.downvotes.includes(user.username) ? 36 : 24} /></div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">

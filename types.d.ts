@@ -13,7 +13,8 @@ type Post = {
   title: string;
   body: string;
   views: number;
-  likes: number;
+  upvotes: string[];
+  downvotes: string[];
   comments: number;
   tags: any[];
   date: string;
