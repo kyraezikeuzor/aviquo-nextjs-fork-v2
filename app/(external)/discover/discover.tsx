@@ -14,6 +14,7 @@ import {
   SelectedItems,
   Avatar,
   Selection,
+  Button,
 } from "@nextui-org/react";
 
 export default function Discover({ user }: { user: any }) {
@@ -107,7 +108,10 @@ export default function Discover({ user }: { user: any }) {
         <div className="flex flex-row flex-wrap gap-3">
           {searchDataFiltered.map((item: any, index: number) => (
             <Card key={index}>
-              <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
+              <div className='flex flex-row'>
+                <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
+                <p className="self-end">❤️</p>
+              </div>
               <p className="text-sm">{item.description}</p>
               <div className="flex flex-wrap">
                 <Tag type="pink">💼 {item.type}</Tag>
@@ -115,6 +119,9 @@ export default function Discover({ user }: { user: any }) {
                 <Tag type="green">🎓 {item.education}</Tag>
                 <Tag type="orange">⏰ {item.deadline}</Tag>
                 <Tag type="tag">📖 {item.subjects}</Tag>
+              </div>
+              <div className="flex flex-row items-center w-full justify-center">
+                <Button>More Info</Button>
               </div>
             </Card>
           ))}
