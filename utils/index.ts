@@ -55,3 +55,25 @@ export const toDateTimeString = (date: Date): string => {
 
   return dateTimeString;
 };
+
+export function formatRelativeTime(dateString: string, forward: boolean): string {
+  const currentDate = new Date();
+  const givenDate = new Date(dateString);
+
+  const suffix = forward ? 'left' : 'ago';
+
+  const timeDifferenceInSeconds = Math.floor((forward ? -1 : 1) * (currentDate.getTime() - givenDate.getTime()) / 1000);
+  
+  if (timeDifferenceInSeconds < 60) {
+    return timeDifferenceInSeconds === 1 ? `1 second ${forward}` : `${timeDifferenceInSeconds} seconds ${forward}`;
+  } else if (timeDifferenceInSeconds < 3600) {
+    const minutes = Math.floor(timeDifferenceInSeconds / 60);
+    return minutes === 1 ? `1 minute ${suffix}` : `${minutes} minutes ${suffix}`;
+  } else if (timeDifferenceInSeconds < 86400) {
+    const hours = Math.floor(timeDifferenceInSeconds / 3600);
+    return hours === 1 ? `1 hour ${suffix}` : `${hours} hours ${suffix}`;
+  } else {
+    const days = Math.floor(timeDifferenceInSeconds / 86400);
+    return days === 1 ? `1 day ${suffix}` : `${days} days ${suffix}`;
+  }
+}

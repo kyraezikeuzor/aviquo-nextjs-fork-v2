@@ -13,9 +13,13 @@ import {
   Chip,
   SelectedItems,
   Avatar,
+  useDisclosure,
   Selection,
   Button,
+  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter
 } from "@nextui-org/react";
+
+import { formatRelativeTime } from "@/utils";
 
 import AnimatedHeart from "@/components/Heart";
 
@@ -30,6 +34,8 @@ export default function Discover({ user }: { user: any }) {
     Grade: new Set(),
     Subject: new Set(),
   });
+
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
   const [opps, setOpps] = useState<object>(user.opportunities);
@@ -135,9 +141,11 @@ export default function Discover({ user }: { user: any }) {
     setSearchDataFiltered(filtered_data);
   }, [searchFilters]);
 
+  const [modalItem, setModalItem] = useState<any | null | undefined>();
+
   return (
     <div className="flex flex-row w-full h-full">
-      <div className="flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
+      <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Discover</h1>
           <p>Discover new opportunities and activities.</p>
@@ -156,17 +164,20 @@ export default function Discover({ user }: { user: any }) {
                 <Tag type="pink">💼 {item.type}</Tag>
                 <Tag type="pink">🌍 {item.location}</Tag>
                 <Tag type="green">🎓 {item.education}</Tag>
-                <Tag type="orange">⏰ {item.deadline}</Tag>
+                <Tag type="orange">⏰ {formatRelativeTime(item.deadline, true)}</Tag>
                 <Tag type="tag">📖 {item.subjects}</Tag>
               </div>
               <div className="flex flex-row items-center w-full justify-center">
-                <Button>More Info</Button>
+                <Button onPress={() => {
+                  setModalItem(item)
+                  onOpen()
+                }}>More Info</Button>
               </div>
             </Card>
           ))}
         </div>
       </div>
-      <div className="flex flex-col w-[20%] rounded-md border-black border-2 px-[2.5%] !mr-[5%] h-fit ">
+      <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
         <FilterBox
           values={["Activity", "Internship"]}
           sector={"Type"}
@@ -198,6 +209,42 @@ export default function Discover({ user }: { user: any }) {
         ></FilterBox>
         <Divider />
       </div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+              <Card >
+              <div className='flex flex-row items-center w-full'>
+                <h2 className="text-base flex-grow md:text-lg lg:text-xl">{modalItem.name}</h2>
+                <AnimatedHeart className="self-end justify-self-end" likeTrigger={(e, a) => handleLike(e, a)} oppId={modalItem.id} liked={modalItem.isMine} />
+              </div>
+              <p className="text-sm">{modalItem.description}</p>
+              <div className="flex flex-wrap">
+                <Tag type="pink">💼 {modalItem.type}</Tag>
+                <Tag type="pink">🌍 {modalItem.location}</Tag>
+                <Tag type="green">🎓 {modalItem.education}</Tag>
+                <Tag type="orange">⏰ {formatRelativeTime(modalItem.deadline, true)}</Tag>
+                <Tag type="tag">📖 {modalItem.subjects}</Tag>
+              </div>
+              <div className="flex flex-row items-center w-full justify-center">
+                <Button onPress={onOpen}>More Info</Button>
+              </div>
+            </Card>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
