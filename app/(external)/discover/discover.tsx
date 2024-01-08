@@ -17,10 +17,12 @@ import {
   Button,
 } from "@nextui-org/react";
 
+import AnimatedHeart from "@/components/Heart";
+
 export default function Discover({ user }: { user: any }) {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
-  const [ecItems, setEcItems] = useState<Array<number | string>>([]);
+  const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>([]);
   const [searchFilters, setSearchFilters] = useState<Record<string, any>>({
     Type: new Set(),
     Location: new Set(),
@@ -30,16 +32,53 @@ export default function Discover({ user }: { user: any }) {
   });
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
+  const [opps, setOpps] = useState<object>(user.opportunities);
+
+  const handleLike = (state: boolean, oppId: string) => {
+    // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
+    // let likes = currentOpp!.users;
+    let url;
+
+    if(state) {
+      url = 'add';
+    } else {
+      url = 'remove'
+    }
+    
+
+    const update = axios.put(`/api/like/${url}`, {
+      id: oppId,
+      userId: user.userId
+    })
+  }
+
+
+
+  const oppToUser = (opp:any) => {
+    if (opp.users.some((obj: any) => obj.id === user.userId)) {
+      return {
+        ...opp,
+        isMine: true,
+      }
+    } else {
+      return {
+        ...opp,
+        isMine: false
+      }
+    }
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const raw_response = await axios.get(`/api/ecs`);
-        const response = raw_response.data;
+        let response = raw_response.data
+        response = Object.values(response);
+        response = response.map(oppToUser)
 
-        setEcItems(Object.values(response));
-
-        setSearchDataFiltered(Object.values(response));
+        setEcItems(response);
+        setSearchDataFiltered(response);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -49,7 +88,6 @@ export default function Discover({ user }: { user: any }) {
   }, []);
 
   const filterData = (s: any, sc: string) => {
-    console.log(s);
     console.log({
       ...searchFilters,
       [sc]: s,
@@ -61,6 +99,7 @@ export default function Discover({ user }: { user: any }) {
   };
 
   useEffect(() => {
+
     var filtered_data = ecItems;
 
     if (searchFilters["Type"].size !== 0) {
@@ -108,9 +147,9 @@ export default function Discover({ user }: { user: any }) {
         <div className="flex flex-row flex-wrap gap-3">
           {searchDataFiltered.map((item: any, index: number) => (
             <Card key={index}>
-              <div className='flex flex-row'>
-                <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
-                <p className="self-end">❤️</p>
+              <div className='flex flex-row items-center w-full'>
+                <h2 className="text-base flex-grow md:text-lg lg:text-xl">{item.name}</h2>
+                <AnimatedHeart className="self-end justify-self-end" likeTrigger={(e, a) => handleLike(e, a)} oppId={item.id} liked={item.isMine} />
               </div>
               <p className="text-sm">{item.description}</p>
               <div className="flex flex-wrap">

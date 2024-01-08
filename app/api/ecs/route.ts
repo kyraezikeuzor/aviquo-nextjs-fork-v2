@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 
 export async function GET(request: Request): Promise<NextResponse> {
-  const result = await prisma.opportunity.findMany();
+  const result = await prisma.opportunity.findMany({
+    include: {
+      users: true,
+    }
+  });
 
   if (result != null) {
     return NextResponse.json({ ...result });

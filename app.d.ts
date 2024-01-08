@@ -13,6 +13,7 @@ declare namespace Lucia {
     posts?: Array<any>?;
     notifications?: Array<any>?;
     comments?: Array<any>?;
+    opportunities?: Array<any>?;
   };
   type DatabaseSessionAttributes = {};
 }
