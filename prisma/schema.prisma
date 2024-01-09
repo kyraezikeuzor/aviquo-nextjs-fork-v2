@@ -18,7 +18,8 @@ model Post {
   date     DateTime  @default(now())
   author   User?     @relation(fields: [authorId], references: [id])
   authorId String?
-  likes    Int
+  upvotes  String[]
+  downvotes String[]
   comments Comment[]
 }
 
@@ -59,6 +60,7 @@ model User {
   posts         Post[]
   comments      Comment[]
   notifications Notification[]
+  opportunities   Opportunity[]
 
   @@map(name: "users")
 }
@@ -89,13 +91,14 @@ model Company {
 }
 
 model Opportunity {
+  id          String @id @unique @default(cuid())
   name        String  @unique @db.VarChar(200)
   description String
   url         String
   type        String
   education   String?
   company     Company @relation(fields: [companyName], references: [name])
-
+  users       User[]
   location    String?
   duration    String?
   deadline    DateTime?

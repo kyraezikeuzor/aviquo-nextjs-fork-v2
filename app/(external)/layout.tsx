@@ -5,28 +5,25 @@ import Sidebar from "@/components/Navbar";
 import { getPageSession } from "@/auth/lucia";
 import Navbar from "@/components/Navbar";
 
-export default async function UserLayout({
+export default async function ExternalLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session = await getPageSession();
-  if (!session) redirect("/auth");
-
-  console.log(session.user);
-  console.log("reach");
-
-  if (
-    session.user.username == "" ||
-    session.user.firstName == "" ||
-    session.user.lastName == ""
-  )
-    redirect("/onboarding");
+  if (session) {
+    if (
+      session.user.username == "" ||
+      session.user.firstName == "" ||
+      session.user.lastName == ""
+    )
+      redirect("/onboarding");
+  }
 
   return (
     <div className="app">
-      <Navbar />
-      <div className="overflow-y-auto w-full max-h-screen h-full pt-[3.5%]">{children}</div>
+      {session ? (<Navbar />) : <></>}
+      <div className="overflow-y-auto w-full max-h-screen h-screen pt-[3.5%]">{children}</div>
     </div>
   );
 }

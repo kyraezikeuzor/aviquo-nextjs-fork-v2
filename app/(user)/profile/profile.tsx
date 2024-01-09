@@ -40,16 +40,16 @@ export default function Profile({ user }: { user: any }) {
           </h1>
           <div className="flex gap-2">
             <Tag type="tag">
-              <b>1</b>follower
+              <b>1</b>Upvotes
             </Tag>
             <Tag type="tag">
-              <b>29</b>following
+              <b>29</b>Downvotes
             </Tag>
             <Tag type="tag">
-              <b>23</b>posts
+              <b>23</b>Posts
             </Tag>
             <Tag type="tag">
-              <b>108</b>likes
+              <b>108</b>Liked Items
             </Tag>
           </div>
           <p>{user?.bio}</p>
@@ -67,7 +67,7 @@ export default function Profile({ user }: { user: any }) {
             <div className="w-4 flex flex-col items-center">
               <Icon icon="arrow-up" fillColor="black" />
               <p className="text-sm font-semibold text-[var(--clr-grey-400)]">
-                {item.likes}
+                {item.upvotes == undefined ? 0 : item.upvotes.length - item.downvotes.length}
               </p>
               <Icon icon="arrow-down" fillColor="black" />
             </div>

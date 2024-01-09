@@ -3,6 +3,7 @@ import React from "react";
 type IconProps = {
   icon: string;
   fillColor: string;
+  size?: number;
 };
 
 const icons = [
@@ -68,7 +69,13 @@ const icons = [
   },
 ];
 
-const Icon = ({ icon, fillColor }: IconProps) => {
+const Icon = ({ icon, fillColor, size }: IconProps) => {
+  var dimen = size;
+
+  if (!dimen) {
+    dimen = 24;
+  }
+
   const getIconPath = () => {
     for (let i = 0; i < icons.length; i++) {
       if (icons[i].name == icon) {
@@ -82,8 +89,8 @@ const Icon = ({ icon, fillColor }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={`${dimen}`}
+      height={`${dimen}`}
       viewBox="0 0 24 24"
       fill="none"
       className="cursor-pointer p-1 rounded"

@@ -13,13 +13,20 @@ import {
   Chip,
   SelectedItems,
   Avatar,
+  useDisclosure,
   Selection,
+  Button,
+  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter
 } from "@nextui-org/react";
+
+import { formatRelativeTime } from "@/utils";
+
+import AnimatedHeart from "@/components/Heart";
 
 export default function Discover({ user }: { user: any }) {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
-  const [ecItems, setEcItems] = useState<Array<number | string>>([]);
+  const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>([]);
   const [searchFilters, setSearchFilters] = useState<Record<string, any>>({
     Type: new Set(),
     Location: new Set(),
@@ -28,17 +35,56 @@ export default function Discover({ user }: { user: any }) {
     Subject: new Set(),
   });
 
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
+  const [opps, setOpps] = useState<object>(user.opportunities);
+
+  const handleLike = (state: boolean, oppId: string) => {
+    // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
+    // let likes = currentOpp!.users;
+    let url;
+
+    if(state) {
+      url = 'add';
+    } else {
+      url = 'remove'
+    }
+    
+
+    const update = axios.put(`/api/like/${url}`, {
+      id: oppId,
+      userId: user.userId
+    })
+  }
+
+
+
+  const oppToUser = (opp:any) => {
+    if (opp.users.some((obj: any) => obj.id === user.userId)) {
+      return {
+        ...opp,
+        isMine: true,
+      }
+    } else {
+      return {
+        ...opp,
+        isMine: false
+      }
+    }
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const raw_response = await axios.get(`/api/ecs`);
-        const response = raw_response.data;
+        let response = raw_response.data
+        response = Object.values(response);
+        response = response.map(oppToUser)
 
-        setEcItems(Object.values(response));
-
-        setSearchDataFiltered(Object.values(response));
+        setEcItems(response);
+        setSearchDataFiltered(response);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -48,7 +94,6 @@ export default function Discover({ user }: { user: any }) {
   }, []);
 
   const filterData = (s: any, sc: string) => {
-    console.log(s);
     console.log({
       ...searchFilters,
       [sc]: s,
@@ -60,6 +105,7 @@ export default function Discover({ user }: { user: any }) {
   };
 
   useEffect(() => {
+
     var filtered_data = ecItems;
 
     if (searchFilters["Type"].size !== 0) {
@@ -95,9 +141,11 @@ export default function Discover({ user }: { user: any }) {
     setSearchDataFiltered(filtered_data);
   }, [searchFilters]);
 
+  const [modalItem, setModalItem] = useState<any | null | undefined>();
+
   return (
     <div className="flex flex-row w-full h-full">
-      <div className="flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
+      <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl md:text-3xl lg:text-4xl">Discover</h1>
           <p>Discover new opportunities and activities.</p>
@@ -107,20 +155,29 @@ export default function Discover({ user }: { user: any }) {
         <div className="flex flex-row flex-wrap gap-3">
           {searchDataFiltered.map((item: any, index: number) => (
             <Card key={index}>
-              <h2 className="text-base md:text-lg lg:text-xl">{item.name}</h2>
+              <div className='flex flex-row items-center w-full'>
+                <h2 className="text-base flex-grow md:text-lg lg:text-xl">{item.name}</h2>
+                <AnimatedHeart className="self-end justify-self-end" likeTrigger={(e, a) => handleLike(e, a)} oppId={item.id} liked={item.isMine} />
+              </div>
               <p className="text-sm">{item.description}</p>
               <div className="flex flex-wrap">
-                <Tag type="pink">{item.type}</Tag>
-                <Tag type="pink">{item.location}</Tag>
-                <Tag type="green">{item.education}</Tag>
-                <Tag type="orange">{item.deadline}</Tag>
-                <Tag type="tag">{item.subjects}</Tag>
+                <Tag type="pink">💼 {item.type}</Tag>
+                <Tag type="pink">🌍 {item.location}</Tag>
+                <Tag type="green">🎓 {item.education}</Tag>
+                <Tag type="orange">⏰ {formatRelativeTime(item.deadline, true)}</Tag>
+                <Tag type="tag">📖 {item.subjects}</Tag>
+              </div>
+              <div className="flex flex-row items-center w-full justify-center">
+                <Button onPress={() => {
+                  setModalItem(item)
+                  onOpen()
+                }}>More Info</Button>
               </div>
             </Card>
           ))}
         </div>
       </div>
-      <div className="flex flex-col w-[20%] rounded-md border-black border-2 px-[2.5%] !mr-[5%] h-fit ">
+      <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
         <FilterBox
           values={["Activity", "Internship"]}
           sector={"Type"}
@@ -152,6 +209,42 @@ export default function Discover({ user }: { user: any }) {
         ></FilterBox>
         <Divider />
       </div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalBody>
+              <Card >
+              <div className='flex flex-row items-center w-full'>
+                <h2 className="text-base flex-grow md:text-lg lg:text-xl">{modalItem.name}</h2>
+                <AnimatedHeart className="self-end justify-self-end" likeTrigger={(e, a) => handleLike(e, a)} oppId={modalItem.id} liked={modalItem.isMine} />
+              </div>
+              <p className="text-sm">{modalItem.description}</p>
+              <div className="flex flex-wrap">
+                <Tag type="pink">💼 {modalItem.type}</Tag>
+                <Tag type="pink">🌍 {modalItem.location}</Tag>
+                <Tag type="green">🎓 {modalItem.education}</Tag>
+                <Tag type="orange">⏰ {formatRelativeTime(modalItem.deadline, true)}</Tag>
+                <Tag type="tag">📖 {modalItem.subjects}</Tag>
+              </div>
+              <div className="flex flex-row items-center w-full justify-center">
+                <Button onPress={onOpen}>More Info</Button>
+              </div>
+            </Card>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Action
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

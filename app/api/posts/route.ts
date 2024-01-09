@@ -25,7 +25,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     const result = await prisma.post.create({
       data: {
         ...body,
-        likes: 0,
+        upvotes: [],
+        downvotes: [],
       },
     });
 

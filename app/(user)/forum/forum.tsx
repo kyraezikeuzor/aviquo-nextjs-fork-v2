@@ -54,20 +54,20 @@ export default function Forum({ user }: { user: any }) {
           {searchDataFiltered.map((item: any, index: number) => (
             <div
               key={index}
-              className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5 hover:border-[rgb(0,0,255)] hover:border-dashed hover:border-3"
+              className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5 hover:bg-[#FAEAEC] hover:opacity-60"
               onClick={(e) => router.replace(`/forum/${item.id}`)}
             >
               <div className="w-4 flex flex-col items-center">
                 <Icon icon="arrow-up" fillColor="black" />
                 <p className="font-semibold text-[var(--clr-grey-400)]">
-                  {item.likes}
+                  {item.upvotes.length - item.downvotes.length}
                 </p>
                 <Icon icon="arrow-down" fillColor="black" />
               </div>
               <div className="flex flex-col gap-2">
                 <span className="inline-block flex gap-2 text-xs md:text-sm lg:text-sm">
                   @{item.author.username} • {item.date}{" "}
-                </span>
+                </span> 
                 <h2 className="font-semibold text-base md:text-lg lg:text-xl">
                   {item.title}
                 </h2>

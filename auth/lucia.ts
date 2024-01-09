@@ -29,6 +29,7 @@ export const auth = lucia({
       comments: data.comments,
       notifications: data.notifications,
       posts: data.posts,
+      opportunities: data.opportunities,
     };
   },
 });
