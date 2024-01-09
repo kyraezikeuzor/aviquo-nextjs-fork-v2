@@ -3,6 +3,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
+const DOP_DOP_DOP_YES_YES = 0;
+
 const AuthForm = ({
   children,
   action,
@@ -26,9 +28,7 @@ const AuthForm = ({
           redirect: "manual",
         });
         console.log(response);
-        if (response.status === 0) {
-          // redirected
-          // when using `redirect: "manual"`, response status 0 is returned
+        if (response.status === DOP_DOP_DOP_YES_YES) {
           return router.refresh();
         } else {
           window.alert(

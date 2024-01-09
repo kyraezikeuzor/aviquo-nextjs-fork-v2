@@ -28,9 +28,10 @@ function Button({
       type={"button"}
       onClick={(e) => onClick(e)}
       className={
-        disabled
-          ? `${className} mt-6 transition transition-all block py-3 px-4 w-1/4 text-white font-bold rounded-md cursor-pointer bg-slate-700 h-auto`
-          : `${className} mt-6 transition transition-all block py-3 px-4 w-1/4 text-white font-bold rounded-md cursor-pointer bg-gradient-to-r from-indigo-600 to-purple-400 hover:from-indigo-700 hover:to-purple-500 focus:bg-indigo-900 transform hover:-translate-y-1 hover:shadow-lg h-auto`
+        "${className} mt-6 transition-all block py-2 text-white w-32 rounded-md cursor-pointer " +
+        (disabled
+          ? `bg-slate-700 text-gray-500 h-auto`
+          : `font-bold drop-shadow-[-3px_3px_6px_#00000055] bg-gradient-to-r from-indigo-600 to-purple-400 hover:from-indigo-700 hover:to-purple-500 focus:bg-indigo-900 transform hover:-translate-y-1 hover:shadow-lg h-auto`)
       }
       disabled={disabled}
     >
@@ -38,6 +39,9 @@ function Button({
     </button>
   );
 }
+
+const CHOOSE_NAME = 0;
+const CHOOSE_USERNAME_PFP = 1;
 
 function Onboarding({ user }: { user: any }) {
   const router = useRouter();
@@ -51,18 +55,16 @@ function Onboarding({ user }: { user: any }) {
     lastName: user.lastName,
   });
 
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState(CHOOSE_NAME);
 
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (name.firstName == "" || name.lastName == "") {
-      console.log("a");
-      setStage(0);
+      setStage(CHOOSE_NAME);
     } else if (username == "" || user.pfp == "") {
-      setStage(1);
-      console.log("b");
+      setStage(CHOOSE_USERNAME_PFP);
     }
   }, []);
 
@@ -72,9 +74,7 @@ function Onboarding({ user }: { user: any }) {
         const imageData = await axios.get(`/api/retrieve?filename=${user.pfp}`);
         const image = imageData.data as HeadBlobResult;
         setPfp(image);
-        console.log(image);
       } else {
-        console.log("here");
         setPfp(null);
       }
     };
@@ -126,81 +126,79 @@ function Onboarding({ user }: { user: any }) {
       });
   };
 
+  const INPUT_STYLES = {
+    input: [
+      "bg-transparent",
+      "text-black/90 dark:text-white/90",
+      "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+    ],
+    innerWrapper: ["bg-transparent"],
+    inputWrapper: [
+      "shadow-2xl",
+      "bg-default-200/50",
+      "dark:bg-default/60",
+      "backdrop-blur-xl",
+      "backdrop-saturate-200",
+      "hover:brightness-105",
+      "dark:hover:bg-default/70",
+      "group-data-[focused=true]:bg-default-200/50",
+      "dark:group-data-[focused=true]:bg-default/60",
+      "!cursor-text",
+    ],
+  };
+
+  const NAME_INPUT_STYLES = {
+    input: [...INPUT_STYLES.input],
+    innerWrapper: [...INPUT_STYLES.innerWrapper],
+    inputWrapper: [...INPUT_STYLES.inputWrapper],
+  };
+
   return (
-    <div className=" bg-gradient-to-tr from-pink-500 to-yellow-500 shadow-lg flex justify-center items-center h-screen w-screen">
+    <div className="flex items-center justify-center w-screen h-screen shadow-lg bg-gradient-to-tr from-pink-500 to-yellow-500">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="rounded-sm bg-[rgba(255,255,255,0.5)] p-12 shadow-2xl w-[60%]">
-        {stage == 0 ? (
-          <>
-            <h1 className="font-bold text-center block text-2xl pb-[8%]">
+      <div
+        className={
+          "rounded-2xl bg-[rgba(255,255,255,0.5)] p-12 shadow-2xl " +
+          (stage == CHOOSE_NAME ? "w-1/4" : "w-3/5")
+        }
+      >
+        {stage == CHOOSE_NAME ? (
+          <div className="">
+            <h1 className="block pb-10 text-2xl font-bold text-center">
               What&apos;s Your Name?
             </h1>
-            <Input
-              radius="lg"
-              className="pb-[5%]"
-              classNames={{
-                input: [
-                  "bg-transparent",
-                  "text-black/90 dark:text-white/90",
-                  "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                ],
-                innerWrapper: "bg-transparent",
-                inputWrapper: [
-                  "shadow-xl",
-                  "bg-default-200/50",
-                  "dark:bg-default/60",
-                  "backdrop-blur-xl",
-                  "backdrop-saturate-200",
-                  "hover:bg-default-200/70",
-                  "dark:hover:bg-default/70",
-                  "group-data-[focused=true]:bg-default-200/50",
-                  "dark:group-data-[focused=true]:bg-default/60",
-                  "!cursor-text",
-                ],
-              }}
-              label="First Name"
-              labelPlacement="inside"
-              value={name.firstName}
-              onValueChange={(v) => {
-                setName((prev) => ({
-                  ...prev,
-                  firstName: v,
-                }));
-              }}
-            />
-            <Input
-              radius="lg"
-              classNames={{
-                input: [
-                  "bg-transparent",
-                  "text-black/90 dark:text-white/90",
-                  "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                ],
-                innerWrapper: "bg-transparent",
-                inputWrapper: [
-                  "shadow-xl",
-                  "bg-default-200/50",
-                  "dark:bg-default/60",
-                  "backdrop-blur-xl",
-                  "backdrop-saturate-200",
-                  "hover:bg-default-200/70",
-                  "dark:hover:bg-default/70",
-                  "group-data-[focused=true]:bg-default-200/50",
-                  "dark:group-data-[focused=true]:bg-default/60",
-                  "!cursor-text",
-                ],
-              }}
-              label="Last Name"
-              labelPlacement="inside"
-              value={name.lastName}
-              onValueChange={(v) => {
-                setName((prev) => ({
-                  ...prev,
-                  lastName: v,
-                }));
-              }}
-            />
-          </>
+            <div className="grid grid-cols-[minmax(0,_1fr)_5%_minmax(0,_1fr)] grid-rows-1">
+              <Input
+                size="lg"
+                radius="md"
+                classNames={NAME_INPUT_STYLES}
+                label="First"
+                labelPlacement="inside"
+                value={name.firstName}
+                onValueChange={(v) => {
+                  setName((prev) => ({
+                    ...prev,
+                    firstName: v,
+                  }));
+                }}
+              />
+              <div></div>
+              <Input
+                size="lg"
+                radius="md"
+                classNames={NAME_INPUT_STYLES}
+                label="Last"
+                labelPlacement="inside"
+                value={name.lastName}
+                onValueChange={(v) => {
+                  setName((prev) => ({
+                    ...prev,
+                    lastName: v,
+                  }));
+                }}
+              />
+            </div>
+          </div>
         ) : (
           <>
             <h1 className="font-bold text-center block text-2xl pb-[4%]">
@@ -208,27 +206,7 @@ function Onboarding({ user }: { user: any }) {
             </h1>
             <Input
               radius="lg"
-              className="pb-[5%]"
-              classNames={{
-                input: [
-                  "bg-transparent",
-                  "text-black/90 dark:text-white/90",
-                  "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                ],
-                innerWrapper: "bg-transparent",
-                inputWrapper: [
-                  "shadow-xl",
-                  "bg-default-200/50",
-                  "dark:bg-default/60",
-                  "backdrop-blur-xl",
-                  "backdrop-saturate-200",
-                  "hover:bg-default-200/70",
-                  "dark:hover:bg-default/70",
-                  "group-data-[focused=true]:bg-default-200/50",
-                  "dark:group-data-[focused=true]:bg-default/60",
-                  "!cursor-text",
-                ],
-              }}
+              classNames={INPUT_STYLES}
               label="Username"
               labelPlacement="inside"
               value={username}
@@ -265,7 +243,7 @@ function Onboarding({ user }: { user: any }) {
             </div>
           </>
         )}
-        <div className="flex flex-row w-full justify-between">
+        <div className="flex flex-row justify-between w-full">
           <Button
             value={"Back"}
             className={`self-start`}
