@@ -58,8 +58,6 @@ export default function Discover({ user }: { user: any }) {
     })
   }
 
-
-
   const oppToUser = (opp:any) => {
     if (opp.users.some((obj: any) => obj.id === user.userId)) {
       return {

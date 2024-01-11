@@ -15,14 +15,16 @@ export default function Profile({ user }: { user: any }) {
   const [likedActivities, setLikedActivities] = useState<any>([]);
 
   useEffect(() => {
+    let likedActivities = user.opportunities;
     let posts = user.posts.map((obj: any) => ({ ...obj, type: "Question" }));
     let replies = user.comments.map((obj: any) => ({ ...obj, type: "Reply" }));
 
     const combined = [...posts, ...replies].sort(
       (a: any, b: any) => b.date - a.date
     );
-
+    // console.log(likedActivities)
     setForumData(combined);
+    setLikedActivities(user.opportunities);
     // setSearchDataFiltered(Object.values(response));
     // console.log(response);
   }, []);
