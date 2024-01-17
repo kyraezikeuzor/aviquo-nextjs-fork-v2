@@ -1,4 +1,4 @@
-//TODO bug fix regarding router
+// TODO bug fix regarding router
 
 "use client";
 
@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 import { promisify } from "util";
+import styles from "./page.module.css";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -154,7 +155,12 @@ function Onboarding({ user }: { user: any }) {
   };
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen shadow-lg bg-gradient-to-tr from-pink-500 to-yellow-500">
+    <div
+      className={
+        "flex items-center justify-center w-screen h-screen shadow-lg bg-gradient-to-tr " +
+        styles.bgthing
+      }
+    >
       <Toaster position="top-center" reverseOrder={false} />
       <div
         className={

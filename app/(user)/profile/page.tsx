@@ -2,12 +2,21 @@ import { getPageSession } from "@/auth/lucia";
 import Profile from "./profile";
 import Navbar from "@/components/Navbar";
 
-export default async function ProfilePage() {
-  const user = (await getPageSession())?.user;
+import { UserInterface } from "@/auth/lucia";
+import { useRouter } from "next/navigation";
 
-  return (
-    <>
-      <Profile user={user}></Profile>
-    </>
-  );
+export default async function ProfilePage() {
+  const user: (UserInterface & { userId: string }) | undefined = (
+    await getPageSession()
+  )?.user;
+
+  const router = useRouter();
+
+  if (!user) router.push("/auth?l");
+  else
+    return (
+      <>
+        <Profile user={user}></Profile>
+      </>
+    );
 }
