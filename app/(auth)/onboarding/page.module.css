@@ -1,0 +1,16 @@
+@keyframes bg {
+  0% {
+    --tw-gradient-from: black;
+    --tw-gradient-to: black;
+  }
+  100% {
+    --tw-gradient-from: rgb(246, 99, 123);
+    --tw-gradient-to: rgb(236, 236, 10);
+  }
+}
+
+.bgthing {
+  animation-name: bg;
+  animation-timing-function: ease-out;
+  animation-duration: 2s;
+}
