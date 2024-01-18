@@ -5,5 +5,5 @@ export default async function ForumPage() {
   const user = (await getPageSession())?.user;
   // console.log(user);
 
-  return <Discover user={user}></Discover>;
+  return <Discover></Discover>;
 }
