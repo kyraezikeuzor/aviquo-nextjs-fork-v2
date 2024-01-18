@@ -5,7 +5,7 @@ import Sidebar from "@/components/Navbar";
 import { getPageSession } from "@/auth/lucia";
 import Navbar from "@/components/Navbar";
 
-export default async function UserLayout({
+export default async function LoginLayout({
   children,
 }: {
   children: React.ReactNode;

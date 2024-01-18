@@ -23,7 +23,7 @@ import { formatRelativeTime } from "@/utils";
 
 import AnimatedHeart from "@/components/Heart";
 
-export default function Discover({ user }: { user: any }) {
+export default function Discover() {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
   const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>([]);
@@ -38,7 +38,7 @@ export default function Discover({ user }: { user: any }) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
-  const [opps, setOpps] = useState<object>(user.opportunities);
+  // const [opps, setOpps] = useState<object>(user.opportunities);
 
   const handleLike = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
@@ -52,25 +52,25 @@ export default function Discover({ user }: { user: any }) {
     }
     
 
-    const update = axios.put(`/api/like/${url}`, {
-      id: oppId,
-      userId: user.userId
-    })
+    // const update = axios.put(`/api/like/${url}`, {
+    //   id: oppId,
+    //   userId: user.userId
+    // })
   }
 
-  const oppToUser = (opp:any) => {
-    if (opp.users.some((obj: any) => obj.id === user.userId)) {
-      return {
-        ...opp,
-        isMine: true,
-      }
-    } else {
-      return {
-        ...opp,
-        isMine: false
-      }
-    }
-  }
+  // const oppToUser = (opp:any) => {
+  //   if (opp.users.some((obj: any) => obj.id === user.userId)) {
+  //     return {
+  //       ...opp,
+  //       isMine: true,
+  //     }
+  //   } else {
+  //     return {
+  //       ...opp,
+  //       isMine: false
+  //     }
+  //   }
+  // }
   
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function Discover({ user }: { user: any }) {
         const raw_response = await axios.get(`/api/ecs`);
         let response = raw_response.data
         response = Object.values(response);
-        response = response.map(oppToUser)
+        // response = response.map(oppToUser)
 
         setEcItems(response);
         setSearchDataFiltered(response);

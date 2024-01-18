@@ -10,19 +10,19 @@ export default async function ExternalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getPageSession();
-  if (session) {
-    if (
-      session.user.username == "" ||
-      session.user.firstName == "" ||
-      session.user.lastName == ""
-    )
-      redirect("/onboarding");
-  }
+  // const session = await getPageSession();
+  // if (session) {
+  //   if (
+  //     session.user.username == "" ||
+  //     session.user.firstName == "" ||
+  //     session.user.lastName == ""
+  //   )
+  //     redirect("/onboarding");
+  // }
 
   return (
     <div className="app">
-      {session ? (<Navbar />) : <></>}
+      {/* {session ? (<Navbar />) : <></>} */}
       <div className="overflow-y-auto w-full max-h-screen h-screen pt-[3.5%]">{children}</div>
     </div>
   );
