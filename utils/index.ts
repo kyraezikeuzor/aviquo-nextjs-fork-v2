@@ -56,8 +56,11 @@ export const toDateTimeString = (date: Date): string => {
   return dateTimeString;
 };
 
-export function formatRelativeTime(dateString: string, forward: boolean): string | boolean {
+export function formatRelativeTime(dateString?: string, forward?: boolean): string | boolean {
   const currentDate = new Date();
+  if (!dateString) {
+    return 'N/A'
+  }
   const givenDate = new Date(dateString);
 
   const suffix = forward ? 'left' : 'ago';
@@ -82,4 +85,18 @@ export function formatRelativeTime(dateString: string, forward: boolean): string
     const days = Math.floor(timeDifferenceInSeconds / 86400);
     return days === 1 ? `1 day ${suffix}` : `${days} days ${suffix}`;
   }
+}
+
+
+export function extractFilters(targetArr: any[], attr: string): string[] {
+  const allValues = targetArr.reduce((accumulator: any, currentObject: any) => {
+    const tempValues = currentObject[attr].split(',').map((value: any) => value.trim());
+    accumulator.push(...tempValues);
+    return accumulator;
+  }, []);
+  
+  // Use Set to get unique values
+  const uniqueValues = new Set<string>(allValues);
+  
+  return [...uniqueValues]
 }

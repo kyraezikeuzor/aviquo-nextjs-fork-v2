@@ -22,7 +22,7 @@ import {
 
 import { SearchIcon } from '@/public/SearchIcon'
 
-import { formatRelativeTime } from "@/utils";
+import { extractFilters, formatRelativeTime } from "@/utils";
 
 import AnimatedHeart from "@/components/Heart";
 
@@ -40,19 +40,37 @@ export default function Discover() {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  const getLikedActivites = () => {
+    const savedValue = localStorage.getItem('liked');
+    if (savedValue) {
+      return JSON.parse(savedValue);
+    } else {
+      return [] as string[];
+    }
+  }
+
+  const saveLikedActivities = () => {
+    localStorage.setItem('liked', JSON.stringify(likedActivites));
+  }
+
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
   // const [opps, setOpps] = useState<object>(user.opportunities);
+  const [likedActivites, setLikedActivites] = useState<string>(getLikedActivites());
+
+  useEffect(() => {
+    saveLikedActivities();
+  }, [likedActivites])
 
   const handleLike = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
     // let likes = currentOpp!.users;
-    let url;
+    // let url;
 
-    if (state) {
-      url = 'add';
-    } else {
-      url = 'remove'
-    }
+    // if (state) {
+    //   url = 'add';
+    // } else {
+    //   url = 'remove'
+    // }
 
 
     // const update = axios.put(`/api/like/${url}`, {
@@ -83,9 +101,11 @@ export default function Discover() {
         let response = raw_response.data
         response = Object.values(response).filter((value: any) => formatRelativeTime(value.deadline, true) != false);
         // response = response.map(oppToUser)
-
+        console.log(response.length)
         setEcItems(response);
         setSearchDataFiltered(response);
+
+
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -209,9 +229,9 @@ export default function Discover() {
       />
         </div>
 
-        <div className="flex flex-row flex-wrap gap-3">
+        <div className="flex flex-row flex-wrap gap-3 max-w-full">
           {searchDataFiltered.map((item: any, index: number) => (
-            <Card key={index} className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 hover:cursor-pointer">
+            <Card key={index} className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 hover:cursor-pointer max-w-full">
               <div onClick={(e) => handleClick(e, item)}>
                 <div className='flex flex-row items-center w-full mt-[-2.5%] '>
                   <h2 className="text-base flex-grow md:text-lg lg:text-xl">{item.name}</h2>
@@ -232,31 +252,31 @@ export default function Discover() {
       </div>
       <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
         <FilterBox
-          values={["Activity", "Internship"]}
+          values={extractFilters(ecItems, 'type')}
           sector={"Type"}
           callback={filterData}
         ></FilterBox>
         <Divider />
         <FilterBox
-          values={["Global", "America"]}
+          values={extractFilters(ecItems, 'location')}
           sector={"Location"}
           callback={filterData}
         ></FilterBox>
         <Divider />
         <FilterBox
-          values={["College", "11th"]}
+          values={extractFilters(ecItems, 'education')}
           sector={"Grade"}
           callback={filterData}
         ></FilterBox>
         <Divider />
         <FilterBox
-          values={["Unknown", "28th December"]}
+          values={['N/A']}
           sector={"Deadline"}
           callback={filterData}
         ></FilterBox>
         <Divider />
         <FilterBox
-          values={["Activitydd", "Internshipdd"]}
+          values={extractFilters(ecItems, 'subjects')}
           sector={"Subject"}
           callback={filterData}
         ></FilterBox>
