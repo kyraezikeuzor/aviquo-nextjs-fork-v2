@@ -23,7 +23,7 @@ export default async function ExternalLayout({
   return (
     <div className="app">
       {/* {session ? (<Navbar />) : <></>} */}
-      <div className="overflow-y-auto w-full max-h-screen h-screen pt-[3.5%]">{children}</div>
+      <div className="overflow-y-auto w-full max-h-screen h-screen pt-[3.5%] bg-gradient-to-r from-violet-500 to-fuchsia-500">{children}</div>
     </div>
   );
 }
