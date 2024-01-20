@@ -16,12 +16,24 @@ export async function GET(request: Request): Promise<NextResponse> {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  if (request.body) {
-    const body = await request.json();
+  const body = await request.json();
+  if (body && 'description' in body && 'name' in body) {
     const result = await prisma.opportunity.create({ data: body });
-
     return NextResponse.json(result);
-  } else {
-    return NextResponse.json({ status: "fail" });
+    
+  } else if (body) {
+    const opportunities = await prisma.opportunity.findMany({
+      where: {
+        id: {
+          in: body.oppIds,
+        },
+      },
+    });
+
+    console.log(opportunities);
+    return NextResponse.json(opportunities);
   }
+
+  
+    return NextResponse.json({ status: "fail" });
 }
