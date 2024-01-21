@@ -314,7 +314,7 @@ export default function Discover() {
                     <Tag type="pink">🌍 {item.location}</Tag>
                     <Tag type="green">🎓 {item.education}</Tag>
                     <Tag type="orange">⏰ {formatRelativeTime(item.deadline, true)}</Tag>
-                    <Tag type="tag">📖 {item.subjects}</Tag>
+                    <Tag type="tag" className="!w-fit-content !max-w-full flex items-start justify-start flex-wrap">📖 {item.subjects}</Tag>
                   </div>
                 </div>
               </Card>
