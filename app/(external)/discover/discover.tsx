@@ -357,175 +357,155 @@ export default function Discover() {
               <>
                 <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
                 <ModalBody>
-                  {/* <Card >
-                  <div className='flex flex-row items-center w-full'>
-                    <h2 className="text-base flex-grow md:text-lg lg:text-xl">{modalItem.name}</h2>
-                    <AnimatedHeart className="self-end justify-self-end" likeTrigger={(e, a) => handleLike(e, a)} oppId={modalItem.id} liked={modalItem.isMine} />
-                  </div>
-                  <p className="text-sm">{modalItem.description}</p>
-                  <div className="flex flex-wrap">
-                    <Tag type="pink">💼 {modalItem.type}</Tag>
-                    <Tag type="pink">🌍 {modalItem.location}</Tag>
-                    <Tag type="green">🎓 {modalItem.education}</Tag>
-                    <Tag type="orange">⏰ {formatRelativeTime(modalItem.deadline, true)}</Tag>
-                    <Tag type="tag">📖 {modalItem.subjects}</Tag>
-                  </div>
-                  <div className="flex flex-row items-center w-full justify-center">
-                    <Button onPress={onOpen}>More Info</Button>
-                  </div>
-                </Card> */}
-                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity opacity-100">
-                  </div>
-                  <div className="fixed inset-0 z-10 w-screen overflow-y-auto font-outfit">
-                    <div className="flex min-h-full px-2 xl:px-10 items-end justify-center p-4 text-center sm:items-center">
-                      <div
-                        className="relative transform lg:w-11/12 xl:w-7/12 overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 opacity-100 translate-y-0 sm:scale-100"
-                        data-headlessui-state="open" id="headlessui-dialog-panel-:r2:">
-                        <div
-                          className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none">
-                          <div className="flex flex-col gap-y-1">
-                            <div className="flex justify-between items-center">
-                              <h1 className="font-semibold text-4xl w-11/12">
-                                Key Club
-                              </h1>
-                              <div className="flex gap-x-1">
-                                <AnimatedHeart className="self-end justify-self-end animated-heart-section" likeTrigger={(e, a) => handleLike(e, a)} oppId={'xd'} liked={false} />
-                              </div>
+                   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity opacity-100"></div>
+
+                <div className="fixed inset-0 z-10 w-screen overflow-y-auto font-outfit">
+                  <div className="flex min-h-full px-2 xl:px-10 items-end justify-center p-4 text-center sm:items-center">
+                    <div
+                      className="relative transform lg:w-11/12 xl:w-7/12 overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 opacity-100 translate-y-0 sm:scale-100"
+                      data-headlessui-state="open"
+                      id="headlessui-dialog-panel-:r2:"
+                    >
+                      <div className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none">
+                        <div className="flex flex-col gap-y-1">
+                          <div className="flex justify-between items-center">
+                            <h1 className="font-semibold text-4xl w-11/12">
+                              {modalItem.name}
+                            </h1>
+                            <div className="flex gap-x-1">
+                              <AnimatedHeart
+                                className="self-end justify-self-end animated-heart-section"
+                                likeTrigger={(e, a) => handleLike(e, a)}
+                                oppId={"xd"}
+                                liked={false}
+                              />
                             </div>
-                            {/* <h3 className="text-gray-500">
+                          </div>
+                          {/* <h3 className="text-gray-500">
                       Extracurricular Activity
                     </h3>
                   </div> */}
-                          </div>
-                          <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
-                            <div
-                              className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Extracurricular Open To:
-                                </h3>
-                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                  <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
-                                    All Grades
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Location Requirements:
-                                </h3>
-                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                  <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
-                                    Global/Worldwide
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Category:
-                                </h3>
-                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                  <div className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md">
-                                    Club
-                                  </div>
-                                  <div className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md">
-                                    Community Service
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Organization Type:
-                                </h3>
-                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                  <div className="bg-yellow-100 w-max text-yellow-700 text-sm py-1 px-2 rounded-md">
-                                    Nonprofit Organization
-                                  </div>
+                        </div>
+                        <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
+                          <div className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Extracurricular Open To:
+                              </h3>
+                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
+                                  {modalItem.education}
                                 </div>
                               </div>
                             </div>
-                            <div
-                              className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Preferred Skill Level(s):
-                                </h3>
-                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                    All Skill Levels
-                                  </div>
-                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                    Beginner Friendly
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Activity Commitment:
-                                </h3>
-                                <div className="flex gap-x-3">
-                                  <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
-                                    Long-Term
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Team/Individual Based
-                                </h3>
-                                <div className="flex gap-x-3">
-                                  <div className="bg-fuchsia-100 w-max text-fuchsia-700 text-sm py-1 px-2 rounded-md">
-                                    Team-Based
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex flex-col gap-y-1">
-                                <h3 className="text-slate-500 text-lg">
-                                  Activity Subjects:
-                                </h3>
-                                <div className="flex gap-3 flex-wrap">
-                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                    Entrepreneurship
-                                  </div>
-                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                    Leadership
-                                  </div>
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Location Requirements:
+                              </h3>
+                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
+                                  {modalItem.location}
                                 </div>
                               </div>
                             </div>
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Category:
+                              </h3>
+                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                {modalItem.type
+                                  .split(",")
+                                  .map((subject:string, index:number) => (
+                                    <div
+                                      key={index}
+                                      className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                    >
+                                      {subject.trim()}{" "}
+                                      {/* Use trim() to remove any leading or trailing spaces */}
+                                    </div>
+                                  ))}
+                              </div>
+                            </div>
+                           
                           </div>
-                          <div
-                            className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
-                            <img alt="Image of Key Club" className="hidden lg:block w-1/6"
-                              src="https://upload.wikimedia.org/wikipedia/en/b/b4/Keyclub.png" />
-                            <div className="w-full lg:w-5/6">
-                              <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
-                                Description:
-                              </h1>
-                              <p>
-                                Key Club is a renowned international student-led organization that empowers high school students
-                                to serve their communities, develop leadership skills, and make a positive impact through
-                                volunteerism and service projects. Key Club chapters operate in schools worldwide, fostering
-                                collaboration, compassion, and civic engagement.
-                              </p>
+                          <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Preferred Skill Level(s):
+                              </h3>
+                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                                  All Skill Levels
+                                </div>
+                                <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                                  Beginner Friendly
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Activity Commitment:
+                              </h3>
+                              <div className="flex gap-x-3">
+                                <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
+                                  {modalItem.duration}
+                                </div>
+                              </div>
+                            </div>
+                           
+                            <div className="flex flex-col gap-y-1">
+                              <h3 className="text-slate-500 text-lg">
+                                Activity Subjects:
+                              </h3>
+                              <div className="flex gap-3 flex-wrap">
+                                {modalItem.subjects
+                                  .split(",")
+                                  .map((subject: string, index: number) => (
+                                    <div
+                                      key={index}
+                                      className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                    >
+                                      {subject.trim()}{" "}
+                                      {/* Use trim() to remove any leading or trailing spaces */}
+                                    </div>
+                                  ))}
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
-                          <a className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-                            href="https://www.keyclub.org/" target="_blank">
-                            Visit Site
-                          </a>
-                          <Button
-                            className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-white px-3 py-2 text-base font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                            type="button"
-                            onPress={onClose}>
-                            Go Back
-                          </Button>
+                        <div className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
+                          <img
+                            alt="Image of Key Club"
+                            className="hidden lg:block w-1/6"
+                            src="https://upload.wikimedia.org/wikipedia/en/b/b4/Keyclub.png"
+                          />
+                          <div className="w-full lg:w-5/6">
+                            <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
+                              Description:
+                            </h1>
+                            <p>{modalItem.description}</p>
+                          </div>
                         </div>
+                      </div>
+                      <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
+                        <a
+                          className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                          href={modalItem.url}
+                          target="_blank"
+                        >
+                          Visit Site
+                        </a>
+                        <Button
+                          className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-white px-3 py-2 text-base font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                          type="button"
+                          onPress={onClose}
+                        >
+                          Go Back
+                        </Button>
                       </div>
                     </div>
                   </div>
+                </div>
                 </ModalBody>
               </>
             )}
