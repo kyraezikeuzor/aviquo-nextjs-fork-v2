@@ -321,7 +321,7 @@ export default function Discover() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
+        <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox
             values={extractFilters(ecItems, 'type')}
             sector={"Type"}
@@ -485,7 +485,7 @@ export default function Discover() {
                             <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
                               Description:
                             </h1>
-                            <p>{modalItem.description}</p>
+                            <p className="font-750">{modalItem.description}</p>
                           </div>
                         </div>
                       </div>
