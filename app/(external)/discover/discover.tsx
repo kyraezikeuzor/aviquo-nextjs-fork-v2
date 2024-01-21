@@ -1,3 +1,5 @@
+//replace the phrase 'every' with the phrase 'some' for all filter functions to rever to Linkedin style filtering
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -7,6 +9,7 @@ import Tag from "@/components/Tag";
 import SearchBar from "@/components/SearchBar";
 import Card from "@/components/Card";
 import {
+  Input,
   Divider,
   Select,
   SelectItem,
@@ -21,13 +24,22 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
 } from "@nextui-org/react";
 
-import { formatRelativeTime } from "@/utils";
+import { FaHeart } from "react-icons/fa";
+
+import { SearchIcon } from "@/public/SearchIcon";
+
+import { extractFilters, formatRelativeTime } from "@/utils";
 
 import AnimatedHeart from "@/components/Heart";
 
-export default function Discover({ user }: { user: any }) {
+export default function Discover() {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
   const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>(
@@ -43,48 +55,90 @@ export default function Discover({ user }: { user: any }) {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  const [showLiked, setShowLiked] = useState(false);
+
+  const getLikedActivites = () => {
+    if (global?.window !== undefined) {
+      const savedValue = localStorage.getItem("liked");
+      if (savedValue) {
+        return JSON.parse(savedValue);
+      } else {
+        return [] as string[];
+      }
+    }
+  };
+
+  const saveLikedActivities = () => {
+    if (global?.window !== undefined) {
+      localStorage.setItem("liked", JSON.stringify(likedActivites));
+    }
+  };
+
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
-  const [opps, setOpps] = useState<object>(user.opportunities);
+  // const [opps, setOpps] = useState<object>(user.opportunities);
+  const [likedActivites, setLikedActivites] =
+    useState<string[]>(getLikedActivites());
+
+  useEffect(() => {
+    console.log(likedActivites);
+    saveLikedActivities();
+  }, [likedActivites]);
+
+  useEffect(() => {
+    if (showLiked) {
+      const likedEcs = ecItems.filter((obj) => likedActivites.includes(obj.id));
+      setSearchDataFiltered(likedEcs);
+    } else {
+      setSearchDataFiltered(ecItems);
+    }
+  }, [showLiked]);
 
   const handleLike = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
     // let likes = currentOpp!.users;
-    let url;
+    // let url;
 
+    // if (state) {
+    //   url = 'add';
+    // } else {
+    //   url = 'remove'
+    // }
+
+    // const update = axios.put(`/api/like/${url}`, {
+    //   id: oppId,
+    //   userId: user.userId
+    // })
     if (state) {
-      url = "add";
+      setLikedActivites([...likedActivites, oppId]);
     } else {
-      url = "remove";
-    }
-
-    const update = axios.put(`/api/like/${url}`, {
-      id: oppId,
-      userId: user.userId,
-    });
-  };
-
-  const oppToUser = (opp: any) => {
-    if (opp.users.some((obj: any) => obj.id === user.userId)) {
-      return {
-        ...opp,
-        isMine: true,
-      };
-    } else {
-      return {
-        ...opp,
-        isMine: false,
-      };
+      setLikedActivites(likedActivites.filter((id) => id !== oppId));
     }
   };
+
+  // const oppToUser = (opp:any) => {
+  //   if (opp.users.every((obj: any) => obj.id === user.userId)) {
+  //     return {
+  //       ...opp,
+  //       isMine: true,
+  //     }
+  //   } else {
+  //     return {
+  //       ...opp,
+  //       isMine: false
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const raw_response = await axios.get(`/api/ecs`);
         let response = raw_response.data;
-        response = Object.values(response);
-        response = response.map(oppToUser);
-
+        response = Object.values(response).filter(
+          (value: any) => formatRelativeTime(value.deadline, true) != false
+        );
+        // response = response.map(oppToUser)
+        // console.log(response.length)
         setEcItems(response);
         setSearchDataFiltered(response);
       } catch (error) {
@@ -106,27 +160,57 @@ export default function Discover({ user }: { user: any }) {
     var filtered_data = ecItems;
 
     if (searchFilters["Type"].size !== 0) {
-      filtered_data = filtered_data.filter((item: any) =>
-        searchFilters["Type"].has(item.type)
-      );
+      filtered_data = filtered_data.filter((item: any) => {
+        // Split item.type into an array of items
+        const itemTypes = item.type.split(",").map((type: any) => type.trim());
+
+        // Check if any of the searchFilters["Type"] are part of the itemTypes array
+        return Array.from(searchFilters["Type"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
+      });
     }
 
     if (searchFilters["Location"].size !== 0) {
-      filtered_data = filtered_data.filter((item: any) =>
-        searchFilters["Location"].has(item.location)
-      );
+      filtered_data = filtered_data.filter((item: any) => {
+        // Split item.type into an array of items
+        const itemTypes = item.location
+          .split(",")
+          .map((type: any) => type.trim());
+
+        // Check if any of the searchFilters["Type"] are part of the itemTypes array
+        return Array.from(searchFilters["Location"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
+      });
     }
 
     if (searchFilters["Grade"].size !== 0) {
-      filtered_data = filtered_data.filter((item: any) =>
-        searchFilters["Grade"].has(item.education)
-      );
+      filtered_data = filtered_data.filter((item: any) => {
+        // Split item.type into an array of items
+        const itemTypes = item.education
+          .split(",")
+          .map((type: any) => type.trim());
+
+        // Check if any of the searchFilters["Type"] are part of the itemTypes array
+        return Array.from(searchFilters["Grade"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
+      });
     }
 
     if (searchFilters["Subject"].size !== 0) {
-      filtered_data = filtered_data.filter((item: any) =>
-        searchFilters["Subject"].has(item.subjects)
-      );
+      filtered_data = filtered_data.filter((item: any) => {
+        // Split item.type into an array of items
+        const itemTypes = item.subjects
+          .split(",")
+          .map((type: any) => type.trim());
+
+        // Check if any of the searchFilters["Type"] are part of the itemTypes array
+        return Array.from(searchFilters["Subject"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
+      });
     }
 
     if (searchFilters["Deadline"].size !== 0) {
@@ -140,133 +224,334 @@ export default function Discover({ user }: { user: any }) {
 
   const [modalItem, setModalItem] = useState<any | null | undefined>();
 
-  return (
-    <div className="flex flex-row w-full h-full">
-      <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl">Discover</h1>
-          <p>Discover new opportunities and activities.</p>
-          <SearchBar placeholder="Search" searchFunction={setSearchText} />
-        </div>
+  const handleClick = (event: any, item: any) => {
+    // console.log('clicked')
+    // console.log(event.target.classList)
+    if (
+      !event.target.classList.contains("go2484888251") &&
+      !event.target.classList.contains("go4268192979")
+    ) {
+      // console.log(event.target.classList)
+      // console.log('Clicked on the div, not the AnimatedHeart component');
+      setModalItem(item);
+      onOpen();
+    }
+  };
 
-        <div className="flex flex-row flex-wrap gap-3">
-          {searchDataFiltered.map((item: any, index: number) => (
-            <Card key={index}>
-              <div className="flex flex-row items-center w-full">
-                <h2 className="flex-grow text-base md:text-lg lg:text-xl">
-                  {item.name}
-                </h2>
-                <AnimatedHeart
-                  className="self-end justify-self-end"
-                  likeTrigger={(e, a) => handleLike(e, a)}
-                  oppId={item.id}
-                  liked={item.isMine}
-                />
-              </div>
-              <p className="text-sm">{item.description}</p>
-              <div className="flex flex-wrap">
-                <Tag type="pink">💼 {item.type}</Tag>
-                <Tag type="pink">🌍 {item.location}</Tag>
-                <Tag type="green">🎓 {item.education}</Tag>
-                <Tag type="orange">
-                  ⏰ {formatRelativeTime(item.deadline, true)}
-                </Tag>
-                <Tag type="tag">📖 {item.subjects}</Tag>
-              </div>
-              <div className="flex flex-row items-center justify-center w-full">
-                <Button
-                  onPress={() => {
-                    setModalItem(item);
-                    onOpen();
-                  }}
-                >
-                  More Info
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
-        <FilterBox
-          values={["Activity", "Internship"]}
-          sector={"Type"}
-          callback={filterData}
-        ></FilterBox>
-        <Divider />
-        <FilterBox
-          values={["Global", "America"]}
-          sector={"Location"}
-          callback={filterData}
-        ></FilterBox>
-        <Divider />
-        <FilterBox
-          values={["College", "11th"]}
-          sector={"Grade"}
-          callback={filterData}
-        ></FilterBox>
-        <Divider />
-        <FilterBox
-          values={["Unknown", "28th December"]}
-          sector={"Deadline"}
-          callback={filterData}
-        ></FilterBox>
-        <Divider />
-        <FilterBox
-          values={["Activitydd", "Internshipdd"]}
-          sector={"Subject"}
-          callback={filterData}
-        ></FilterBox>
-        <Divider />
-      </div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
-              </ModalHeader>
-              <ModalBody>
-                <Card>
-                  <div className="flex flex-row items-center w-full">
-                    <h2 className="flex-grow text-base md:text-lg lg:text-xl">
-                      {modalItem.name}
+  return (
+    <>
+      <Navbar
+        isBordered
+        classNames={{
+          base: "bg-transparent",
+        }}
+      >
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button
+              as={Link}
+              href="#"
+              variant="bordered"
+              endContent={<FaHeart />}
+              className="text-white"
+              onClick={() => {
+                setShowLiked(!showLiked);
+              }}
+            >
+              View Liked Opportunities
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+      <div className="flex flex-row w-full h-full">
+        <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
+          <div className="flex flex-col gap-2">
+            {showLiked ? (
+              <>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
+                  My Opportunities
+                </h1>
+                <p className="text-white">View your liked opportunities.</p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
+                  Discover
+                </h1>
+                <p className="text-white">
+                  Discover new opportunities and activities.
+                </p>
+              </>
+            )}
+            <Input
+              isClearable
+              radius="lg"
+              classNames={{
+                label: "text-black/50 dark:text-white/90",
+                input: [
+                  "bg-transparent",
+                  "text-black/90 dark:text-white/90",
+                  "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+                ],
+                innerWrapper: "bg-transparent",
+                inputWrapper: [
+                  "shadow-xl",
+                  "bg-default-200/50",
+                  "dark:bg-default/60",
+                  "backdrop-blur-xl",
+                  "backdrop-saturate-200",
+                  "hover:bg-default-200/70",
+                  "dark:hover:bg-default/70",
+                  "group-data-[focused=true]:bg-default-200/50",
+                  "dark:group-data-[focused=true]:bg-default/60",
+                  "!cursor-text",
+                ],
+              }}
+              placeholder="Type to search..."
+              value={searchText}
+              onValueChange={setSearchText}
+              startContent={
+                <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+              }
+            />
+          </div>
+
+          <div className="flex flex-row flex-wrap gap-3 max-w-full">
+            {searchDataFiltered.map((item: any, index: number) => (
+              <Card
+                key={index}
+                className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 hover:cursor-pointer max-w-full"
+              >
+                <div onClick={(e) => handleClick(e, item)}>
+                  <div className="flex flex-row items-center w-full mt-[-2.5%] ">
+                    <h2 className="text-base flex-grow md:text-lg lg:text-xl">
+                      {item.name}
                     </h2>
                     <AnimatedHeart
-                      className="self-end justify-self-end"
+                      className="self-end justify-self-end animated-heart-section"
                       likeTrigger={(e, a) => handleLike(e, a)}
-                      oppId={modalItem.id}
-                      liked={modalItem.isMine}
+                      oppId={item.id}
+                      liked={likedActivites.includes(item.id)}
                     />
                   </div>
-                  <p className="text-sm">{modalItem.description}</p>
-                  <div className="flex flex-wrap">
-                    <Tag type="pink">💼 {modalItem.type}</Tag>
-                    <Tag type="pink">🌍 {modalItem.location}</Tag>
-                    <Tag type="green">🎓 {modalItem.education}</Tag>
+                  <p className="text-sm">{item.description}</p>
+                  <div className="flex flex-wrap pt-[5%]">
+                    <Tag type="pink">💼 {item.type}</Tag>
+                    <Tag type="pink">🌍 {item.location}</Tag>
+                    <Tag type="green">🎓 {item.education}</Tag>
                     <Tag type="orange">
-                      ⏰ {formatRelativeTime(modalItem.deadline, true)}
+                      ⏰ {formatRelativeTime(item.deadline, true)}
                     </Tag>
-                    <Tag type="tag">📖 {modalItem.subjects}</Tag>
+                    <Tag
+                      type="tag"
+                      className="!w-fit-content !max-w-full flex items-start justify-start flex-wrap"
+                    >
+                      📖 {item.subjects}
+                    </Tag>
                   </div>
-                  <div className="flex flex-row items-center justify-center w-full">
-                    <Button onPress={onOpen}>More Info</Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit ">
+          <FilterBox
+            values={extractFilters(ecItems, "type")}
+            sector={"Type"}
+            callback={filterData}
+          ></FilterBox>
+          <Divider />
+          <FilterBox
+            values={extractFilters(ecItems, "location")}
+            sector={"Location"}
+            callback={filterData}
+          ></FilterBox>
+          <Divider />
+          <FilterBox
+            values={extractFilters(ecItems, "education")}
+            sector={"Grade"}
+            callback={filterData}
+          ></FilterBox>
+          <Divider />
+          <FilterBox
+            values={["N/A"]}
+            sector={"Deadline"}
+            callback={filterData}
+          ></FilterBox>
+          <Divider />
+          <FilterBox
+            values={extractFilters(ecItems, "subjects")}
+            sector={"Subject"}
+            callback={filterData}
+          ></FilterBox>
+          <Divider />
+        </div>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  Modal Title
+                </ModalHeader>
+                <ModalBody>
+                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity opacity-100"></div>
+
+                  <div className="fixed inset-0 z-10 w-screen overflow-y-auto font-outfit">
+                    <div className="flex min-h-full px-2 xl:px-10 items-end justify-center p-4 text-center sm:items-center">
+                      <div
+                        className="relative transform lg:w-11/12 xl:w-7/12 overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 opacity-100 translate-y-0 sm:scale-100"
+                        data-headlessui-state="open"
+                        id="headlessui-dialog-panel-:r2:"
+                      >
+                        <div className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none">
+                          <div className="flex flex-col gap-y-1">
+                            <div className="flex justify-between items-center">
+                              <h1 className="font-semibold text-4xl w-11/12">
+                                {modalItem.name}
+                              </h1>
+                              <div className="flex gap-x-1">
+                                <AnimatedHeart
+                                  className="self-end justify-self-end animated-heart-section"
+                                  likeTrigger={(e, a) => handleLike(e, a)}
+                                  oppId={"xd"}
+                                  liked={false}
+                                />
+                              </div>
+                            </div>
+                            {/* <h3 className="text-gray-500">
+                      Extracurricular Activity
+                    </h3>
+                  </div> */}
+                          </div>
+                          <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
+                            <div className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Extracurricular Open To:
+                                </h3>
+                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                  <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
+                                    {modalItem.education}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Location Requirements:
+                                </h3>
+                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                  <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
+                                    {modalItem.location}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Category:
+                                </h3>
+                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                  {modalItem.type
+                                    .split(",")
+                                    .map((subject: string, index: number) => (
+                                      <div
+                                        key={index}
+                                        className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                      >
+                                        {subject.trim()}{" "}
+                                        {/* Use trim() to remove any leading or trailing spaces */}
+                                      </div>
+                                    ))}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Preferred Skill Level(s):
+                                </h3>
+                                <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                                    All Skill Levels
+                                  </div>
+                                  <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                                    Beginner Friendly
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Activity Commitment:
+                                </h3>
+                                <div className="flex gap-x-3">
+                                  <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
+                                    {modalItem.duration}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex flex-col gap-y-1">
+                                <h3 className="text-slate-500 text-lg">
+                                  Activity Subjects:
+                                </h3>
+                                <div className="flex gap-3 flex-wrap">
+                                  {modalItem.subjects
+                                    .split(",")
+                                    .map((subject: string, index: number) => (
+                                      <div
+                                        key={index}
+                                        className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                      >
+                                        {subject.trim()}{" "}
+                                        {/* Use trim() to remove any leading or trailing spaces */}
+                                      </div>
+                                    ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
+                            <img
+                              alt="Image of Key Club"
+                              className="hidden lg:block w-1/6"
+                              src={
+                                modalItem.imageUrl ||
+                                "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"
+                              }
+                            />
+                            <div className="w-full lg:w-5/6">
+                              <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
+                                Description:
+                              </h1>
+                              <p>{modalItem.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
+                          <a
+                            className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                            href={modalItem.url}
+                            target="_blank"
+                          >
+                            Visit Site
+                          </a>
+                          <Button
+                            className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-white px-3 py-2 text-base font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                            type="button"
+                            onPress={onClose}
+                          >
+                            Go Back
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </Card>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </div>
+                </ModalBody>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      </div>
+    </>
   );
 }
 

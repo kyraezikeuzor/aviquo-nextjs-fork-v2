@@ -48,10 +48,10 @@ model User {
   id            String         @id @unique
   auth_session  Session[]
   key           Key[]
-  firstName     String
+  firstName     String         
   lastName      String
   email         String         @unique
-  username      String         
+  username      String?        @unique 
   pfp           String?
   bio           String?
   numFollowers  Int
@@ -95,6 +95,7 @@ model Opportunity {
   name        String  @unique @db.VarChar(200)
   description String
   url         String
+  imageUrl    String?
   type        String
   education   String?
   company     Company @relation(fields: [companyName], references: [name])

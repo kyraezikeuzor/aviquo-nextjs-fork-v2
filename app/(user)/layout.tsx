@@ -11,6 +11,8 @@ export default async function UserLayout({
 }: {
   children: React.ReactNode;
 }) {
+  redirect("/discover");
+
   const session = await getPageSession();
   if (!session) redirect("/auth?l");
 
