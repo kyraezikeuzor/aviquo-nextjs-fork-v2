@@ -479,7 +479,7 @@ export default function Discover() {
                           <img
                             alt="Image of Key Club"
                             className="hidden lg:block w-1/6"
-                            src="https://upload.wikimedia.org/wikipedia/en/b/b4/Keyclub.png"
+                            src={modalItem.imageUrl || "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"}
                           />
                           <div className="w-full lg:w-5/6">
                             <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
