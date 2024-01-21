@@ -1,3 +1,5 @@
+//replace the phrase 'every' with the phrase 'some' for all filter functions to rever to Linkedin style filtering
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -108,7 +110,7 @@ export default function Discover() {
   }
 
   // const oppToUser = (opp:any) => {
-  //   if (opp.users.some((obj: any) => obj.id === user.userId)) {
+  //   if (opp.users.every((obj: any) => obj.id === user.userId)) {
   //     return {
   //       ...opp,
   //       isMine: true,
@@ -178,7 +180,7 @@ export default function Discover() {
         const itemTypes = item.type.split(',').map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Type"]).some(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Type"]).every(filter => itemTypes.includes(filter));
       });
     }
 
@@ -188,7 +190,7 @@ export default function Discover() {
         const itemTypes = item.location.split(',').map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Location"]).some(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Location"]).every(filter => itemTypes.includes(filter));
       });
     }
 
@@ -198,7 +200,7 @@ export default function Discover() {
         const itemTypes = item.education.split(',').map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Grade"]).some(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Grade"]).every(filter => itemTypes.includes(filter));
       });
     }
 
@@ -208,7 +210,7 @@ export default function Discover() {
         const itemTypes = item.subjects.split(',').map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Subject"]).some(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Subject"]).every(filter => itemTypes.includes(filter));
       });
     }
 
