@@ -3,16 +3,14 @@ import Profile from "./profile";
 import Navbar from "@/components/Navbar";
 
 import { UserInterface } from "@/auth/lucia";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   const user: (UserInterface & { userId: string }) | undefined = (
     await getPageSession()
   )?.user;
 
-  const router = useRouter();
-
-  if (!user) router.push("/auth?l");
+  if (!user) redirect("/auth?l");
   else
     return (
       <>

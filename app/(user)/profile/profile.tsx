@@ -86,7 +86,7 @@ export default function Profile({
               <Icon icon="arrow-down" fillColor="black" />
             </div>
             <div className="flex flex-col gap-2">
-              <span className="flex gap-2 text-sm">
+              <span className="flex text-sm gap-2">
                 @{item.username} • {toDateTimeString(item.date)}{" "}
                 <Tag type="tag">{item.type}</Tag>{" "}
               </span>
@@ -120,11 +120,6 @@ export default function Profile({
           </Card>
         ))}
       </div>
-      {!user.firstName && (
-        <div>
-          <h2>Almost there!</h2>
-        </div>
-      )}
     </main>
   );
 }

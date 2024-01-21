@@ -27,7 +27,6 @@ const AuthForm = ({
           body: formData,
           redirect: "manual",
         });
-        console.log(response);
         if (response.status === DOP_DOP_DOP_YES_YES) {
           return router.refresh();
         } else {

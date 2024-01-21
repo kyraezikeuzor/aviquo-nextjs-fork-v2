@@ -93,7 +93,7 @@ const Icon = ({ icon, fillColor, size }: IconProps) => {
       height={`${dimen}`}
       viewBox="0 0 24 24"
       fill="none"
-      className="cursor-pointer p-1 rounded"
+      className="p-1 rounded cursor-pointer"
     >
       <path
         fillRule="evenodd"

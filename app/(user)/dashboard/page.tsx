@@ -15,7 +15,7 @@ import { username } from "@/lib/userData";
 export default function Dashboard() {
   return (
     <main className={`${styles.main} px-1/6 md:px-[5vw] lg:px-[5vw]`}>
-      <section className="flex flex-col gap-8 px-8 py-4">
+      <section className="flex flex-col px-8 py-4 gap-8">
         <h1 className="text-3xl md:text-4xl lg:text-4xl">
           Welcome back, Soham!
         </h1>
@@ -27,7 +27,7 @@ export default function Dashboard() {
               className="flex gap-2 items-center justify-center text-center bg-[#fff] p-2 border-2 border-[var(--clr-grey-300)] rounded-xl"
             >
               <img className="w-6" src={item.img} />
-              <p className="font-medium text-sm md:text-sm lg:text-sm">
+              <p className="text-sm font-medium md:text-sm lg:text-sm">
                 {item.name}
               </p>
             </div>
@@ -35,7 +35,7 @@ export default function Dashboard() {
         </div>
 
         <h6>Activity List</h6>
-        <div className="flex gap-5 flex-wrap">
+        <div className="flex flex-wrap gap-5">
           <Card>
             <p className="font-semibold text-[var(--fs-400)]">
               Research Science Institute
@@ -82,8 +82,8 @@ export default function Dashboard() {
           className="rounded-full"
           src="https://lh3.googleusercontent.com/a/AAcHTtdyLYM4FwQTKzzM2orCp0ehNswbQ6cQywaFN-fNlCZU9w=s96-c"
         />
-        <div className="w-full rounded-lg flex flex-col gap-5">
-          <h2 className="text-center text-xl md:text-2xl lg:text-2xl">
+        <div className="flex flex-col w-full rounded-lg gap-5">
+          <h2 className="text-xl text-center md:text-2xl lg:text-2xl">
             @{username}
           </h2>
 
@@ -109,7 +109,7 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        <div className="w-full flex flex-col gap-5">
+        <div className="flex flex-col w-full gap-5">
           <h6 className="text-base">Friends</h6>
           <div className="bg-[var(--clr-grey-200)] p-2 rounded-xl">
             {friendsList.map((item, index) => (
@@ -119,7 +119,7 @@ export default function Dashboard() {
               >
                 <div className="flex items-center gap-2">
                   <img
-                    className="rounded-full w-10 h-auto"
+                    className="w-10 h-auto rounded-full"
                     src="https://lh3.googleusercontent.com/a/AAcHTtdyLYM4FwQTKzzM2orCp0ehNswbQ6cQywaFN-fNlCZU9w=s96-c"
                   />
                   <div className="flex flex-col">

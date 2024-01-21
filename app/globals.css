@@ -1,35 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
 /* For IE, Edge and Firefox */
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
 
-*::selection 
-{
-    background-color:transparent;
-} 
-*::-moz-selection
-{
-    background-color:transparent;
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
-*
-{        
-    -webkit-user-select: none;
-    -moz-user-select: -moz-none;
-    /*IE10*/
-    -ms-user-select: none;
-    user-select: none;
-    
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}    
 
 :root {
   /* Colors */
@@ -77,7 +60,8 @@
   /* Shdaows */
   --bs-base: rgba(0, 0, 0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
   --bs-secondary: 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 3px 15px -3px rgba(0, 0, 0, 0.1);
+  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
+    0px 3px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -175,14 +159,12 @@ video {
   display: block;
 }
 
-
 /* Define the styles for the scrollbar */
 
 ::-webkit-scrollbar {
   width: 10px;
   /* width of the scrollbar */
 }
-
 
 /* Handle on hover */
 
@@ -191,7 +173,6 @@ video {
   /* color of the scrollbar handle on hover */
 }
 
-
 /* Define the styles for the scrollbar track */
 
 ::-webkit-scrollbar-track {
@@ -199,7 +180,6 @@ video {
   background: var(--lightgrey);
   /* color of the scrollbar track */
 }
-
 
 /* Define the styles for the scrollbar handle */
 
@@ -210,14 +190,12 @@ video {
   /* rounded corners for the scrollbar handle */
 }
 
-
 /* Define the styles for the scrollbar track when the handle is being dragged */
 
 ::-webkit-scrollbar-track-piece:end {
   background-color: #f1f1f1;
   /* color of the scrollbar track when dragged */
 }
-
 
 /* Define the styles for the scrollbar handle when the handle is being dragged */
 
@@ -226,7 +204,7 @@ video {
   /* color of the scrollbar handle when inactive */
 }
 
-[data-overlay-container=true] {
+[data-overlay-container="true"] {
   height: 100%;
   width: 100%;
 }

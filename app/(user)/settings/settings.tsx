@@ -9,7 +9,7 @@ export default function Settings({ user }: { user: any }) {
   return (
     <main className="flex flex-col gap-5 px-1/6 md:px-[10vw] lg:px-[10vw]">
       <h1 className="text-2xl md:text-3xl lg:text-4xl">Settings</h1>
-      <div className="flex w-full flex-col">
+      <div className="flex flex-col w-full">
         <Tabs
           aria-label="Settings"
           className="self-center w-3/5"

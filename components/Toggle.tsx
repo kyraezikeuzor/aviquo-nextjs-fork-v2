@@ -18,7 +18,7 @@ const Toggle = ({ toggleStatus }: ToggleProps) => {
       className="bg-[var(--clr-purple-500)] rounded-2xl"
     >
       {toggleStatus && (
-        <div className="w-16 h-fit-content flex flex-row relative">
+        <div className="relative flex flex-row w-16 h-fit-content">
           <div className="ml-8">
             <Icon icon="circle-checked" fillColor="white" />
           </div>
