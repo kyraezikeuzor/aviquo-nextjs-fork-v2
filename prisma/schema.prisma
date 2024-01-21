@@ -95,6 +95,7 @@ model Opportunity {
   name        String  @unique @db.VarChar(200)
   description String
   url         String
+  imageUrl    String?
   type        String
   education   String?
   company     Company @relation(fields: [companyName], references: [name])
