@@ -22,6 +22,8 @@ import {
   Link,
 } from "@nextui-org/react";
 
+import { FaHeart } from "react-icons/fa";
+
 import { SearchIcon } from '@/public/SearchIcon'
 
 import { extractFilters, formatRelativeTime } from "@/utils";
@@ -41,6 +43,8 @@ export default function Discover() {
   });
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [showLiked, setShowLiked] = useState(false);
 
 
   const getLikedActivites = () => {
@@ -69,6 +73,16 @@ export default function Discover() {
     console.log(likedActivites)
     saveLikedActivities();
   }, [likedActivites])
+
+  useEffect(() => {
+    if (showLiked) {
+      const likedEcs = ecItems.filter(obj => likedActivites.includes(obj.id));
+      setSearchDataFiltered(likedEcs)
+    } else {
+      setSearchDataFiltered(ecItems)
+    }
+  }, [showLiked])
+
 
   const handleLike = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
@@ -221,6 +235,21 @@ export default function Discover() {
   };
 
   return (
+    <>
+    <Navbar isBordered classNames={{
+      base: 'bg-transparent'
+    }}>
+   
+    <NavbarContent justify="end">
+      <NavbarItem>
+        <Button as={Link} href="#" variant="bordered" endContent={<FaHeart/>} className="text-white" onClick={() => {
+          setShowLiked(!showLiked)
+        }}>
+          View Liked Opportunities
+        </Button>
+      </NavbarItem>
+    </NavbarContent>
+  </Navbar>
     <div className="flex flex-row w-full h-full">
       <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
         <div className="flex flex-col gap-2">
@@ -493,6 +522,7 @@ export default function Discover() {
         </ModalContent>
       </Modal>
     </div>
+    </>
   );
 }
 
