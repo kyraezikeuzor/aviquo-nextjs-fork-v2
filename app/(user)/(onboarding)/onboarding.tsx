@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 import { promisify } from "util";
 import PfpInput from "./pfpInput";
+import { UserInterface } from "@/auth/lucia";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -39,7 +40,7 @@ export function OnboardingButton({
   );
 }
 
-export default function Onboarding({ user }: { user: any }) {
+export default function Onboarding({ user }: { user: UserInterface }) {
   const router = useRouter();
 
   var newBlob;
