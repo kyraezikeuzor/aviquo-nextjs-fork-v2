@@ -5,22 +5,17 @@ export async function GET(request: Request): Promise<NextResponse> {
   const result = await prisma.opportunity.findMany({
     include: {
       users: true,
-    }
+    },
   });
 
-  if (result != null) {
-    return NextResponse.json({ ...result });
-  }
-
-  return NextResponse.json({ status: "fail" });
+  return NextResponse.json(result ? { ...result } : { status: "fail" });
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body = await request.json();
-  if (body && 'description' in body && 'name' in body) {
+  if (body && "description" in body && "name" in body) {
     const result = await prisma.opportunity.create({ data: body });
     return NextResponse.json(result);
-    
   } else if (body) {
     const opportunities = await prisma.opportunity.findMany({
       where: {
@@ -34,6 +29,5 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json(opportunities);
   }
 
-  
-    return NextResponse.json({ status: "fail" });
+  return NextResponse.json({ status: "fail" });
 }

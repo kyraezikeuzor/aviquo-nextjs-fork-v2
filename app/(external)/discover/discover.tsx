@@ -41,6 +41,8 @@ import AnimatedHeart from "@/components/Heart";
 
 import { Suspense } from "react";
 
+import Loading from "@/components/Loading";
+
 export default function Discover() {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
@@ -321,45 +323,43 @@ export default function Discover() {
             />
           </div>
 
-          <Suspense>
-            <div className="flex flex-row flex-wrap max-w-full gap-3">
-              {searchDataFiltered.map((item: any, index: number) => (
-                <Card
-                  key={index}
-                  className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer"
-                >
-                  <div onClick={(e) => handleClick(e, item)}>
-                    <div className="flex flex-row items-center w-full pt-[-2.5%]">
-                      <h2 className="flex-grow text-base md:text-lg lg:text-xl">
-                        {item.name}
-                      </h2>
-                      <AnimatedHeart
-                        className="self-end justify-self-end animated-heart-section"
-                        likeTrigger={(e, a) => handleLike(e, a)}
-                        oppId={item.id}
-                        liked={likedActivites.includes(item.id)}
-                      />
-                    </div>
-                    <p className="text-sm">{item.description}</p>
-                    <div className="flex flex-wrap pt-[5%] pb-[2.5%] gap-1">
-                      <Tag type="pink">💼 {item.type}</Tag>
-                      <Tag type="pink">🌍 {item.location}</Tag>
-                      <Tag type="green">🎓 {item.education}</Tag>
-                      <Tag type="orange">
-                        ⏰ {formatRelativeTime(item.deadline, true)}
-                      </Tag>
-                      <Tag
-                        type="tag"
-                        className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal"
-                      >
-                        📖 {item.subjects}
-                      </Tag>
-                    </div>
+          <div className="flex flex-row flex-wrap max-w-full gap-3">
+            {searchDataFiltered.map((item: any, index: number) => (
+              <Card
+                key={index}
+                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer"
+              >
+                <div onClick={(e) => handleClick(e, item)}>
+                  <div className="flex flex-row items-center w-full pt-[-2.5%]">
+                    <h2 className="flex-grow text-base md:text-lg lg:text-xl">
+                      {item.name}
+                    </h2>
+                    <AnimatedHeart
+                      className="self-end justify-self-end animated-heart-section"
+                      likeTrigger={(e, a) => handleLike(e, a)}
+                      oppId={item.id}
+                      liked={likedActivites.includes(item.id)}
+                    />
                   </div>
-                </Card>
-              ))}
-            </div>
-          </Suspense>
+                  <p className="text-sm">{item.description}</p>
+                  <div className="flex flex-wrap pt-[5%] pb-[2.5%] gap-1">
+                    <Tag type="pink">💼 {item.type}</Tag>
+                    <Tag type="pink">🌍 {item.location}</Tag>
+                    <Tag type="green">🎓 {item.education}</Tag>
+                    <Tag type="orange">
+                      ⏰ {formatRelativeTime(item.deadline, true)}
+                    </Tag>
+                    <Tag
+                      type="tag"
+                      className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal"
+                    >
+                      📖 {item.subjects}
+                    </Tag>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col w-[20%] drop-shadow-lg p-6 mb-6 bg-white rounded-xl px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox
