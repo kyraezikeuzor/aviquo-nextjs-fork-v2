@@ -25,9 +25,15 @@ const config: Config = {
           "400": "#471360",
         },
 
-        
         midnightblue: "#471360",
         slategray: "#796682",
+        theme: {
+          text: {
+            dark: "#250226",
+            "dark-dimmed": "#746278",
+            "more-dark": "#3e0a5c",
+          },
+        },
       },
     },
   },

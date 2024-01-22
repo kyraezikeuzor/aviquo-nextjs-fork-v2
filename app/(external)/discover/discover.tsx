@@ -39,6 +39,10 @@ import { extractFilters, formatRelativeTime } from "@/utils";
 
 import AnimatedHeart from "@/components/Heart";
 
+import { Suspense } from "react";
+
+import Loading from "@/components/Loading";
+
 export default function Discover() {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
@@ -245,7 +249,7 @@ export default function Discover() {
       <Navbar
         isBordered
         classNames={{
-          base: "bg-transparent",
+          base: "bg-gradient-to-r from-violet-500 to-fuchsia-500 drop-shadow-xl",
         }}
       >
         <NavbarContent justify="end">
@@ -279,42 +283,32 @@ export default function Discover() {
       <div className="flex flex-row w-full h-full">
         <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
           <div className="flex flex-col gap-2">
-            {showLiked ? (
-              <>
-                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
-                  My Opportunities
-                </h1>
-                <p className="text-white">View your liked opportunities.</p>
-              </>
-            ) : (
-              <>
-                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
-                  Discover
-                </h1>
-                <p className="text-white">
-                  Discover new opportunities and activities.
-                </p>
-              </>
-            )}
+            <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
+              {showLiked ? "My Opportunities" : "Discover"}
+            </h1>
+            <p className="text-theme-text-dark-dimmed">
+              {showLiked
+                ? "View your liked opportunities."
+                : "Discover new opportunities and activities."}
+            </p>
+
             <Input
               isClearable
               radius="lg"
               classNames={{
-                label: "text-black/50 dark:text-white/90",
+                label: "text-theme-text-dark/50 dark:text-white/90",
                 input: [
                   "bg-transparent",
-                  "text-black/90 dark:text-white/90",
+                  "text-theme-text-dark/90 dark:text-white/90",
                   "placeholder:text-default-700/50 dark:placeholder:text-white/60",
                 ],
                 innerWrapper: "bg-transparent",
                 inputWrapper: [
                   "shadow-xl",
-                  "bg-default-200/50",
-                  "dark:bg-default/60",
+                  "bg-default-200/60",
                   "backdrop-blur-xl",
                   "backdrop-saturate-200",
                   "hover:bg-default-200/70",
-                  "dark:hover:bg-default/70",
                   "group-data-[focused=true]:bg-default-200/50",
                   "dark:group-data-[focused=true]:bg-default/60",
                   "!cursor-text",
@@ -324,20 +318,20 @@ export default function Discover() {
               value={searchText}
               onValueChange={setSearchText}
               startContent={
-                <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+                <SearchIcon className="text-theme-text-dark/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
               }
             />
           </div>
 
-          <div className="flex flex-row flex-wrap gap-3 max-w-full">
+          <div className="flex flex-row flex-wrap max-w-full gap-3">
             {searchDataFiltered.map((item: any, index: number) => (
               <Card
                 key={index}
-                className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 max-w-full hover:cursor-pointer"
+                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer"
               >
                 <div onClick={(e) => handleClick(e, item)}>
                   <div className="flex flex-row items-center w-full pt-[-2.5%]">
-                    <h2 className="text-base flex-grow md:text-lg lg:text-xl">
+                    <h2 className="flex-grow text-base md:text-lg lg:text-xl">
                       {item.name}
                     </h2>
                     <AnimatedHeart
@@ -348,7 +342,7 @@ export default function Discover() {
                     />
                   </div>
                   <p className="text-sm">{item.description}</p>
-                  <div className="flex flex-wrap pt-[5%] pb-[2.5%]">
+                  <div className="flex flex-wrap pt-[5%] pb-[2.5%] gap-1">
                     <Tag type="pink">💼 {item.type}</Tag>
                     <Tag type="pink">🌍 {item.location}</Tag>
                     <Tag type="green">🎓 {item.education}</Tag>
@@ -367,7 +361,7 @@ export default function Discover() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
+        <div className="flex flex-col w-[20%] drop-shadow-lg p-6 mb-6 bg-white rounded-xl px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox
             values={extractFilters(ecItems, "type")}
             sector={"Type"}
@@ -406,8 +400,8 @@ export default function Discover() {
                 <ModalBody>
                   <div className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none w-[96%]">
                     <div className="flex flex-col gap-y-1">
-                      <div className="flex justify-between items-center">
-                        <h1 className="font-semibold text-4xl w-11/12">
+                      <div className="flex items-center justify-between">
+                        <h1 className="w-11/12 text-4xl font-semibold">
                           {modalItem.name}
                         </h1>
                         <div className="flex gap-x-1">
@@ -424,37 +418,37 @@ export default function Discover() {
                     </h3>
                   </div> */}
                     </div>
-                    <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
-                      <div className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
+                    <div className="flex flex-col w-full gap-x-4 gap-y-8 lg:flex-row">
+                      <div className="flex flex-col flex-wrap justify-around w-full gap-4 lg:w-1/2 md:flex-row h-max lg:flex-col">
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
+                          <h3 className="text-lg text-slate-500">
                             Extracurricular Open To:
                           </h3>
-                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                            <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
+                          <div className="flex flex-col gap-x-3 gap-y-2 lg:flex-row">
+                            <div className="px-2 py-1 text-sm text-teal-700 bg-teal-100 rounded-md w-max">
                               {modalItem.education}
                             </div>
                           </div>
                         </div>
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
+                          <h3 className="text-lg text-slate-500">
                             Location Requirements:
                           </h3>
-                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                            <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
+                          <div className="flex flex-col gap-x-3 gap-y-2 lg:flex-row">
+                            <div className="px-2 py-1 text-sm rounded-md bg-sky-100 text-sky-700 w-max">
                               {modalItem.location}
                             </div>
                           </div>
                         </div>
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">Category:</h3>
-                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                          <h3 className="text-lg text-slate-500">Category:</h3>
+                          <div className="flex flex-col gap-x-3 gap-y-2 lg:flex-row">
                             {modalItem.type
                               .split(",")
                               .map((subject: string, index: number) => (
                                 <div
                                   key={index}
-                                  className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                  className="px-2 py-1 text-sm text-indigo-700 bg-indigo-100 rounded-md w-max"
                                 >
                                   {subject.trim()}{" "}
                                   {/* Use trim() to remove any leading or trailing spaces */}
@@ -463,42 +457,42 @@ export default function Discover() {
                           </div>
                         </div>
                       </div>
-                      <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
+                      <div className="flex flex-col flex-wrap justify-between w-full gap-4 lg:w-1/2 md:flex-row lg:flex-col gap-y-6 lg:gap-y-4">
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
+                          <h3 className="text-lg text-slate-500">
                             Preferred Skill Level(s):
                           </h3>
-                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                            <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                          <div className="flex flex-col gap-x-3 gap-y-2 lg:flex-row">
+                            <div className="px-2 py-1 text-sm text-green-700 bg-green-100 rounded-md w-max">
                               All Skill Levels
                             </div>
-                            <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                            <div className="px-2 py-1 text-sm text-green-700 bg-green-100 rounded-md w-max">
                               Beginner Friendly
                             </div>
                           </div>
                         </div>
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
+                          <h3 className="text-lg text-slate-500">
                             Activity Commitment:
                           </h3>
                           <div className="flex gap-x-3">
-                            <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
+                            <div className="px-2 py-1 text-sm text-orange-700 bg-orange-100 rounded-md w-max">
                               {modalItem.duration}
                             </div>
                           </div>
                         </div>
 
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
+                          <h3 className="text-lg text-slate-500">
                             Activity Subjects:
                           </h3>
-                          <div className="flex gap-3 flex-wrap">
+                          <div className="flex flex-wrap gap-3">
                             {modalItem.subjects
                               .split(",")
                               .map((subject: string, index: number) => (
                                 <div
                                   key={index}
-                                  className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                  className="px-2 py-1 text-sm text-indigo-700 bg-indigo-100 rounded-md w-max"
                                 >
                                   {subject.trim()}{" "}
                                   {/* Use trim() to remove any leading or trailing spaces */}
@@ -508,33 +502,33 @@ export default function Discover() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
+                    <div className="flex items-center justify-center py-8 font-thin gap-x-4 h-max font-outfit tracking-loose text-slate-500 leading-1">
                       <img
                         alt="Image of Key Club"
-                        className="hidden lg:block w-1/6"
+                        className="hidden w-1/6 lg:block"
                         src={
                           modalItem.imageUrl ||
                           "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"
                         }
                       />
                       <div className="w-full lg:w-5/6">
-                        <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
+                        <h1 className="block text-xl font-bold tracking-tight underline text-slate-700 font-manrope">
                           Description:
                         </h1>
                         <p className="font-[650]">{modalItem.description}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
+                  <div className="flex items-center justify-center px-4 py-3 bg-gray-50 gap-x-2 sm:px-6">
                     <a
-                      className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                      className="inline-flex justify-center w-full px-3 py-2 text-base font-medium text-white transition duration-300 transform bg-blue-600 rounded-md shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
                       href={modalItem.url}
                       target="_blank"
                     >
                       Visit Site
                     </a>
                     {/* <Button
-                          className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-white px-3 py-2 text-base font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                          className="inline-flex justify-center w-full px-3 py-2 text-base font-medium text-gray-900 transition duration-300 transform bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                           type="button"
                           onPress={onClose}
                         >
