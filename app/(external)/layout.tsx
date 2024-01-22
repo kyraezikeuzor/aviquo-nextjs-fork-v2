@@ -23,9 +23,9 @@ export default async function ExternalLayout({
   // }
 
   return (
-    <div className="app-negate bg-gradient-to-r from-violet-500 to-fuchsia-500">
+    <div className="app-negate bg-gradient-to-r from-violet-500 to-fuchsia-500 max-h-screen h-screen overflow-hidden">
       {/* {session ? (<Navbar />) : <></>} */}
-      <div className="overflow-y-auto w-full max-h-screen h-screen">{children}</div>
+      <div className="overflow-hidden w-full max-h-screen h-screen">{children}</div>
     </div>
   );
 }

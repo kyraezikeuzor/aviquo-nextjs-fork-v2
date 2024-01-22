@@ -24,7 +24,7 @@ import {
   Link,
 } from "@nextui-org/react";
 
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaHome } from "react-icons/fa";
 
 import { SearchIcon } from '@/public/SearchIcon'
 
@@ -72,18 +72,19 @@ export default function Discover() {
   const [likedActivites, setLikedActivites] = useState<string[]>(getLikedActivites());
 
   useEffect(() => {
-    console.log(likedActivites)
     saveLikedActivities();
   }, [likedActivites])
 
   useEffect(() => {
     if (showLiked) {
-      const likedEcs = ecItems.filter(obj => likedActivites.includes(obj.id));
+      const likedEcs = ecItems.filter((obj: any) => likedActivites.includes(obj.id));
       setSearchDataFiltered(likedEcs)
     } else {
       setSearchDataFiltered(ecItems)
     }
-  }, [showLiked])
+
+    
+  }, [showLiked, likedActivites])
 
 
   const handleLike = (state: boolean, oppId: string) => {
@@ -102,12 +103,14 @@ export default function Discover() {
     //   id: oppId,
     //   userId: user.userId
     // })
+    // console.log(state, oppId)
     if (state) {
       setLikedActivites([...likedActivites, oppId])
     } else {
       setLikedActivites(likedActivites.filter(id => id !== oppId));
     }
   }
+
 
   // const oppToUser = (opp:any) => {
   //   if (opp.users.every((obj: any) => obj.id === user.userId)) {
@@ -244,16 +247,18 @@ export default function Discover() {
 
         <NavbarContent justify="end">
           <NavbarItem>
-            <Button as={Link} href="#" variant="bordered" endContent={<FaHeart />} className="text-white" onClick={() => {
+            {!showLiked ?
+            (<Button variant="bordered" endContent={<FaHeart />} className="text-white" onClick={() => {
               setShowLiked(!showLiked)
-            }}>
-              View Liked Opportunities
-            </Button>
+            }}>View My Opportunities</Button>) : (<Button variant="bordered" endContent={<FaHome/>} className="text-white" onClick={() => {
+              setShowLiked(!showLiked)
+            }}>View All Opportunities</Button>)
+            }
           </NavbarItem>
         </NavbarContent>
       </Navbar>
       <div className="flex flex-row w-full h-full">
-        <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen">
+        <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
           <div className="flex flex-col gap-2">
            
             {showLiked ? (
@@ -302,19 +307,19 @@ export default function Discover() {
 
           <div className="flex flex-row flex-wrap gap-3 max-w-full">
             {searchDataFiltered.map((item: any, index: number) => (
-              <Card key={index} className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 hover:cursor-pointer max-w-full">
+              <Card key={index} className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 max-w-full hover:cursor-pointer">
                 <div onClick={(e) => handleClick(e, item)}>
-                  <div className='flex flex-row items-center w-full mt-[-2.5%] '>
+                  <div className='flex flex-row items-center w-full pt-[-2.5%]'>
                     <h2 className="text-base flex-grow md:text-lg lg:text-xl">{item.name}</h2>
                     <AnimatedHeart className="self-end justify-self-end animated-heart-section" likeTrigger={(e, a) => handleLike(e, a)} oppId={item.id} liked={likedActivites.includes(item.id)} />
                   </div>
                   <p className="text-sm">{item.description}</p>
-                  <div className="flex flex-wrap pt-[5%]">
+                  <div className="flex flex-wrap pt-[5%] pb-[2.5%]">
                     <Tag type="pink">💼 {item.type}</Tag>
                     <Tag type="pink">🌍 {item.location}</Tag>
                     <Tag type="green">🎓 {item.education}</Tag>
                     <Tag type="orange">⏰ {formatRelativeTime(item.deadline, true)}</Tag>
-                    <Tag type="tag" className="!w-fit-content !max-w-full flex items-start justify-start flex-wrap">📖 {item.subjects}</Tag>
+                    <Tag type="tag" className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal">📖 {item.subjects}</Tag>
                   </div>
                 </div>
               </Card>
@@ -378,8 +383,8 @@ export default function Discover() {
                               <AnimatedHeart
                                 className="self-end justify-self-end animated-heart-section"
                                 likeTrigger={(e, a) => handleLike(e, a)}
-                                oppId={"xd"}
-                                liked={false}
+                                oppId={modalItem.id} 
+                                liked={likedActivites.includes(modalItem.id)}
                               />
                             </div>
                           </div>
@@ -485,7 +490,7 @@ export default function Discover() {
                             <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
                               Description:
                             </h1>
-                            <p className="font-750">{modalItem.description}</p>
+                            <p className="font-[650]">{modalItem.description}</p>
                           </div>
                         </div>
                       </div>
