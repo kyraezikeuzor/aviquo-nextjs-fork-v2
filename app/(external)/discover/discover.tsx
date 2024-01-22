@@ -83,7 +83,7 @@ export default function Discover() {
       setSearchDataFiltered(ecItems)
     }
 
-    
+
   }, [showLiked, likedActivites])
 
 
@@ -248,11 +248,11 @@ export default function Discover() {
         <NavbarContent justify="end">
           <NavbarItem>
             {!showLiked ?
-            (<Button variant="bordered" endContent={<FaHeart />} className="text-white" onClick={() => {
-              setShowLiked(!showLiked)
-            }}>View My Opportunities</Button>) : (<Button variant="bordered" endContent={<FaHome/>} className="text-white" onClick={() => {
-              setShowLiked(!showLiked)
-            }}>View All Opportunities</Button>)
+              (<Button variant="bordered" endContent={<FaHeart />} className="text-white" onClick={() => {
+                setShowLiked(!showLiked)
+              }}>View My Opportunities</Button>) : (<Button variant="bordered" endContent={<FaHome />} className="text-white" onClick={() => {
+                setShowLiked(!showLiked)
+              }}>View All Opportunities</Button>)
             }
           </NavbarItem>
         </NavbarContent>
@@ -260,10 +260,10 @@ export default function Discover() {
       <div className="flex flex-row w-full h-full">
         <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
           <div className="flex flex-col gap-2">
-           
+
             {showLiked ? (
               <>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">My Opportunities</h1>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">My Opportunities</h1>
                 <p className='text-white'>View your liked opportunities.</p>
               </>
             ) : (
@@ -358,161 +358,148 @@ export default function Discover() {
           ></FilterBox>
           <Divider />
         </div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size={'3xl'}>
           <ModalContent>
             {(onClose) => (
               <>
-                <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
                 <ModalBody>
-                   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity opacity-100"></div>
-
-                <div className="fixed inset-0 z-10 w-screen overflow-y-auto font-outfit">
-                  <div className="flex min-h-full px-2 xl:px-10 items-end justify-center p-4 text-center sm:items-center">
-                    <div
-                      className="relative transform lg:w-11/12 xl:w-7/12 overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 opacity-100 translate-y-0 sm:scale-100"
-                      data-headlessui-state="open"
-                      id="headlessui-dialog-panel-:r2:"
-                    >
-                      <div className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none">
-                        <div className="flex flex-col gap-y-1">
-                          <div className="flex justify-between items-center">
-                            <h1 className="font-semibold text-4xl w-11/12">
-                              {modalItem.name}
-                            </h1>
-                            <div className="flex gap-x-1">
-                              <AnimatedHeart
-                                className="self-end justify-self-end animated-heart-section"
-                                likeTrigger={(e, a) => handleLike(e, a)}
-                                oppId={modalItem.id} 
-                                liked={likedActivites.includes(modalItem.id)}
-                              />
-                            </div>
-                          </div>
-                          {/* <h3 className="text-gray-500">
+                  <div className="bg-white relative px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col gap-y-4 font-outfit select-none w-[96%]">
+                    <div className="flex flex-col gap-y-1">
+                      <div className="flex justify-between items-center">
+                        <h1 className="font-semibold text-4xl w-11/12">
+                          {modalItem.name}
+                        </h1>
+                        <div className="flex gap-x-1">
+                          <AnimatedHeart
+                            className="self-end justify-self-end animated-heart-section"
+                            likeTrigger={(e, a) => handleLike(e, a)}
+                            oppId={modalItem.id}
+                            liked={likedActivites.includes(modalItem.id)}
+                          />
+                        </div>
+                      </div>
+                      {/* <h3 className="text-gray-500">
                       Extracurricular Activity
                     </h3>
                   </div> */}
-                        </div>
-                        <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
-                          <div className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Extracurricular Open To:
-                              </h3>
-                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
-                                  {modalItem.education}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Location Requirements:
-                              </h3>
-                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
-                                  {modalItem.location}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Category:
-                              </h3>
-                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                {modalItem.type
-                                  .split(",")
-                                  .map((subject:string, index:number) => (
-                                    <div
-                                      key={index}
-                                      className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
-                                    >
-                                      {subject.trim()}{" "}
-                                      {/* Use trim() to remove any leading or trailing spaces */}
-                                    </div>
-                                  ))}
-                              </div>
-                            </div>
-                           
-                          </div>
-                          <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Preferred Skill Level(s):
-                              </h3>
-                              <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
-                                <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                  All Skill Levels
-                                </div>
-                                <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
-                                  Beginner Friendly
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Activity Commitment:
-                              </h3>
-                              <div className="flex gap-x-3">
-                                <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
-                                  {modalItem.duration}
-                                </div>
-                              </div>
-                            </div>
-                           
-                            <div className="flex flex-col gap-y-1">
-                              <h3 className="text-slate-500 text-lg">
-                                Activity Subjects:
-                              </h3>
-                              <div className="flex gap-3 flex-wrap">
-                                {modalItem.subjects
-                                  .split(",")
-                                  .map((subject: string, index: number) => (
-                                    <div
-                                      key={index}
-                                      className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
-                                    >
-                                      {subject.trim()}{" "}
-                                      {/* Use trim() to remove any leading or trailing spaces */}
-                                    </div>
-                                  ))}
-                              </div>
+                    </div>
+                    <div className="w-full gap-x-4 gap-y-8 flex flex-col lg:flex-row">
+                      <div className="w-full lg:w-1/2 flex flex-col md:flex-row flex-wrap h-max justify-around lg:flex-col gap-4">
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Extracurricular Open To:
+                          </h3>
+                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                            <div className="bg-teal-100 w-max text-teal-700 text-sm py-1 px-2 rounded-md">
+                              {modalItem.education}
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
-                          <img
-                            alt="Image of Key Club"
-                            className="hidden lg:block w-1/6"
-                            src={modalItem.imageUrl || "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"}
-                          />
-                          <div className="w-full lg:w-5/6">
-                            <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
-                              Description:
-                            </h1>
-                            <p className="font-[650]">{modalItem.description}</p>
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Location Requirements:
+                          </h3>
+                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                            <div className="bg-sky-100 text-sky-700 text-sm py-1 px-2 w-max rounded-md">
+                              {modalItem.location}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Category:
+                          </h3>
+                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                            {modalItem.type
+                              .split(",")
+                              .map((subject: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                >
+                                  {subject.trim()}{" "}
+                                  {/* Use trim() to remove any leading or trailing spaces */}
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+
+                      </div>
+                      <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Preferred Skill Level(s):
+                          </h3>
+                          <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
+                            <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                              All Skill Levels
+                            </div>
+                            <div className="bg-green-100 w-max text-green-700 text-sm py-1 px-2 rounded-md">
+                              Beginner Friendly
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Activity Commitment:
+                          </h3>
+                          <div className="flex gap-x-3">
+                            <div className="bg-orange-100 w-max text-orange-700 text-sm py-1 px-2 rounded-md">
+                              {modalItem.duration}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-y-1">
+                          <h3 className="text-slate-500 text-lg">
+                            Activity Subjects:
+                          </h3>
+                          <div className="flex gap-3 flex-wrap">
+                            {modalItem.subjects
+                              .split(",")
+                              .map((subject: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="bg-indigo-100 w-max text-indigo-700 text-sm py-1 px-2 rounded-md"
+                                >
+                                  {subject.trim()}{" "}
+                                  {/* Use trim() to remove any leading or trailing spaces */}
+                                </div>
+                              ))}
                           </div>
                         </div>
                       </div>
-                      <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
-                        <a
-                          className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-                          href={modalItem.url}
-                          target="_blank"
-                        >
-                          Visit Site
-                        </a>
-                        <Button
+                    </div>
+                    <div className="flex gap-x-4 h-max py-8 items-center justify-center font-outfit font-thin tracking-loose text-slate-500 leading-1">
+                      <img
+                        alt="Image of Key Club"
+                        className="hidden lg:block w-1/6"
+                        src={modalItem.imageUrl || "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"}
+                      />
+                      <div className="w-full lg:w-5/6">
+                        <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">
+                          Description:
+                        </h1>
+                        <p className="font-[650]">{modalItem.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 px-4 py-3 flex items-center justify-center gap-x-2 sm:px-6">
+                    <a
+                      className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-blue-600 px-3 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                      href={modalItem.url}
+                      target="_blank"
+                    >
+                      Visit Site
+                    </a>
+                    {/* <Button
                           className="inline-flex w-full justify-center rounded-md transition transform duration-300 bg-white px-3 py-2 text-base font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                           type="button"
                           onPress={onClose}
                         >
                           Go Back
-                        </Button>
-                      </div>
-                    </div>
+                        </Button> */}
                   </div>
-                </div>
                 </ModalBody>
               </>
             )}
