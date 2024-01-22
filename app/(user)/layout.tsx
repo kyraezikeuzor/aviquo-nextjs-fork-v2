@@ -14,6 +14,7 @@ export default async function UserLayout({
   redirect("/discover");
 
   const session = await getPageSession();
+
   if (!session) redirect("/auth?l");
 
   return (
@@ -23,6 +24,8 @@ export default async function UserLayout({
         {children}
       </div>
 
+      {/* shut up */}
+      {/* @ts-ignore */}
       {!session.user.username && <Onboarding user={session.user} />}
     </div>
   );
