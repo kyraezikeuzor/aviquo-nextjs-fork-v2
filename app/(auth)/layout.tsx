@@ -10,7 +10,7 @@ export default async function LoginLayout({
 }: {
   children: React.ReactNode;
 }) {
-  redirect('/discover');
+  redirect("/discover");
   // const session = await getPageSession();
   // if (!session) redirect("/auth");
 

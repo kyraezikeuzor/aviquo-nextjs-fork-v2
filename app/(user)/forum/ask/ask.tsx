@@ -22,11 +22,11 @@ export default function Ask({ user }: { user: any }) {
       >
         <Icon icon="arrow-left" fillColor="#3981F6" /> Back to Forum
       </Link>
-      <h1 className="tracking-tight text-lg md:text-xl lg:text-2xl">
+      <h1 className="text-lg tracking-tight md:text-xl lg:text-2xl">
         Create A Post
       </h1>
       <Card>
-        <div className="flex flex-col p-2 gap-5 w-full">
+        <div className="flex flex-col w-full p-2 gap-5">
           <div className="w-full">
             <h2 className="text-[var(--clr-grey-500)] tracking-tight text-sm md:text-base lg:text-lg">
               Title
@@ -50,7 +50,7 @@ export default function Ask({ user }: { user: any }) {
             />
           </div>
         </div>
-        <div className="flex w-full items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <Button
             color="default"
             onClick={async () => {

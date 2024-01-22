@@ -71,7 +71,7 @@ export default function DashNavbar() {
 
   return (
     <nav className="px-[50px] md:px-[6vw] lg:px-[6vw] py-[1vh] flex flex-row items-center w-full">
-      <ul className="w-full flex flex-row gap-2">
+      <ul className="flex flex-row w-full gap-2">
         <li>
           <div
             onClick={handleMobileSidebarClick}
@@ -101,7 +101,7 @@ export default function DashNavbar() {
         </Modal>
       </ul>
 
-      <ul className="flex flex-row items-center gap-2 sticky right-0">
+      <ul className="sticky right-0 flex flex-row items-center gap-2">
         <li>
           <Icon icon="notification-bell" fillColor="black" />
         </li>

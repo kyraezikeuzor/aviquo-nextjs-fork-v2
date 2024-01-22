@@ -64,9 +64,9 @@ const SignupForm: React.FC<SignUpProps> = ({ onSwitchMode }) => {
             variant="contained"
             size="large"
             sx={{
-              bgcolor: `${colors.grey[400]} !important`,
+              bgcolor: `${colors.indigo[400]} !important`,
               "&:hover": {
-                bgcolor: `${colors.grey[600]} !important`,
+                bgcolor: `${colors.indigo[600]} !important`,
               },
             }}
             onClick={() => {

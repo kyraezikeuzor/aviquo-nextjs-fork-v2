@@ -16,7 +16,7 @@ export const auth = lucia({
 
   adapter: prisma(client),
 
-  getUserAttributes: (data) => {
+  getUserAttributes: (data): UserInterface => {
     return {
       username: data.username,
       firstName: data.firstName,
@@ -45,4 +45,19 @@ export async function loadUser() {
   "use server";
   const user = (await getPageSession())?.user;
   return user;
+}
+
+export interface UserInterface {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  pfp: string;
+  bio: string;
+  numFollowers: number;
+  numFollowing: number;
+  comments: any[] | null | undefined;
+  notifications: any[] | null | undefined;
+  posts: any[] | null | undefined;
+  opportunities: any[] | null | undefined;
 }

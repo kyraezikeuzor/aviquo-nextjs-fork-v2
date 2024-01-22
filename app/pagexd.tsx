@@ -8,14 +8,14 @@ const Page = async () => {
   return (
     <div className="flex flex-col min-h-screen">
       <section className="flex-grow">
-        <div className="container mx-auto px-6 py-16 text-center">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">
+        <div className="container px-6 py-16 mx-auto text-center">
+          <h1 className="mb-4 text-5xl font-bold text-gray-800">
             College Admissions Simplified
           </h1>
-          <h2 className="text-2xl text-gray-600 mb-8">
+          <h2 className="mb-8 text-2xl text-gray-600">
             Built by students, for students.
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="mb-8 text-gray-600">
             Aviquo offers personalized tips and access to extracurriculars to
             help high schoolers succeed in the college admissions process.
           </p>
@@ -28,21 +28,21 @@ const Page = async () => {
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
+      <section className="py-16 bg-white">
+        <div className="container px-6 mx-auto">
+          <div className="mb-12 text-center">
             <h3 className="text-4xl font-bold text-gray-800">
               Why Choose Aviquo?
             </h3>
-            <p className="text-gray-600 mt-4">
+            <p className="mt-4 text-gray-600">
               We provide unique insights and opportunities tailored for high
               schoolers aspiring to get into their dream colleges.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <i className="fas fa-user-graduate text-indigo-600 text-6xl mb-4"></i>
-              <h4 className="text-xl font-bold text-gray-800 mb-2">
+              <i className="mb-4 text-6xl text-indigo-600 fas fa-user-graduate"></i>
+              <h4 className="mb-2 text-xl font-bold text-gray-800">
                 Student-Centric
               </h4>
               <p className="text-gray-600">
@@ -51,8 +51,8 @@ const Page = async () => {
               </p>
             </div>
             <div className="text-center">
-              <i className="fas fa-lightbulb text-indigo-600 text-6xl mb-4"></i>
-              <h4 className="text-xl font-bold text-gray-800 mb-2">
+              <i className="mb-4 text-6xl text-indigo-600 fas fa-lightbulb"></i>
+              <h4 className="mb-2 text-xl font-bold text-gray-800">
                 Actionable Tips
               </h4>
               <p className="text-gray-600">
@@ -61,8 +61,8 @@ const Page = async () => {
               </p>
             </div>
             <div className="text-center">
-              <i className="fas fa-handshake text-indigo-600 text-6xl mb-4"></i>
-              <h4 className="text-xl font-bold text-gray-800 mb-2">
+              <i className="mb-4 text-6xl text-indigo-600 fas fa-handshake"></i>
+              <h4 className="mb-2 text-xl font-bold text-gray-800">
                 Community Support
               </h4>
               <p className="text-gray-600">
@@ -74,9 +74,9 @@ const Page = async () => {
         </div>
       </section>
 
-      <section className="bg-indigo-600 text-white py-16">
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="text-3xl font-bold mb-4">
+      <section className="py-16 text-white bg-indigo-600">
+        <div className="container px-6 mx-auto text-center">
+          <h3 className="mb-4 text-3xl font-bold">
             Ready to take the next step?
           </h3>
           <p className="mb-8">
@@ -85,15 +85,15 @@ const Page = async () => {
           </p>
           <a
             href="/auth/"
-            className="bg-white text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            className="px-6 py-3 font-bold text-indigo-600 bg-white rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
             Sign Up
           </a>
         </div>
       </section>
 
-      <footer className="bg-white py-6">
-        <div className="container mx-auto px-6 text-center">
+      <footer className="py-6 bg-white">
+        <div className="container px-6 mx-auto text-center">
           <p className="text-gray-600">
             &copy; 2023 Aviquo. All rights reserved.
           </p>

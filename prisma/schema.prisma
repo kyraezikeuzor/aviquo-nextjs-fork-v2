@@ -60,7 +60,7 @@ model User {
   posts         Post[]
   comments      Comment[]
   notifications Notification[]
-  opportunities   Opportunity[]
+  opportunities Opportunity[]
 
   @@map(name: "users")
 }

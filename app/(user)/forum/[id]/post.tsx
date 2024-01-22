@@ -167,18 +167,18 @@ export default function Post({ user, postId }: { user: any; postId: string }) {
         </div>
       </Card>
 
-      <h2 className="text-base md:text-xl lg:text-xl tracking-tight">
+      <h2 className="text-base tracking-tight md:text-xl lg:text-xl">
         {post.comments.length} Comment{post.comments.length == 1 ? "" : "s"}
       </h2>
 
-      <div className="flex flex-col gap-5 cursor-pointer">
+      <div className="flex flex-col cursor-pointer gap-5">
         {replies.map((item: any, index: number) => (
           <div
             key={index}
             className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5"
           >
             <div className="flex flex-col gap-2">
-              <span className="inline-block flex gap-2 text-xs md:text-sm lg:text-sm">
+              <span className="flex inline-block text-xs gap-2 md:text-sm lg:text-sm">
                 @{item.author.username} • {item.date}{" "}
                 <Tag type="tag">Comment</Tag>{" "}
               </span>

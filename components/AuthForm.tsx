@@ -3,6 +3,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
+const DOP_DOP_DOP_YES_YES = 0;
+
 const AuthForm = ({
   children,
   action,
@@ -25,14 +27,11 @@ const AuthForm = ({
           body: formData,
           redirect: "manual",
         });
-        console.log(response);
-        if (response.status === 0) {
-          // redirected
-          // when using `redirect: "manual"`, response status 0 is returned
+        if (response.status === DOP_DOP_DOP_YES_YES) {
           return router.refresh();
         } else {
           window.alert(
-            "Server Received An Error - idk will fine tune error handling sometime"
+            "HAL 9000 ERROR - This mission is too imporant for me to allow you to jeopardize it"
           );
         }
       }}

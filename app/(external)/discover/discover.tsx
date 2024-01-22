@@ -19,14 +19,21 @@ import {
   useDisclosure,
   Selection,
   Button,
-  Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,
-  Navbar, NavbarBrand, NavbarContent, NavbarItem,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
   Link,
 } from "@nextui-org/react";
 
 import { FaHeart, FaHome } from "react-icons/fa";
 
-import { SearchIcon } from '@/public/SearchIcon'
+import { SearchIcon } from "@/public/SearchIcon";
 
 import { extractFilters, formatRelativeTime } from "@/utils";
 
@@ -35,7 +42,9 @@ import AnimatedHeart from "@/components/Heart";
 export default function Discover() {
   const [searchText, setSearchText] = useState("");
   // const [ecItems, setEcItems] = useState<Record<number | string, any>>({});
-  const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>([]);
+  const [ecItems, setEcItems] = useState<Array<Record<number | string, any>>>(
+    []
+  );
   const [searchFilters, setSearchFilters] = useState<Record<string, any>>({
     Type: new Set(),
     Location: new Set(),
@@ -48,44 +57,42 @@ export default function Discover() {
 
   const [showLiked, setShowLiked] = useState(false);
 
-
   const getLikedActivites = () => {
     if (global?.window !== undefined) {
-
-      const savedValue = localStorage.getItem('liked');
+      const savedValue = localStorage.getItem("liked");
       if (savedValue) {
         return JSON.parse(savedValue);
       } else {
         return [] as string[];
       }
     }
-  }
+  };
 
   const saveLikedActivities = () => {
     if (global?.window !== undefined) {
-      localStorage.setItem('liked', JSON.stringify(likedActivites));
+      localStorage.setItem("liked", JSON.stringify(likedActivites));
     }
-  }
+  };
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
   // const [opps, setOpps] = useState<object>(user.opportunities);
-  const [likedActivites, setLikedActivites] = useState<string[]>(getLikedActivites());
+  const [likedActivites, setLikedActivites] =
+    useState<string[]>(getLikedActivites());
 
   useEffect(() => {
     saveLikedActivities();
-  }, [likedActivites])
+  }, [likedActivites]);
 
   useEffect(() => {
     if (showLiked) {
-      const likedEcs = ecItems.filter((obj: any) => likedActivites.includes(obj.id));
-      setSearchDataFiltered(likedEcs)
+      const likedEcs = ecItems.filter((obj: any) =>
+        likedActivites.includes(obj.id)
+      );
+      setSearchDataFiltered(likedEcs);
     } else {
-      setSearchDataFiltered(ecItems)
+      setSearchDataFiltered(ecItems);
     }
-
-
-  }, [showLiked, likedActivites])
-
+  }, [showLiked, likedActivites]);
 
   const handleLike = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
@@ -98,19 +105,17 @@ export default function Discover() {
     //   url = 'remove'
     // }
 
-
     // const update = axios.put(`/api/like/${url}`, {
     //   id: oppId,
     //   userId: user.userId
     // })
     // console.log(state, oppId)
     if (state) {
-      setLikedActivites([...likedActivites, oppId])
+      setLikedActivites([...likedActivites, oppId]);
     } else {
-      setLikedActivites(likedActivites.filter(id => id !== oppId));
+      setLikedActivites(likedActivites.filter((id) => id !== oppId));
     }
-  }
-
+  };
 
   // const oppToUser = (opp:any) => {
   //   if (opp.users.every((obj: any) => obj.id === user.userId)) {
@@ -126,19 +131,18 @@ export default function Discover() {
   //   }
   // }
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const raw_response = await axios.get(`/api/ecs`);
-        let response = raw_response.data
-        response = Object.values(response).filter((value: any) => formatRelativeTime(value.deadline, true) != false);
+        let response = raw_response.data;
+        response = Object.values(response).filter(
+          (value: any) => formatRelativeTime(value.deadline, true) != false
+        );
         // response = response.map(oppToUser)
         // console.log(response.length)
         setEcItems(response);
         setSearchDataFiltered(response);
-
-
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -148,10 +152,6 @@ export default function Discover() {
   }, []);
 
   const filterData = (s: any, sc: string) => {
-    console.log({
-      ...searchFilters,
-      [sc]: s,
-    });
     setSearchFilters((prev) => ({
       ...prev,
       [sc]: s,
@@ -159,61 +159,59 @@ export default function Discover() {
   };
 
   useEffect(() => {
-    if (searchText.length >= 2) {
-
-      // console.log(searchText)
-
-      let filtered_data = ecItems;
-      // console.log(filtered_data)
-      filtered_data = filtered_data.filter(obj =>
-        obj.name.toLowerCase().trim().includes(searchText) || obj.description.toLowerCase().trim().includes(searchText)
-      );
-
-      setSearchDataFiltered(filtered_data);
-    }
-  }, [searchText])
-
-  useEffect(() => {
-
     var filtered_data = ecItems;
 
     if (searchFilters["Type"].size !== 0) {
       filtered_data = filtered_data.filter((item: any) => {
         // Split item.type into an array of items
-        const itemTypes = item.type.split(',').map((type: any) => type.trim());
+        const itemTypes = item.type.split(",").map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Type"]).every(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Type"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
       });
     }
 
     if (searchFilters["Location"].size !== 0) {
       filtered_data = filtered_data.filter((item: any) => {
         // Split item.type into an array of items
-        const itemTypes = item.location.split(',').map((type: any) => type.trim());
+        const itemTypes = item.location
+          .split(",")
+          .map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Location"]).every(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Location"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
       });
     }
 
     if (searchFilters["Grade"].size !== 0) {
       filtered_data = filtered_data.filter((item: any) => {
         // Split item.type into an array of items
-        const itemTypes = item.education.split(',').map((type: any) => type.trim());
+        const itemTypes = item.education
+          .split(",")
+          .map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Grade"]).every(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Grade"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
       });
     }
 
     if (searchFilters["Subject"].size !== 0) {
       filtered_data = filtered_data.filter((item: any) => {
         // Split item.type into an array of items
-        const itemTypes = item.subjects.split(',').map((type: any) => type.trim());
+        const itemTypes = item.subjects
+          .split(",")
+          .map((type: any) => type.trim());
 
         // Check if any of the searchFilters["Type"] are part of the itemTypes array
-        return Array.from(searchFilters["Subject"]).every(filter => itemTypes.includes(filter));
+        return Array.from(searchFilters["Subject"]).every((filter) =>
+          itemTypes.includes(filter)
+        );
       });
     }
 
@@ -231,45 +229,71 @@ export default function Discover() {
   const handleClick = (event: any, item: any) => {
     // console.log('clicked')
     // console.log(event.target.classList)
-    if (!event.target.classList.contains('go2484888251') && !event.target.classList.contains('go4268192979')) {
+    if (
+      !event.target.classList.contains("go2484888251") &&
+      !event.target.classList.contains("go4268192979")
+    ) {
       // console.log(event.target.classList)
       // console.log('Clicked on the div, not the AnimatedHeart component');
-      setModalItem(item)
-      onOpen()
+      setModalItem(item);
+      onOpen();
     }
   };
 
   return (
     <>
-      <Navbar isBordered classNames={{
-        base: 'bg-transparent'
-      }}>
-
+      <Navbar
+        isBordered
+        classNames={{
+          base: "bg-transparent",
+        }}
+      >
         <NavbarContent justify="end">
           <NavbarItem>
-            {!showLiked ?
-              (<Button variant="bordered" endContent={<FaHeart />} className="text-white" onClick={() => {
-                setShowLiked(!showLiked)
-              }}>View My Opportunities</Button>) : (<Button variant="bordered" endContent={<FaHome />} className="text-white" onClick={() => {
-                setShowLiked(!showLiked)
-              }}>View All Opportunities</Button>)
-            }
+            {!showLiked ? (
+              <Button
+                variant="bordered"
+                endContent={<FaHeart />}
+                className="text-white"
+                onClick={() => {
+                  setShowLiked(!showLiked);
+                }}
+              >
+                View My Opportunities
+              </Button>
+            ) : (
+              <Button
+                variant="bordered"
+                endContent={<FaHome />}
+                className="text-white"
+                onClick={() => {
+                  setShowLiked(!showLiked);
+                }}
+              >
+                View All Opportunities
+              </Button>
+            )}
           </NavbarItem>
         </NavbarContent>
       </Navbar>
       <div className="flex flex-row w-full h-full">
         <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
           <div className="flex flex-col gap-2">
-
             {showLiked ? (
               <>
-                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">My Opportunities</h1>
-                <p className='text-white'>View your liked opportunities.</p>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
+                  My Opportunities
+                </h1>
+                <p className="text-white">View your liked opportunities.</p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">Discover</h1>
-                <p className='text-white'>Discover new opportunities and activities.</p>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl text-white">
+                  Discover
+                </h1>
+                <p className="text-white">
+                  Discover new opportunities and activities.
+                </p>
               </>
             )}
             <Input
@@ -307,19 +331,36 @@ export default function Discover() {
 
           <div className="flex flex-row flex-wrap gap-3 max-w-full">
             {searchDataFiltered.map((item: any, index: number) => (
-              <Card key={index} className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 max-w-full hover:cursor-pointer">
+              <Card
+                key={index}
+                className="transition-transform hover:bg-gradient-to-r hover:from-blue-500 hover:to-green-5000 hover:scale-105 max-w-full hover:cursor-pointer"
+              >
                 <div onClick={(e) => handleClick(e, item)}>
-                  <div className='flex flex-row items-center w-full pt-[-2.5%]'>
-                    <h2 className="text-base flex-grow md:text-lg lg:text-xl">{item.name}</h2>
-                    <AnimatedHeart className="self-end justify-self-end animated-heart-section" likeTrigger={(e, a) => handleLike(e, a)} oppId={item.id} liked={likedActivites.includes(item.id)} />
+                  <div className="flex flex-row items-center w-full pt-[-2.5%]">
+                    <h2 className="text-base flex-grow md:text-lg lg:text-xl">
+                      {item.name}
+                    </h2>
+                    <AnimatedHeart
+                      className="self-end justify-self-end animated-heart-section"
+                      likeTrigger={(e, a) => handleLike(e, a)}
+                      oppId={item.id}
+                      liked={likedActivites.includes(item.id)}
+                    />
                   </div>
                   <p className="text-sm">{item.description}</p>
                   <div className="flex flex-wrap pt-[5%] pb-[2.5%]">
                     <Tag type="pink">💼 {item.type}</Tag>
                     <Tag type="pink">🌍 {item.location}</Tag>
                     <Tag type="green">🎓 {item.education}</Tag>
-                    <Tag type="orange">⏰ {formatRelativeTime(item.deadline, true)}</Tag>
-                    <Tag type="tag" className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal">📖 {item.subjects}</Tag>
+                    <Tag type="orange">
+                      ⏰ {formatRelativeTime(item.deadline, true)}
+                    </Tag>
+                    <Tag
+                      type="tag"
+                      className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal"
+                    >
+                      📖 {item.subjects}
+                    </Tag>
                   </div>
                 </div>
               </Card>
@@ -328,37 +369,37 @@ export default function Discover() {
         </div>
         <div className="flex flex-col w-[20%] rounded-md shadow-lg p-6 mb-6 bg-[#FAEAEC] bg-opacity-40 rounded-md px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox
-            values={extractFilters(ecItems, 'type')}
+            values={extractFilters(ecItems, "type")}
             sector={"Type"}
             callback={filterData}
           ></FilterBox>
           <Divider />
           <FilterBox
-            values={extractFilters(ecItems, 'location')}
+            values={extractFilters(ecItems, "location")}
             sector={"Location"}
             callback={filterData}
           ></FilterBox>
           <Divider />
           <FilterBox
-            values={extractFilters(ecItems, 'education')}
+            values={extractFilters(ecItems, "education")}
             sector={"Grade"}
             callback={filterData}
           ></FilterBox>
           <Divider />
           <FilterBox
-            values={['N/A']}
+            values={["N/A"]}
             sector={"Deadline"}
             callback={filterData}
           ></FilterBox>
           <Divider />
           <FilterBox
-            values={extractFilters(ecItems, 'subjects')}
+            values={extractFilters(ecItems, "subjects")}
             sector={"Subject"}
             callback={filterData}
           ></FilterBox>
           <Divider />
         </div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size={'3xl'}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size={"3xl"}>
           <ModalContent>
             {(onClose) => (
               <>
@@ -406,9 +447,7 @@ export default function Discover() {
                           </div>
                         </div>
                         <div className="flex flex-col gap-y-1">
-                          <h3 className="text-slate-500 text-lg">
-                            Category:
-                          </h3>
+                          <h3 className="text-slate-500 text-lg">Category:</h3>
                           <div className="flex gap-x-3 gap-y-2 flex-col lg:flex-row">
                             {modalItem.type
                               .split(",")
@@ -423,7 +462,6 @@ export default function Discover() {
                               ))}
                           </div>
                         </div>
-
                       </div>
                       <div className="w-full lg:w-1/2 flex flex-col md:flex-row justify-between flex-wrap lg:flex-col gap-4 gap-y-6 lg:gap-y-4">
                         <div className="flex flex-col gap-y-1">
@@ -474,7 +512,10 @@ export default function Discover() {
                       <img
                         alt="Image of Key Club"
                         className="hidden lg:block w-1/6"
-                        src={modalItem.imageUrl || "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"}
+                        src={
+                          modalItem.imageUrl ||
+                          "https://raw.githubusercontent.com/BRama10/aviquo_dev/b18f426149adff2de1437a7af596830b45cf3681/public/Opp%20Placeholder.png"
+                        }
                       />
                       <div className="w-full lg:w-5/6">
                         <h1 className="text-slate-700 font-manrope font-bold tracking-tight underline block text-xl">

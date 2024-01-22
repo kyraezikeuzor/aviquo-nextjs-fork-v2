@@ -10,11 +10,21 @@ import interestList from "@/lib/interests.json";
 
 import { toDateTimeString } from "@/utils";
 
-export default function Profile({ user }: { user: any }) {
+import { UserInterface } from "@/auth/lucia";
+
+export default function Profile({
+  user,
+}: {
+  user: UserInterface & { userId: string };
+}) {
   const [forumData, setForumData] = useState<any>([]);
   const [likedActivities, setLikedActivities] = useState<any>([]);
 
   useEffect(() => {
+    if (!user.posts) user.posts = [];
+    if (!user.comments) user.comments = [];
+    if (!user.opportunities) user.opportunities = [];
+
     let likedActivities = user.opportunities;
     let posts = user.posts.map((obj: any) => ({ ...obj, type: "Question" }));
     let replies = user.comments.map((obj: any) => ({ ...obj, type: "Reply" }));
@@ -33,7 +43,7 @@ export default function Profile({ user }: { user: any }) {
     <main className="m-auto flex flex-col gap-5 !px-1/6 md:!px-[10vw] lg:!px-[10vw]">
       <div className="flex flex-col gap-5">
         <img
-          className="rounded-full w-20 h-auto"
+          className="w-20 h-auto rounded-full"
           src="https://lh3.googleusercontent.com/a-/AOh14GgeD4LTuYuvwpMah5byGlk8eREsrmb9xO691yO3VQ=s96-c"
         />
         <div className="flex flex-col gap-2">
@@ -57,7 +67,7 @@ export default function Profile({ user }: { user: any }) {
           <p>{user?.bio}</p>
         </div>
       </div>
-      <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
+      <h2 className="text-lg tracking-normal md:text-xl lg:text-xl">
         My Posts
       </h2>
       <div className="flex flex-col gap-5">
@@ -66,19 +76,21 @@ export default function Profile({ user }: { user: any }) {
             key={index}
             className="border-2 border-[var(--clr-grey-300)] p-4 rounded-xl flex flex-row gap-5"
           >
-            <div className="w-4 flex flex-col items-center">
+            <div className="flex flex-col items-center w-4">
               <Icon icon="arrow-up" fillColor="black" />
               <p className="text-sm font-semibold text-[var(--clr-grey-400)]">
-                {item.upvotes == undefined ? 0 : item.upvotes.length - item.downvotes.length}
+                {item.upvotes == undefined
+                  ? 0
+                  : item.upvotes.length - item.downvotes.length}
               </p>
               <Icon icon="arrow-down" fillColor="black" />
             </div>
             <div className="flex flex-col gap-2">
-              <span className="text-sm inline-block flex gap-2">
+              <span className="flex text-sm gap-2">
                 @{item.username} • {toDateTimeString(item.date)}{" "}
                 <Tag type="tag">{item.type}</Tag>{" "}
               </span>
-              <h3 className="font-semibold text-lg md:text-lg lg:text-lg tracking-tight">
+              <h3 className="text-lg font-semibold tracking-tight md:text-lg lg:text-lg">
                 {item.title}
               </h3>
               <p className="text-sm">
@@ -88,13 +100,13 @@ export default function Profile({ user }: { user: any }) {
           </div>
         ))}
       </div>
-      <h2 className="text-lg md:text-xl lg:text-xl tracking-normal">
+      <h2 className="text-lg tracking-normal md:text-xl lg:text-xl">
         My Liked Opportunities
       </h2>
       <div className="flex flex-row flex-wrap gap-3">
         {likedActivities.map((item: any, index: number) => (
           <Card key={index}>
-            <h3 className="text-lg md:text-lg lg:text-lg tracking-tight">
+            <h3 className="text-lg tracking-tight md:text-lg lg:text-lg">
               {item.name}
             </h3>
             <p className="text-sm">{item.description}</p>
