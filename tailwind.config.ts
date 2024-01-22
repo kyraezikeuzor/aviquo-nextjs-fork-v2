@@ -31,7 +31,7 @@ const config: Config = {
           text: {
             dark: "#250226",
             "dark-dimmed": "#746278",
-            "more-dark": "#4f1087",
+            "more-dark": "#3e0a5c",
           },
         },
       },
