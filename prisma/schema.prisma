@@ -12,15 +12,15 @@ datasource db {
 // Represents a single post on the forum.
 //
 model Post {
-  id       String    @id @default(cuid())
-  title    String
-  body     String?
-  date     DateTime  @default(now())
-  author   User?     @relation(fields: [authorId], references: [id])
-  authorId String?
-  upvotes  String[]
+  id        String    @id @default(cuid())
+  title     String
+  body      String?
+  date      DateTime  @default(now())
+  author    User?     @relation(fields: [authorId], references: [id])
+  authorId  String?
+  upvotes   String[]
   downvotes String[]
-  comments Comment[]
+  comments  Comment[]
 }
 
 model Comment {
@@ -48,10 +48,10 @@ model User {
   id            String         @id @unique
   auth_session  Session[]
   key           Key[]
-  firstName     String         
+  firstName     String
   lastName      String
   email         String         @unique
-  username      String?        @unique 
+  username      String?        @unique
   pfp           String?
   bio           String?
   numFollowers  Int
@@ -91,20 +91,30 @@ model Company {
 }
 
 model Opportunity {
-  id          String @id @unique @default(cuid())
-  name        String  @unique @db.VarChar(200)
+  id          String    @id @unique @default(cuid())
+  name        String    @unique @db.VarChar(200)
   description String
   url         String
   imageUrl    String?
   type        String
   education   String?
-  company     Company @relation(fields: [companyName], references: [name])
+  company     Company   @relation(fields: [companyName], references: [name])
   users       User[]
   location    String?
   duration    String?
   deadline    DateTime?
   subjects    String?
   companyName String    @db.VarChar(200)
+  reviews     Review[]
+}
+
+model Review {
+  id    String       @id @unique @default(cuid())
+  text  String?
+  stars Int
+  oppId String?
+  opp   Opportunity? @relation(fields: [oppId], references: [id])
+  verified Boolean @default(false)
 }
 
 model Waitlist {
