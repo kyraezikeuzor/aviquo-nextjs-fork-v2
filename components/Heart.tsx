@@ -10,7 +10,7 @@ export default function AnimatedHeart({ likeTrigger, className, oppId, liked }: 
     setClick(liked);
   }, [liked]); // Include liked in the dependency array
 
-  console.log(isClick);
+  // console.log(isClick);
 
   return (
     <div className={className}>
