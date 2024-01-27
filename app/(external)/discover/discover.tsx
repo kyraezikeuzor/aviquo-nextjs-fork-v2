@@ -6,8 +6,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Tag from "@/components/Tag";
-import SearchBar from "@/components/SearchBar";
-import Card from "@/components/Card";
+
+import { motion, useScroll } from "framer-motion"
+
 import {
   Input,
   Divider,
@@ -29,6 +30,10 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
+  Card, 
+  CardHeader, 
+  CardBody,
+  CardFooter
 } from "@nextui-org/react";
 
 import { FaHeart, FaHome } from "react-icons/fa";
@@ -244,6 +249,10 @@ export default function Discover() {
     }
   };
 
+  function getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   return (
     <>
       <Navbar
@@ -281,7 +290,7 @@ export default function Discover() {
         </NavbarContent>
       </Navbar>
       <div className="flex flex-row w-full h-full">
-        <div className="scrollbar-hide flex flex-col gap-5 !pl-[12.5%] !pr-[12.5%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
+        <div className="scrollbar-hide flex flex-col gap-5 !pl-[6%] !pr-[6%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
               {showLiked ? "My Opportunities" : "Discover"}
@@ -325,13 +334,25 @@ export default function Discover() {
 
           <div className="flex flex-row flex-wrap max-w-full gap-3">
             {searchDataFiltered.map((item: any, index: number) => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ 
+                  opacity: [0.25, 0.4, 0.6, 0.8, 1],
+                  scale: [0.5, 0.7, 1.2, 1.1, 1],
+                  rotate: [0, 0, 180, 270, 360],
+                }}
+                transition={{
+                   duration: 1.5,
+                   ease: "easeInOut" 
+                }}
+              >
               <Card
                 key={index}
-                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer"
+                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-[fit-content]"
+                onClick={(e) => handleClick(e, item)}
               >
-                <div onClick={(e) => handleClick(e, item)}>
-                  <div className="flex flex-row items-center w-full pt-[-2.5%]">
-                    <h2 className="flex-grow text-base md:text-lg lg:text-xl">
+                <CardHeader className="flex flex-row items-center w-full mt-[-5.0%] mb-[-5.0%] mr-[-5.0%]">
+                    <h2 className="flex-grow text-base md:text-lg lg:text-xl text-center">
                       {item.name}
                     </h2>
                     <AnimatedHeart
@@ -340,24 +361,18 @@ export default function Discover() {
                       oppId={item.id}
                       liked={likedActivites.includes(item.id)}
                     />
-                  </div>
-                  <p className="text-sm">{item.description}</p>
+                </CardHeader>
+              <CardBody>
+               
                   <div className="flex flex-wrap pt-[5%] pb-[2.5%] gap-1">
-                    <Tag type="pink">💼 {item.type}</Tag>
-                    <Tag type="pink">🌍 {item.location}</Tag>
-                    <Tag type="green">🎓 {item.education}</Tag>
+                    <Tag type="pink">📖 STEM</Tag>
                     <Tag type="orange">
                       ⏰ {formatRelativeTime(item.deadline, true)}
                     </Tag>
-                    <Tag
-                      type="tag"
-                      className="!w-fit-content !max-w-full !flex !items-start !justify-start !flex-wrap !whitespace-normal"
-                    >
-                      📖 {item.subjects}
-                    </Tag>
                   </div>
-                </div>
+                </CardBody>
               </Card>
+              </motion.div>
             ))}
           </div>
         </div>
