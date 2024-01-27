@@ -1,0 +1,288 @@
+[33mcommit 60ba4b2826b7751b1257405198aa5070c7680bfe[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sat Jan 27 21:59:34 2024 +0300
+
+    merge commits bru
+
+[33mcommit 5d3f6e3a9e76a38cb01953b3e80db07ddd68dbb4[m
+Merge: b716fde f2dd016
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sat Jan 27 21:57:00 2024 +0300
+
+    Merge branch 'main' of github.com:AviquoCompany/Aviquo
+
+[33mcommit f2dd016fd7cab8b20e99f05112ba40cce8de9f22[m
+Author: The Hunter <grand.hunter.dark.14@gmail.com>
+Date:   Sat Jan 27 13:46:32 2024 -0500
+
+    breaking changes
+
+[33mcommit b716fde6a69283877b24e1b2de660e8a6432387e[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sat Jan 27 20:15:34 2024 +0300
+
+    fixed warning
+
+[33mcommit d938617cc22d979f1b61e6ff8482b9797354ac4b[m[33m ([m[1;31morigin/leo-dev[m[33m)[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sat Jan 27 20:08:26 2024 +0300
+
+    made the dealine thingy disappear when no deadline
+
+[33mcommit 0779ce42ae3823901d4540e718e2ba79957b2f09[m
+Author: thehunter911 <grand.hunter.dark.15@gmail.com>
+Date:   Sat Jan 27 09:43:41 2024 -0500
+
+    modal fixing
+
+[33mcommit a46e6eb67def930893c543a0a2381779a8740993[m
+Author: The Hunter <grand.hunter.dark.14@gmail.com>
+Date:   Fri Jan 26 21:25:47 2024 -0500
+
+    fixed tile design
+
+[33mcommit aedcfec72ae9800b9f29977a6764c1a80b934c24[m
+Merge: 5fe9e43 4f35217
+Author: Leo <86385005+Leo-MathGuy@users.noreply.github.com>
+Date:   Mon Jan 22 21:35:51 2024 +0300
+
+    Merge pull request #8 from AviquoCompany/leo-dev
+    
+    Leo dev
+
+[33mcommit 4f35217890388db9af6eecdc128d0b7bc7b95c11[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 21:35:21 2024 +0300
+
+    uh
+
+[33mcommit 1669a0889f00c2bc4ee2b3f238ca6324a6cc77f7[m
+Merge: 6718507 5fe9e43
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 21:14:52 2024 +0300
+
+    Merge remote-tracking branch 'upstream/main' into leo-dev
+
+[33mcommit 67185070b6ccda6ebfffa9531f06330ead7bf712[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 21:14:34 2024 +0300
+
+    more
+
+[33mcommit 32195a20394af1d1cf5c880fa017fe9324a59bea[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 21:10:55 2024 +0300
+
+    color
+
+[33mcommit 6f0175dddc309b83b2840cd3d4df5a38edb70a05[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 21:10:42 2024 +0300
+
+    cool
+
+[33mcommit 5fe9e43bdc90d841023af0b8c2b1377d98afef29[m
+Merge: f04f03d 16a8e4c
+Author: Leo <86385005+Leo-MathGuy@users.noreply.github.com>
+Date:   Mon Jan 22 11:44:15 2024 +0300
+
+    Merge pull request #7 from AviquoCompany/leo-dev
+    
+    shup up
+
+[33mcommit 16a8e4cc8b230e182d88886dda12dc2ce8303879[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 11:43:41 2024 +0300
+
+    shup up
+
+[33mcommit f04f03d3095ce43d36dec0507fdeb5846af9fb3a[m
+Merge: 614a3d5 674330c
+Author: Leo <86385005+Leo-MathGuy@users.noreply.github.com>
+Date:   Mon Jan 22 11:38:41 2024 +0300
+
+    Merge pull request #6 from AviquoCompany/leo-dev
+    
+    onboarding (still needs fix)
+
+[33mcommit 674330c81019eab5c850cdc5c42094b899e86822[m
+Merge: 29cc36a 614a3d5
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Mon Jan 22 11:38:12 2024 +0300
+
+    Merge branch 'main' into leo-dev
+
+[33mcommit 614a3d590fd03aba1a799b45fbaa2992bfe537bd[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 20:07:50 2024 -0500
+
+    fixed modal
+
+[33mcommit 0e87ff9abc689d3f8b8a884b25df0715b7faae94[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 19:45:07 2024 -0500
+
+    bug fixes pt1
+
+[33mcommit 29cc36ad0579a9a0008ae75b2a25d0930b8e651a[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sun Jan 21 23:48:04 2024 +0300
+
+    useless
+
+[33mcommit d23c6ba2cb5da1e54d1306c3d4b3e81f94066cc7[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 15:14:08 2024 -0500
+
+    soham sucks
+
+[33mcommit d6ea899fd1015844f86852ad9402daaa69ee379a[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sun Jan 21 22:53:24 2024 +0300
+
+    format
+
+[33mcommit e1147394f74e767e94756360505b795014a3cc91[m
+Merge: 7a405ea 05d8b37
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sun Jan 21 22:53:13 2024 +0300
+
+    Merge branch 'main' into leo-dev
+
+[33mcommit 47f0aed0a7154f7cb40f81deb30c51e8228b3248[m
+Merge: 1067420 05d8b37
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 14:43:11 2024 -0500
+
+    patching
+
+[33mcommit 1067420fce139350fcbb5d6f429bf70e93bfa6c8[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 14:42:09 2024 -0500
+
+    ladning changes
+
+[33mcommit 05d8b378dd00102cf003c8d1680abb9e39fe39d8[m
+Author: srivatsav-kannan <srivatsavkannan@gmail.com>
+Date:   Mon Jan 22 00:40:11 2024 +0530
+
+    Added placeholder image
+
+[33mcommit 52175d17723a1f152799b3282426490d5e4b859c[m
+Merge: d55549f 16fd946
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 13:45:20 2024 -0500
+
+    push
+
+[33mcommit d55549fee0f61b206da802321de8b12b431713da[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 13:43:52 2024 -0500
+
+    fixed tag wrapping
+
+[33mcommit 16fd9460172123f0c33249c0bf6d449ac6211220[m
+Author: srivatsav-kannan <srivatsavkannan@gmail.com>
+Date:   Sun Jan 21 23:34:55 2024 +0530
+
+    Added imageUrl field to Opportunity schema
+
+[33mcommit 45762c818b1c8ef27991748c3410fff559946ec7[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 12:56:53 2024 -0500
+
+    removed linkedin style filtering
+
+[33mcommit 0216c0b9a9945d065f30cff64377667ebbedb1e2[m
+Author: srivatsav-kannan <srivatsavkannan@gmail.com>
+Date:   Sun Jan 21 23:17:34 2024 +0530
+
+    Expanded Card now shows specific info
+
+[33mcommit 764d669e7a169f4fe4c69b9070c345134f64a041[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 12:33:09 2024 -0500
+
+    reset branch
+
+[33mcommit b96fa4047e879d56e00516eb54329bc085667171[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Sun Jan 21 12:09:29 2024 -0500
+
+    liked opps showing
+
+[33mcommit 7a405ea1e98dbcd98616328867c1f16c5df73011[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Sun Jan 21 19:45:14 2024 +0300
+
+    onboarding thing
+
+[33mcommit c4efd03cff6c4da43dce08eeb27253f0a4d30b11[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Fri Jan 19 21:56:07 2024 -0500
+
+    some more liked activity changes
+
+[33mcommit 5313b6ea01d0826e3f6b5967bea9b7536b6a8fa9[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Fri Jan 19 17:55:18 2024 -0500
+
+    new landing
+
+[33mcommit 5f93a910671df5f6e6a9dd563b2d96982d2dc6e0[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Fri Jan 19 12:28:02 2024 -0500
+
+    hot landing
+
+[33mcommit a254479db9dffcc2f227c2ccaa31c799e67398b7[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Fri Jan 19 12:05:11 2024 -0500
+
+    logo
+
+[33mcommit 94259aacd658a99c20d056228d0135cc12e2503d[m
+Author: rk <t@test.com>
+Date:   Fri Jan 19 10:38:10 2024 -0500
+
+    latest
+
+[33mcommit 83000bb6ddace1d295c3b23f189f67a30a763fc4[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Thu Jan 18 22:06:01 2024 -0500
+
+     breaking
+
+[33mcommit a995eb592b3a62327dcb5ae99ffacd6649573f25[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Thu Jan 18 16:11:28 2024 -0500
+
+    redirect fixed
+
+[33mcommit 9b05897497d147ed6656f2b05062b984d62fe259[m
+Author: BRama10 <grand.hunter.dark.15@gmail.com>
+Date:   Thu Jan 18 16:10:08 2024 -0500
+
+    fix breaking change
+
+[33mcommit 6fbcffb0decb9d6e4bf3e76cb78e6d3ec8251674[m
+Author: rk <t@test.com>
+Date:   Thu Jan 18 04:57:22 2024 -0500
+
+    fixes
+
+[33mcommit 516aba76d9eb36c5dc7976d61e6eceb556ac2a65[m
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Wed Jan 17 13:14:50 2024 +0300
+
+    continue merge
+
+[33mcommit 05cb78c5d7ee49b262f74986b6874d335432b4d3[m
+Merge: 6e06153 d130f37
+Author: Leo-MathGuy <leo.mathguy@gmail.com>
+Date:   Wed Jan 17 13:14:38 2024 +0300
+
+    Merge remote-tracking branch 'upstream/main' into leo-dev
+
+[33mcommit 6e061530ebc4cd837827d8df42dd8464f45409a7[m
+Author: Leo-MathGuy <leo.mathguy@gmail.co
