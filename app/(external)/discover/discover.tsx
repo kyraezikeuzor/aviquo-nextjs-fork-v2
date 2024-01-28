@@ -336,11 +336,11 @@ export default function Discover() {
 
           <div className="flex flex-row flex-wrap max-w-full gap-3">
             {searchDataFiltered.map((item: any, index: number) => (
-              <motion.div
+              <motiyon.div
                 initial={{ opacity: 0 }}
                 whileInView={{ 
                   opacity: [0.25, 0.4, 0.6, 0.8, 1],
-                  scale: [0.5, 0.7, 1.2, 1.1, 1],
+                  scale: [0.5, 1.2, 1],
                   // rotate: [0, 360],
                 }}
                 transition={{
