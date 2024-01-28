@@ -334,7 +334,7 @@ export default function Discover() {
             />
           </div>
 
-          <div className="flex flex-row flex-wrap max-w-full gap-3">
+          <div className="flex flex-row flex-wrap max-w-full">
             {searchDataFiltered.map((item: any, index: number) => (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -349,12 +349,13 @@ export default function Discover() {
                 }}
                 onClick={(e) => handleClick(e, item)}
                 key={index}
+                className="w-1/3"
               >
               <Card
                 key={index}
-                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-[fit-content]"
+                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-full"
               >
-                <CardHeader className="flex flex-row items-center w-full mt-[-5.0%] mb-[-5.0%] mr-[-5.0%]">
+                <CardHeader className="flex flex-row items-center w-full mt-[-2.5%] mb-[-5.0%] mr-[-5.0%]">
                     <h2 className="flex-grow text-base md:text-lg lg:text-xl text-center">
                       {item.name}
                     </h2>
