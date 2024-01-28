@@ -340,11 +340,11 @@ export default function Discover() {
                 initial={{ opacity: 0 }}
                 whileInView={{ 
                   opacity: [0.25, 0.4, 0.6, 0.8, 1],
-                  scale: [0.5, 1.2, 1],
+                  scale: [0.5, 1.1, 1],
                   // rotate: [0, 360],
                 }}
                 transition={{
-                   duration: 1.5,
+                   duration: 1.3,
                    ease: "easeInOut" 
                 }}
                 onClick={(e) => handleClick(e, item)}
