@@ -341,7 +341,7 @@ export default function Discover() {
                 whileInView={{ 
                   opacity: [0.25, 0.4, 0.6, 0.8, 1],
                   scale: [0.5, 0.7, 1.2, 1.1, 1],
-                  rotate: [0, 360],
+                  // rotate: [0, 360],
                 }}
                 transition={{
                    duration: 1.5,
