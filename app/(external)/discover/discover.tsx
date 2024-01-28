@@ -336,7 +336,7 @@ export default function Discover() {
 
           <div className="flex flex-row flex-wrap max-w-full gap-3">
             {searchDataFiltered.map((item: any, index: number) => (
-              <motiyon.div
+              <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ 
                   opacity: [0.25, 0.4, 0.6, 0.8, 1],
