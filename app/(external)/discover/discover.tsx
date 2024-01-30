@@ -349,7 +349,7 @@ export default function Discover() {
                 }}
                 onClick={(e) => handleClick(e, item)}
                 key={index}
-                className="w-1/3"
+                className="w-[31%] ml-[1%] mr-[1%] mb-[5%]"
               >
               <Card
                 key={index}
