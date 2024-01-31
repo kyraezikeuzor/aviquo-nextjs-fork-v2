@@ -424,22 +424,22 @@ export default function Discover() {
                 <ModalHeader className='flex flex-col align-items mx-[1%]'>
                   <p className='text-center md:text-2xl lg:text-3xl pt-[6%] pb-[4%] border-r border-l border-t border-indigo-600'>{modalItem.name}</p>
                   <div className="flex flex-row w-full border border-indigo-600">
-                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
-                    <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
+                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline: {formatRelativeTime(modalItem.deadline)}</div>
+                    <div className='w-1/2 text-center py-[2%]'>Grades: {modalItem.education}</div>
                   </div>
                   <div className="flex flex-row w-full border-r border-l border-b border-indigo-600">
-                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
-                    <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
+                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Subjects: {modalItem.subjects}</div>
+                    <div className='w-1/2 text-center py-[2%]'>Type: {modalItem.type}</div>
                   </div>
                 </ModalHeader>
                 <ModalBody className='flex flex-col mx-[1%]'>
                   <div className="w-full">
                     {modalItem.description}
                   </div>
-                  <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
+                  {/* <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
                     Reviews
                   </p>
-                  <StarRating callback={(e) => console.log(e)} />
+                  <StarRating callback={(e) => console.log(e)} /> */}
                 </ModalBody>
                 <ModalFooter>
 
