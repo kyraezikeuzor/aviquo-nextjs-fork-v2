@@ -7,7 +7,7 @@ import axios from "axios";
 
 import styles from './discover.module.css'
 
-import { motion, useScroll } from "framer-motion"
+import { useAnimate } from "framer-motion"
 
 import { StarRating } from "@/components/ReviewComponent";
 
@@ -19,6 +19,10 @@ import {
   Chip,
   SelectedItems,
   Avatar,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
   useDisclosure,
   Selection,
   Button,
@@ -57,7 +61,20 @@ export default function Discover() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [showLiked, setShowLiked] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isCardVisible, setIsCardVisible] = useState(false);
+
+  const [scopeExpandedCard, animateExpandedCard] = useAnimate()
+  const [scopeBackground, animateBackground] = useAnimate()
+  const [currId, setCurrentId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isCardVisible) {
+      animateExpandedCard(scopeExpandedCard.current, {scale: [0, 0.5, 1], rotate: [0, 180,360], borderRadius: ['20%', '50%', '20%'], opacity: [0,0.5,1]}, {ease: 'linear', duration: 2, delay: 0.5})
+    }
+    if (!isCardVisible && currId) {
+      document.getElementById(currId)!.scrollIntoView({ behavior: 'auto' });
+    }
+  }, [isCardVisible])
 
   const getLikedActivites = () => {
     if (global?.window !== undefined) {
@@ -243,9 +260,9 @@ export default function Discover() {
 
   const [modalItem, setModalItem] = useState<any | null | undefined>();
 
-  const handleClick = (event: any, item: any) => {
-    console.log('clicked')
-    console.log(event.target.classList)
+  const handleClick = (event: any, item: any, id: string) => {
+    setCurrentId(id);
+
     if (
       // !event.target.classList.contains("go2484888251") &&
       // !event.target.classList.contains("go4268192979")
@@ -254,10 +271,9 @@ export default function Discover() {
       // console.log(event.target.classList)
       // console.log('Clicked on the div, not the AnimatedHeart component');
 
-      // setIsVisible(!isVisible);
-      setModalItem(item);
-      onOpen();
-
+      setIsCardVisible(!isCardVisible);
+      // setModalItem(item);
+      // onOpen();
     }
   };
 
@@ -302,9 +318,9 @@ export default function Discover() {
         </NavbarContent>
       </Navbar>
       <div className="flex flex-row w-full h-full">
-        <div className="scrollbar-hide flex flex-col gap-5 !pl-[6%] !pr-[6%] w-[80%] overflow-y-auto h-max-screen pt-[2%]">
+        <div className={`scrollbar-hide flex flex-col ${!isCardVisible ? 'gap-3 overflow-y-auto' : 'overflow-y-hidden'} !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}>
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
+            <h1 id='baseline' className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
               {showLiked ? "My Opportunities" : "Discover"}
             </h1>
             <p className="text-theme-text-dark-dimmed">
@@ -343,16 +359,21 @@ export default function Discover() {
               }
             />
           </div>
+          {isCardVisible && <div className='flex flex-grow items-center justify-center w-full'>
+            <Card ref={scopeExpandedCard} className="w-4/5 aspect-square bg-blue-500 opacity-0 scale-0 border-[20%]">
+              <Button onClick={(e) => setIsCardVisible(false)}>Click Here</Button>
+            </Card>
+          </div>}
 
-          <div className={`flex flex-col flex-wrap max-w-full ${isVisible ? styles.visible : styles.hidden}`}>
+          {!isCardVisible && <div className={`flex flex-col flex-wrap max-w-full ${isCardVisible ? styles.hidden : styles.visible} ${isCardVisible && 'h-[5px]'}`}>
             {chunkedSearchDataFiltered.map((chunk: any[], chunkIndex: number) => (
               <OpportunityRow key={chunkIndex}>
                 {chunk.map((item: any, index: number) => (
-                  <Opportunity key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} status={'standard'} />
+                  <Opportunity id={`${chunkIndex}=${index}`} key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} status={'standard'} />
                 ))}
               </OpportunityRow>
             ))}
-          </div>
+          </div>}
         </div>
         <div className="flex flex-col w-[20%] drop-shadow-lg p-6 mb-6 bg-white rounded-xl px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox

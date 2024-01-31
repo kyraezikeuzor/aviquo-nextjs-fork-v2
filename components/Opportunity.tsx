@@ -18,11 +18,12 @@ import { formatRelativeTime } from "@/utils";
 import AnimatedHeart from "@/components/Heart";
 
 interface OpportunityProps {
-  clickCallback: (a: any, b: any) => void;
+  clickCallback: (a: any, b: any, c: string) => void;
   item: Record<string, any>;
   likedActivites: Array<any>;
   likeCallback: (a: any, b: any) => void;
   status: 'expanded' | 'folded' | 'standard'
+  id: string;
 }
 
 export const Opportunity: React.FC<OpportunityProps> = ({
@@ -30,7 +31,8 @@ export const Opportunity: React.FC<OpportunityProps> = ({
   clickCallback,
   likedActivites,
   likeCallback,
-  status
+  status,
+  id
 }) => {
 
   return (
@@ -45,10 +47,11 @@ export const Opportunity: React.FC<OpportunityProps> = ({
         duration: 1.3,
         ease: "easeInOut"
       }}
-      onClick={(e) => clickCallback(e, item)}
+      onClick={(e) => clickCallback(e, item, id)}
       // className="w-[31%] ml-[1%] mr-[1%] mb-[5%]"
       // className="aspect-square md:w-[31%] lg:w-[24%] ml-[1%] mr-[1%]"
       className="aspect-square w-[31%]  ml-[1%] mr-[1%] max-h-full"
+      id={id}
     >
       <Card
         className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-full h-full"
