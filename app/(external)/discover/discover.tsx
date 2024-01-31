@@ -28,14 +28,9 @@ import {
   ModalBody,
   ModalFooter,
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter
+  Textarea
 } from "@nextui-org/react";
 
 import { FaHeart, FaHome } from "react-icons/fa";
@@ -348,7 +343,7 @@ export default function Discover() {
               }
             />
           </div>
-          
+
           <div className={`flex flex-col flex-wrap max-w-full ${isVisible ? styles.visible : styles.hidden}`}>
             {chunkedSearchDataFiltered.map((chunk: any[], chunkIndex: number) => (
               <OpportunityRow key={chunkIndex}>
@@ -436,11 +431,43 @@ export default function Discover() {
                   <div className="w-full">
                     {modalItem.description}
                   </div>
-                  {modalItem.reviews.map((item: any, index: number) => (
-                    <div key={index}>
-                      
+                  <div className="w-full flex flex-row pt-[4.5%]">
+                    <div className="w-3/5 flex flex-col border-indigo-600 border-l border-t border-b pt-[2%]">
+                    <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Reviews</p>
+                      <div className="flex flex-row w-full h-full">
+                        <div className="flex flex-col w-[70%] h-full">
+                          {modalItem.reviews.map((item: any, index: number) => (
+                            <div className="border border-black flex flex-row">
+                              <p className="flex w-1/5">Anonymous</p>
+                            <div key={index} className="flex flex-col w-4/5">
+                              <p>{"⭐".repeat(item.stars)}</p>
+                              <p className="lg:text-md md:text-sm">{item.text}</p>
+                            </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex flex-col w-[30%] border-l border-indigo-600 h-full justify-between pl-[1.75%]">
+                          <p className="text-bold">5⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 5).length} Reviews</p>
+                          <p className="text-bold">4⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 4).length} Reviews</p>
+                          <p className="text-bold">3⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 3).length} Reviews</p>
+                          <p className="text-bold">2⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 2).length} Reviews</p>
+                          <p className="text-bold">1⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 1).length} Reviews</p>
+                        </div>
+                      </div>
                     </div>
-                  ))}
+                    <div className="w-2/5 flex flex-col border-indigo-600 border py-[2%]">
+                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Post A Review</p>
+                      <div className="self-center"><StarRating callback={(e) => console.log(e)} /></div>
+                      <Textarea
+                        label="Comments (Optional)"
+                        placeholder="Any specific notes/feedback?"
+                        className="max-w-3/5 w-3/5 pb-[2.5%] pt-[2.5%] self-center"
+                      />
+                      <Button color="secondary" variant="ghost" className='w-3/5 self-center py-3'>
+                        Submit Review
+                      </Button>
+                    </div>
+                  </div>
                   {/* <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
                     Reviews
                   </p>
