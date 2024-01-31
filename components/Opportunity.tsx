@@ -44,17 +44,18 @@ export const Opportunity: React.FC<OpportunityProps> = ({
                 }}
                 onClick={(e) => clickCallback(e, item)}
                 // className="w-[31%] ml-[1%] mr-[1%] mb-[5%]"
-                className="aspect-square w-[31%] ml-[1%] mr-[1%]"
+                // className="aspect-square md:w-[31%] lg:w-[24%] ml-[1%] mr-[1%]"
+                className="aspect-square w-[31%]  ml-[1%] mr-[1%]"
               >
               <Card
                 className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-full max-h-full h-full"
               >
-                <CardHeader className="flex flex-row items-center w-full mt-[-2.5%] mb-[-5.0%] mr-[-5.0%]">
-                    <h2 className="flex-grow text-base md:text-lg lg:text-xl text-center">
+                <CardHeader className="flex flex-row items-center justify-center w-full mt-[-2.5%] mb-[-5.0%] mr-[-5.0%]">
+                    <h2 className="w-[80%] text-base md:text-lg lg:text-xl text-center">
                       {item.name}
                     </h2>
                     <AnimatedHeart
-                      className="self-end justify-self-end animated-heart-section aspect-square w-[15%] p-1"
+                      className="justify-self-end animated-heart-section w-[20%] p-1"
                       likeTrigger={(e, a) => likeCallback(e, a)}
                       oppId={item.id}
                       liked={likedActivites.includes(item.id)}
