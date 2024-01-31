@@ -106,7 +106,9 @@ model Opportunity {
   subjects    String?
   companyName String    @db.VarChar(200)
   reviews     Review[]
+  primarySubject String? 
 }
+
 
 model Review {
   id    String       @id @unique @default(cuid())
