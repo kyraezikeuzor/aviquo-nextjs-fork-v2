@@ -15,7 +15,7 @@ export default function AnimatedHeart({ likeTrigger, className, oppId, liked }: 
 
   return (
     <div className={className}>
-      <Heart animationScale={1.3} isActive={isClick} onClick={() => {
+      <Heart animationScale={1.3} animationDuration={0.7} isActive={isClick} onClick={() => {
         likeTrigger(!isClick, oppId);
         setClick(!isClick);
       }}

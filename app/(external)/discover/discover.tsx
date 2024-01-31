@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import Tag from "@/components/Tag";
+import styles from './discover.module.css'
 
 import { motion, useScroll } from "framer-motion"
 
@@ -32,8 +32,8 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Card, 
-  CardHeader, 
+  Card,
+  CardHeader,
   CardBody,
   CardFooter
 } from "@nextui-org/react";
@@ -43,7 +43,7 @@ import { FaHeart, FaHome } from "react-icons/fa";
 import { SearchIcon } from "@/public/SearchIcon";
 
 import { extractFilters, formatRelativeTime } from "@/utils";
-import { Opportunity } from "@/components/Opportunity";
+import { Opportunity, OpportunityRow } from "@/components/Opportunity";
 
 export default function Discover() {
   const [searchText, setSearchText] = useState("");
@@ -62,6 +62,7 @@ export default function Discover() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [showLiked, setShowLiked] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const getLikedActivites = () => {
     if (global?.window !== undefined) {
@@ -96,8 +97,10 @@ export default function Discover() {
     const chunkedData = [];
 
     for (let i = 0; i < searchDataFiltered.length; i += chunkSize) {
-        chunkedData.push(searchDataFiltered.slice(i, i + chunkSize));
+      chunkedData.push(searchDataFiltered.slice(i, i + chunkSize));
     }
+
+    console.log(chunkedData);
 
     setChunkedSearchDataFiltered(chunkedData);
   }, [searchDataFiltered])
@@ -247,15 +250,19 @@ export default function Discover() {
 
   const handleClick = (event: any, item: any) => {
     console.log('clicked')
-    // console.log(event.target.classList)
+    console.log(event.target.classList)
     if (
-      !event.target.classList.contains("go2484888251") &&
-      !event.target.classList.contains("go4268192979")
+      // !event.target.classList.contains("go2484888251") &&
+      // !event.target.classList.contains("go4268192979")
+      !(event.target.classList.length == 0)
     ) {
       // console.log(event.target.classList)
       // console.log('Clicked on the div, not the AnimatedHeart component');
+
+      // setIsVisible(!isVisible);
       setModalItem(item);
       onOpen();
+
     }
   };
 
@@ -341,14 +348,14 @@ export default function Discover() {
               }
             />
           </div>
-
-          <div className="flex flex-col flex-wrap max-w-full">
+          
+          <div className={`flex flex-col flex-wrap max-w-full ${isVisible ? styles.visible : styles.hidden}`}>
             {chunkedSearchDataFiltered.map((chunk: any[], chunkIndex: number) => (
-              <div key={chunkIndex} className="flex flex-row flex-wrap max-w-full pb-[1.5%] pt-[1.5%]">
-              {chunk.map((item: any, index: number) => (
-                  <Opportunity key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} />
-              ))}
-          </div>
+              <OpportunityRow key={chunkIndex}>
+                {chunk.map((item: any, index: number) => (
+                  <Opportunity key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} status={'standard'} />
+                ))}
+              </OpportunityRow>
             ))}
           </div>
         </div>
@@ -388,51 +395,51 @@ export default function Discover() {
           base: '!h-full !w-[80vw] !max-w-[100vw] !mr-0 !mt-0',
           wrapper: 'overflow-hidden justify-end !pr-0 !mr-0'
         }}
-        motionProps={{
-          variants : {
-            enter: {
-              x: 0,
-              opacity: 1,
-              transition: {
-                duration: 1.5,
-                ease: "easeOut",
+          motionProps={{
+            variants: {
+              enter: {
+                x: 0,
+                opacity: 1,
+                transition: {
+                  duration: 1.5,
+                  ease: "easeOut",
+                },
               },
-            }, 
-            exit: {
-              x: 500,
-              opacity: 0,
-              transition: {
-                duration: 1.5,
-                ease: "easeIn",
-              },
+              exit: {
+                x: 500,
+                opacity: 0,
+                transition: {
+                  duration: 1.5,
+                  ease: "easeIn",
+                },
+              }
             }
-          }
-        }}
-        backdrop="blur"
-        scrollBehavior="outside"
+          }}
+          backdrop="blur"
+          scrollBehavior="outside"
         >
           <ModalContent>
             {(onClose) => (
               <>
-              <ModalHeader className='flex flex-col align-items mx-[1%]'>
-                <p className='text-center md:text-2xl lg:text-3xl pt-[6%] pb-[4%] border-r border-l border-t border-indigo-600'>{modalItem.name}</p>
-                <div className="flex flex-row w-full border border-indigo-600">
-                  <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
-                  <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
-                </div>
-                <div className="flex flex-row w-full border-r border-l border-b border-indigo-600">
-                  <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
-                  <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
-                </div>
-              </ModalHeader>
+                <ModalHeader className='flex flex-col align-items mx-[1%]'>
+                  <p className='text-center md:text-2xl lg:text-3xl pt-[6%] pb-[4%] border-r border-l border-t border-indigo-600'>{modalItem.name}</p>
+                  <div className="flex flex-row w-full border border-indigo-600">
+                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
+                    <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
+                  </div>
+                  <div className="flex flex-row w-full border-r border-l border-b border-indigo-600">
+                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline!!</div>
+                    <div className='w-1/2 text-center py-[2%]'>Grades!!</div>
+                  </div>
+                </ModalHeader>
                 <ModalBody className='flex flex-col mx-[1%]'>
-                <div className="w-full">
-                {modalItem.description}
-                </div>
-                <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
-                Reviews
-                </p>
-                 <StarRating callback={(e) => console.log(e)} />
+                  <div className="w-full">
+                    {modalItem.description}
+                  </div>
+                  <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
+                    Reviews
+                  </p>
+                  <StarRating callback={(e) => console.log(e)} />
                 </ModalBody>
                 <ModalFooter>
 
