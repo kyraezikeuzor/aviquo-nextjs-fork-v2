@@ -5,6 +5,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const result = await prisma.opportunity.findMany({
     include: {
       users: true,
+      reviews: true,
     },
   });
 
@@ -23,9 +24,6 @@ export async function POST(request: Request): Promise<NextResponse> {
           in: body.oppIds,
         },
       },
-      include: {
-        reviews: true,
-      }
     });
 
     console.log(opportunities);

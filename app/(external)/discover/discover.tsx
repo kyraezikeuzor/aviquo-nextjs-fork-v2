@@ -436,6 +436,11 @@ export default function Discover() {
                   <div className="w-full">
                     {modalItem.description}
                   </div>
+                  {modalItem.reviews.map((item: any, index: number) => (
+                    <div key={index}>
+                      
+                    </div>
+                  ))}
                   {/* <p className='text-center md:text-2xl lg:text-3xl pt-[3%] pb-[3%]'>
                     Reviews
                   </p>
