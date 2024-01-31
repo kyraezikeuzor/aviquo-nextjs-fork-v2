@@ -43,12 +43,7 @@ import { FaHeart, FaHome } from "react-icons/fa";
 import { SearchIcon } from "@/public/SearchIcon";
 
 import { extractFilters, formatRelativeTime } from "@/utils";
-
-import AnimatedHeart from "@/components/Heart";
-
-import { Suspense } from "react";
-
-import Loading from "@/components/Loading";
+import { Opportunity } from "@/components/Opportunity";
 
 export default function Discover() {
   const [searchText, setSearchText] = useState("");
@@ -86,6 +81,7 @@ export default function Discover() {
   };
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
+  const [chunkedSearchDataFiltered, setChunkedSearchDataFiltered] = useState<any>([]);
   // const [opps, setOpps] = useState<object>(user.opportunities);
   const [likedActivites, setLikedActivites] =
     useState<string[]>(getLikedActivites());
@@ -93,6 +89,18 @@ export default function Discover() {
   useEffect(() => {
     saveLikedActivities();
   }, [likedActivites]);
+
+  useEffect(() => {
+    const chunkSize = 3;
+
+    const chunkedData = [];
+
+    for (let i = 0; i < searchDataFiltered.length; i += chunkSize) {
+        chunkedData.push(searchDataFiltered.slice(i, i + chunkSize));
+    }
+
+    setChunkedSearchDataFiltered(chunkedData);
+  }, [searchDataFiltered])
 
   useEffect(() => {
     if (showLiked) {
@@ -105,7 +113,7 @@ export default function Discover() {
     }
   }, [showLiked, likedActivites]);
 
-  const handleLike = (state: boolean, oppId: string) => {
+  const handleLike: (e: boolean, a: string) => void = (state: boolean, oppId: string) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
     // let likes = currentOpp!.users;
     // let url;
@@ -334,48 +342,13 @@ export default function Discover() {
             />
           </div>
 
-          <div className="flex flex-row flex-wrap max-w-full">
-            {searchDataFiltered.map((item: any, index: number) => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ 
-                  opacity: [0.25, 0.4, 0.6, 0.8, 1],
-                  scale: [0.5, 1.1, 1],
-                  // rotate: [0, 360],
-                }}
-                transition={{
-                   duration: 1.3,
-                   ease: "easeInOut" 
-                }}
-                onClick={(e) => handleClick(e, item)}
-                key={index}
-                className="w-[31%] ml-[1%] mr-[1%] mb-[5%]"
-              >
-              <Card
-                key={index}
-                className="max-w-full duration-300 transition-[transition_box-shadow] hover:scale-105 hover:cursor-pointer w-full"
-              >
-                <CardHeader className="flex flex-row items-center w-full mt-[-2.5%] mb-[-5.0%] mr-[-5.0%]">
-                    <h2 className="flex-grow text-base md:text-lg lg:text-xl text-center">
-                      {item.name}
-                    </h2>
-                    <AnimatedHeart
-                      className="self-end justify-self-end animated-heart-section"
-                      likeTrigger={(e, a) => handleLike(e, a)}
-                      oppId={item.id}
-                      liked={likedActivites.includes(item.id)}
-                    />
-                </CardHeader>
-              <CardBody>
-                  <div className="flex flex-wrap pt-[5%] pb-[2.5%] gap-1">
-                    <Tag type="pink">📖 STEM</Tag>
-                    <Tag type="orange">
-                      ⏰ {formatRelativeTime(item.deadline, true)}
-                    </Tag>
-                  </div>
-                </CardBody>
-              </Card>
-              </motion.div>
+          <div className="flex flex-col flex-wrap max-w-full">
+            {chunkedSearchDataFiltered.map((chunk: any[], chunkIndex: number) => (
+              <div key={chunkIndex} className="flex flex-row flex-wrap max-w-full pb-[1.5%] pt-[1.5%]">
+              {chunk.map((item: any, index: number) => (
+                  <Opportunity key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} />
+              ))}
+          </div>
             ))}
           </div>
         </div>
