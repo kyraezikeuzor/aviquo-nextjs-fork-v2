@@ -23,6 +23,9 @@ export async function POST(request: Request): Promise<NextResponse> {
           in: body.oppIds,
         },
       },
+      include: {
+        reviews: true,
+      }
     });
 
     console.log(opportunities);

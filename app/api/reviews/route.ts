@@ -25,13 +25,31 @@ export async function POST(request: Request): Promise<NextResponse> {
     const result = await prisma.post.create({
       data: {
         ...body,
-        upvotes: [],
-        downvotes: [],
+        verified: false,
       },
     });
 
     return NextResponse.json(result);
   } else {
     return NextResponse.json({ status: "fail" });
+  }
+}
+
+export async function PUT(request: Request): Promise<NextResponse> {
+  if (request.body) {
+      const body = await request.json();
+
+      const res = await prisma.review.update({
+          where: {
+              id: body.id
+          },
+          data: {
+              verified: body.isVerified,
+          }
+      });
+
+      return NextResponse.json(res);
+  } else {
+      return NextResponse.json({ status: "fail" });
   }
 }
