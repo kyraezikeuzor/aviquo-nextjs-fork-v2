@@ -281,9 +281,9 @@ export default function Discover() {
       // console.log(event.target.classList)
       // console.log('Clicked on the div, not the AnimatedHeart component');
 
-      setIsCardVisible(!isCardVisible);
-      // setModalItem(item);
-      // onOpen();
+      // setIsCardVisible(!isCardVisible);
+      setModalItem(item);
+      onOpen();
     }
   };
 
@@ -330,7 +330,7 @@ export default function Discover() {
       <p id='baseline'></p>
       <div className="flex flex-row w-full h-full">
         <div className={`scrollbar-hide flex flex-col ${!isCardVisible ? 'gap-3 overflow-y-auto' : 'overflow-y-auto'} !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
               {showLiked ? "My Opportunities" : "Discover"}
             </h1>

@@ -60,7 +60,7 @@ export const Opportunity: React.FC<OpportunityProps> = ({
         >
             {hover ? (<AnimatedGradientBorderTW height="h-full" width="w-full">
                 <Card
-                    className={`max-w-full w-full h-full hover:bg-violet-500 hover:text-white rounded-[7px]`}
+                    className={`max-w-full w-full h-full hover:bg-violet-900 hover:text-white rounded-[7px]`}
                 >
                     <CardHeader className="flex flex-row items-center justify-center w-full mt-[-2.5%] mb-[-5.0%] mr-[-5.0%]">
                         <h2 className="w-[87%] text-base h-[28px] text-center">
