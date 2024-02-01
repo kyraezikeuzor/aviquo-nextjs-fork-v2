@@ -69,10 +69,20 @@ export default function Discover() {
 
   useEffect(() => {
     if (isCardVisible) {
-      animateExpandedCard(scopeExpandedCard.current, {scale: [0, 0.5, 1], rotate: [0, 180,360], borderRadius: ['20%', '50%', '20%'], opacity: [0,0.5,1]}, {ease: 'linear', duration: 2, delay: 0.5})
+      // window.scrollTo({
+      //   top: 0
+      // });
+      animateExpandedCard(scopeExpandedCard.current, { scale: [0, 0.5, 1], borderRadius: ['20%', '50%', '20%'], opacity: [0, 0.5, 1] }, { ease: 'linear', duration: 2, delay: 0.5 })
     }
     if (!isCardVisible && currId) {
-      document.getElementById(currId)!.scrollIntoView({ behavior: 'auto' });
+      const index = currId.indexOf('=');
+      if (index >= 0) {
+        const [f, l] = [parseInt(currId.substring(0, index)) - 1, currId.substring(index+1, currId.length)];
+        document.getElementById(`${f}=${l}`)!.scrollIntoView({ behavior: 'auto' });
+      } else {
+        document.getElementById(currId)!.scrollIntoView({ behavior: 'auto' });
+      }
+      
     }
   }, [isCardVisible])
 
@@ -317,10 +327,11 @@ export default function Discover() {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
+      <p id='baseline'></p>
       <div className="flex flex-row w-full h-full">
-        <div className={`scrollbar-hide flex flex-col ${!isCardVisible ? 'gap-3 overflow-y-auto' : 'overflow-y-hidden'} !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}>
+        <div className={`scrollbar-hide flex flex-col ${!isCardVisible ? 'gap-3 overflow-y-auto' : 'overflow-y-auto'} !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}>
           <div className="flex flex-col gap-2">
-            <h1 id='baseline' className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
+            <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
               {showLiked ? "My Opportunities" : "Discover"}
             </h1>
             <p className="text-theme-text-dark-dimmed">
@@ -360,7 +371,7 @@ export default function Discover() {
             />
           </div>
           {isCardVisible && <div className='flex flex-grow items-center justify-center w-full'>
-            <Card ref={scopeExpandedCard} className="w-4/5 aspect-square bg-blue-500 opacity-0 scale-0 border-[20%]">
+            <Card ref={scopeExpandedCard} className="h-4/5 aspect-square bg-blue-500 opacity-0 scale-0 border-[20%]">
               <Button onClick={(e) => setIsCardVisible(false)}>Click Here</Button>
             </Card>
           </div>}
@@ -454,16 +465,16 @@ export default function Discover() {
                   </div>
                   <div className="w-full flex flex-row pt-[4.5%]">
                     <div className="w-3/5 flex flex-col border-indigo-600 border-l border-t border-b pt-[2%]">
-                    <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Reviews</p>
+                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Reviews</p>
                       <div className="flex flex-row w-full h-full">
                         <div className="flex flex-col w-[70%] h-full">
                           {modalItem.reviews.map((item: any, index: number) => (
-                            <div className="border border-black flex flex-row">
+                            <div key={index} className="border border-black flex flex-row">
                               <p className="flex w-1/5">Anonymous</p>
-                            <div key={index} className="flex flex-col w-4/5">
-                              <p>{"⭐".repeat(item.stars)}</p>
-                              <p className="lg:text-md md:text-sm">{item.text}</p>
-                            </div>
+                              <div key={index} className="flex flex-col w-4/5">
+                                <p>{"⭐".repeat(item.stars)}</p>
+                                <p className="lg:text-md md:text-sm">{item.text}</p>
+                              </div>
                             </div>
                           ))}
                         </div>
