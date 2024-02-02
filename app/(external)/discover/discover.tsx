@@ -5,9 +5,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import styles from './discover.module.css'
+import styles from "./discover.module.css";
 
-import { useAnimate } from "framer-motion"
+import { useAnimate } from "framer-motion";
 
 import { StarRating } from "@/components/ReviewComponent";
 
@@ -34,7 +34,7 @@ import {
   Navbar,
   NavbarContent,
   NavbarItem,
-  Textarea
+  Textarea,
 } from "@nextui-org/react";
 
 import { FaHeart, FaHome } from "react-icons/fa";
@@ -63,8 +63,8 @@ export default function Discover() {
   const [showLiked, setShowLiked] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(false);
 
-  const [scopeExpandedCard, animateExpandedCard] = useAnimate()
-  const [scopeBackground, animateBackground] = useAnimate()
+  const [scopeExpandedCard, animateExpandedCard] = useAnimate();
+  const [scopeBackground, animateBackground] = useAnimate();
   const [currId, setCurrentId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -72,19 +72,31 @@ export default function Discover() {
       // window.scrollTo({
       //   top: 0
       // });
-      animateExpandedCard(scopeExpandedCard.current, { scale: [0, 0.5, 1], borderRadius: ['20%', '50%', '20%'], opacity: [0, 0.5, 1] }, { ease: 'linear', duration: 2, delay: 0.5 })
+      animateExpandedCard(
+        scopeExpandedCard.current,
+        {
+          scale: [0, 0.5, 1],
+          borderRadius: ["20%", "50%", "20%"],
+          opacity: [0, 0.5, 1],
+        },
+        { ease: "linear", duration: 2, delay: 0.5 }
+      );
     }
     if (!isCardVisible && currId) {
-      const index = currId.indexOf('=');
+      const index = currId.indexOf("=");
       if (index >= 0) {
-        const [f, l] = [parseInt(currId.substring(0, index)) - 1, currId.substring(index+1, currId.length)];
-        document.getElementById(`${f}=${l}`)!.scrollIntoView({ behavior: 'auto' });
+        const [f, l] = [
+          parseInt(currId.substring(0, index)) - 1,
+          currId.substring(index + 1, currId.length),
+        ];
+        document
+          .getElementById(`${f}=${l}`)!
+          .scrollIntoView({ behavior: "auto" });
       } else {
-        document.getElementById(currId)!.scrollIntoView({ behavior: 'auto' });
+        document.getElementById(currId)!.scrollIntoView({ behavior: "auto" });
       }
-      
     }
-  }, [isCardVisible])
+  }, [isCardVisible]);
 
   const getLikedActivites = () => {
     if (global?.window !== undefined) {
@@ -104,7 +116,8 @@ export default function Discover() {
   };
 
   const [searchDataFiltered, setSearchDataFiltered] = useState<any>([]);
-  const [chunkedSearchDataFiltered, setChunkedSearchDataFiltered] = useState<any>([]);
+  const [chunkedSearchDataFiltered, setChunkedSearchDataFiltered] =
+    useState<any>([]);
   // const [opps, setOpps] = useState<object>(user.opportunities);
   const [likedActivites, setLikedActivites] =
     useState<string[]>(getLikedActivites());
@@ -125,7 +138,7 @@ export default function Discover() {
     console.log(chunkedData);
 
     setChunkedSearchDataFiltered(chunkedData);
-  }, [searchDataFiltered])
+  }, [searchDataFiltered]);
 
   useEffect(() => {
     if (showLiked) {
@@ -138,7 +151,10 @@ export default function Discover() {
     }
   }, [showLiked, likedActivites]);
 
-  const handleLike: (e: boolean, a: string) => void = (state: boolean, oppId: string) => {
+  const handleLike: (e: boolean, a: string) => void = (
+    state: boolean,
+    oppId: string
+  ) => {
     // const currentOpp = ecItems.find((obj: any) => obj.id === oppId);
     // let likes = currentOpp!.users;
     // let url;
@@ -327,9 +343,13 @@ export default function Discover() {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-      <p id='baseline'></p>
+      <p id="baseline"></p>
       <div className="flex flex-row w-full h-full">
-        <div className={`scrollbar-hide flex flex-col ${!isCardVisible ? 'gap-3 overflow-y-auto' : 'overflow-y-auto'} !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}>
+        <div
+          className={`scrollbar-hide flex flex-col ${
+            !isCardVisible ? "gap-3 overflow-y-auto" : "overflow-y-auto"
+          } !pl-[6%] !pr-[6%] w-[80%] h-max-screen pt-[2%]`}
+        >
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-semibold text-theme-text-more-dark md:text-4xl lg:text-5xl">
               {showLiked ? "My Opportunities" : "Discover"}
@@ -370,21 +390,44 @@ export default function Discover() {
               }
             />
           </div>
-          {isCardVisible && <div className='flex flex-grow items-center justify-center w-full'>
-            <Card ref={scopeExpandedCard} className="h-4/5 aspect-square bg-blue-500 opacity-0 scale-0 border-[20%]">
-              <Button onClick={(e) => setIsCardVisible(false)}>Click Here</Button>
-            </Card>
-          </div>}
+          {isCardVisible && (
+            <div className="flex items-center justify-center flex-grow w-full">
+              <Card
+                ref={scopeExpandedCard}
+                className="h-4/5 aspect-square bg-blue-500 opacity-0 scale-0 border-[20%]"
+              >
+                <Button onClick={(e) => setIsCardVisible(false)}>
+                  Click Here
+                </Button>
+              </Card>
+            </div>
+          )}
 
-          {!isCardVisible && <div className={`flex flex-col flex-wrap max-w-full ${isCardVisible ? styles.hidden : styles.visible} ${isCardVisible && 'h-[5px]'}`}>
-            {chunkedSearchDataFiltered.map((chunk: any[], chunkIndex: number) => (
-              <OpportunityRow key={chunkIndex}>
-                {chunk.map((item: any, index: number) => (
-                  <Opportunity id={`${chunkIndex}=${index}`} key={index} clickCallback={handleClick} likeCallback={handleLike} likedActivites={likedActivites} item={item} status={'standard'} />
-                ))}
-              </OpportunityRow>
-            ))}
-          </div>}
+          {!isCardVisible && (
+            <div
+              className={`flex flex-col flex-wrap max-w-full ${
+                isCardVisible ? styles.hidden : styles.visible
+              } ${isCardVisible && "h-[5px]"}`}
+            >
+              {chunkedSearchDataFiltered.map(
+                (chunk: any[], chunkIndex: number) => (
+                  <OpportunityRow key={chunkIndex}>
+                    {chunk.map((item: any, index: number) => (
+                      <Opportunity
+                        id={`${chunkIndex}=${index}`}
+                        key={index}
+                        clickCallback={handleClick}
+                        likeCallback={handleLike}
+                        likedActivites={likedActivites}
+                        item={item}
+                        status={"standard"}
+                      />
+                    ))}
+                  </OpportunityRow>
+                )
+              )}
+            </div>
+          )}
         </div>
         <div className="flex flex-col w-[20%] drop-shadow-lg p-6 mb-6 bg-white rounded-xl px-[2.5%] !mr-[5%] h-fit !mt-[2.5%]">
           <FilterBox
@@ -418,10 +461,13 @@ export default function Discover() {
           ></FilterBox>
           <Divider />
         </div>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} classNames={{
-          base: '!h-full !w-[80vw] !max-w-[100vw] !mr-0 !mt-0',
-          wrapper: 'overflow-hidden justify-end !pr-0 !mr-0'
-        }}
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          classNames={{
+            base: "!h-full !w-[80vw] !max-w-[100vw] !mr-0 !mt-0",
+            wrapper: "overflow-hidden justify-end !pr-0 !mr-0",
+          }}
           motionProps={{
             variants: {
               enter: {
@@ -439,8 +485,8 @@ export default function Discover() {
                   duration: 1.5,
                   ease: "easeIn",
                 },
-              }
-            }
+              },
+            },
           }}
           backdrop="blur"
           scrollBehavior="outside"
@@ -448,54 +494,117 @@ export default function Discover() {
           <ModalContent>
             {(onClose) => (
               <>
-                <ModalHeader className='flex flex-col align-items mx-[1%]'>
-                  <p className='text-center md:text-2xl lg:text-3xl pt-[6%] pb-[4%] border-r border-l border-t border-indigo-600'>{modalItem.name}</p>
+                <ModalHeader className="flex flex-col align-items mx-[1%]">
+                  <p className="text-center md:text-2xl lg:text-3xl pt-[6%] pb-[4%] border-r border-l border-t border-indigo-600">
+                    {modalItem.name}
+                  </p>
                   <div className="flex flex-row w-full border border-indigo-600">
-                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Deadline: {formatRelativeTime(modalItem.deadline)}</div>
-                    <div className='w-1/2 text-center py-[2%]'>Grades: {modalItem.education}</div>
+                    <div className="w-1/2 text-center border-r border-indigo-600 py-[2%]">
+                      Deadline: {formatRelativeTime(modalItem.deadline)}
+                    </div>
+                    <div className="w-1/2 text-center py-[2%]">
+                      Grades: {modalItem.education}
+                    </div>
                   </div>
-                  <div className="flex flex-row w-full border-r border-l border-b border-indigo-600">
-                    <div className='w-1/2 text-center border-r border-indigo-600 py-[2%]'>Subjects: {modalItem.subjects}</div>
-                    <div className='w-1/2 text-center py-[2%]'>Type: {modalItem.type}</div>
+                  <div className="flex flex-row w-full border-b border-l border-r border-indigo-600">
+                    <div className="w-1/2 text-center border-r border-indigo-600 py-[2%]">
+                      Subjects: {modalItem.subjects}
+                    </div>
+                    <div className="w-1/2 text-center py-[2%]">
+                      Type: {modalItem.type}
+                    </div>
                   </div>
                 </ModalHeader>
-                <ModalBody className='flex flex-col mx-[1%]'>
-                  <div className="w-full">
-                    {modalItem.description}
-                  </div>
+                <ModalBody className="flex flex-col mx-[1%]">
+                  <div className="w-full">{modalItem.description}</div>
                   <div className="w-full flex flex-row pt-[4.5%]">
                     <div className="w-3/5 flex flex-col border-indigo-600 border-l border-t border-b pt-[2%]">
-                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Reviews</p>
+                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">
+                        Reviews
+                      </p>
                       <div className="flex flex-row w-full h-full">
                         <div className="flex flex-col w-[70%] h-full">
                           {modalItem.reviews.map((item: any, index: number) => (
-                            <div key={index} className="border border-black flex flex-row">
+                            <div
+                              key={index}
+                              className="flex flex-row border border-black"
+                            >
                               <p className="flex w-1/5">Anonymous</p>
                               <div key={index} className="flex flex-col w-4/5">
                                 <p>{"⭐".repeat(item.stars)}</p>
-                                <p className="lg:text-md md:text-sm">{item.text}</p>
+                                <p className="lg:text-md md:text-sm">
+                                  {item.text}
+                                </p>
                               </div>
                             </div>
                           ))}
                         </div>
                         <div className="flex flex-col w-[30%] border-l border-indigo-600 h-full justify-between pl-[1.75%]">
-                          <p className="text-bold">5⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 5).length} Reviews</p>
-                          <p className="text-bold">4⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 4).length} Reviews</p>
-                          <p className="text-bold">3⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 3).length} Reviews</p>
-                          <p className="text-bold">2⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 2).length} Reviews</p>
-                          <p className="text-bold">1⭐ → {modalItem.reviews.filter((obj: any) => obj.stars === 1).length} Reviews</p>
+                          <p className="text-bold">
+                            5⭐ →{" "}
+                            {
+                              modalItem.reviews.filter(
+                                (obj: any) => obj.stars === 5
+                              ).length
+                            }{" "}
+                            Reviews
+                          </p>
+                          <p className="text-bold">
+                            4⭐ →{" "}
+                            {
+                              modalItem.reviews.filter(
+                                (obj: any) => obj.stars === 4
+                              ).length
+                            }{" "}
+                            Reviews
+                          </p>
+                          <p className="text-bold">
+                            3⭐ →{" "}
+                            {
+                              modalItem.reviews.filter(
+                                (obj: any) => obj.stars === 3
+                              ).length
+                            }{" "}
+                            Reviews
+                          </p>
+                          <p className="text-bold">
+                            2⭐ →{" "}
+                            {
+                              modalItem.reviews.filter(
+                                (obj: any) => obj.stars === 2
+                              ).length
+                            }{" "}
+                            Reviews
+                          </p>
+                          <p className="text-bold">
+                            1⭐ →{" "}
+                            {
+                              modalItem.reviews.filter(
+                                (obj: any) => obj.stars === 1
+                              ).length
+                            }{" "}
+                            Reviews
+                          </p>
                         </div>
                       </div>
                     </div>
                     <div className="w-2/5 flex flex-col border-indigo-600 border py-[2%]">
-                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">Post A Review</p>
-                      <div className="self-center"><StarRating callback={(e) => console.log(e)} /></div>
+                      <p className="self-center pb-[2.5%] md:text-xl lg:text-2xl">
+                        Post A Review
+                      </p>
+                      <div className="self-center">
+                        <StarRating callback={(e) => console.log(e)} />
+                      </div>
                       <Textarea
                         label="Comments (Optional)"
                         placeholder="Any specific notes/feedback?"
                         className="max-w-3/5 w-3/5 pb-[2.5%] pt-[2.5%] self-center"
                       />
-                      <Button color="secondary" variant="ghost" className='w-3/5 self-center py-3'>
+                      <Button
+                        color="secondary"
+                        variant="ghost"
+                        className="self-center w-3/5 py-3"
+                      >
                         Submit Review
                       </Button>
                     </div>
@@ -505,9 +614,7 @@ export default function Discover() {
                   </p>
                   <StarRating callback={(e) => console.log(e)} /> */}
                 </ModalBody>
-                <ModalFooter>
-
-                </ModalFooter>
+                <ModalFooter></ModalFooter>
               </>
             )}
           </ModalContent>
