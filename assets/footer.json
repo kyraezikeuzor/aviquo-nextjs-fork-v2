@@ -1,0 +1,18 @@
+[
+    {
+        "name" : "About Aviquo",
+        "pages" : ["Impact","Who We Are", "Mission"]
+    },
+    {
+        "name" : "Resources",
+        "pages" : ["Scholars"]
+    },
+    {
+        "name" : "Programs",
+        "pages" : ["Programs"]
+    },
+    {
+        "name" : "Careers",
+        "pages" : ["Join the Team"]
+    }
+]

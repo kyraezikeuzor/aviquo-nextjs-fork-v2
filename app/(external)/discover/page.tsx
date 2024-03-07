@@ -7,5 +7,7 @@ export default async function ForumPage() {
   const user = (await getPageSession())?.user;
   // console.log(user);
 
-  return <Discover></Discover>;
+  return <Discover>
+    
+  </Discover>;
 }

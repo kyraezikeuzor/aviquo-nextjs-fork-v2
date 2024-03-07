@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-// import Heart from "react-animated-heart";
+
 import Heart from "react-heart"
 
 export default function AnimatedHeart({ likeTrigger, className, oppId, liked }: { likeTrigger: (l: boolean, o: string) => void, className: string, oppId: string, liked: boolean }) {

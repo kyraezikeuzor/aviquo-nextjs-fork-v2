@@ -1,116 +1,127 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
 
-/* For IE, Edge and Firefox */
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
 
 :root {
-  /* Colors */
-  --clr-surface: #fefdfd;
-  --clr-text: #232323;
-  --clr-blue-500: #0b2439;
-  --clr-blue-400: #3981f6;
-  --clr-blue-300: #f3f8fc;
-  --clr-seablue-400: #1088c9;
-  --clr-purple-500: #3f1c3d;
-  --clr-pink-400: #d16ede;
-  --clr-grey-500: rgb(84, 83, 83);
-  --clr-grey-400: rgb(173, 168, 168);
-  --clr-grey-300: #e7e9ec;
-  --clr-grey-200: #f9fafb;
-  --clr-green-400: #84d463;
-  /* Font Families */
+  /* COLORS */
+  --clr-base: #fefdfd;
+  --clr-base-text: #232323;
+  --clr-base-accent:rgb(243, 243, 243);
+
+  --clr-blue-dark: #0b2439;
+  --clr-blue-base: #3981f6;
+  --clr-blue-light: #f3f8fc;
+  --clr-seablue: #1088c9;
+
+  --clr-purple-base: #3f1c3d;
+
+  --clr-pink-base: #d16ede;
+
+  --clr-grey-dark: rgb(84, 83, 83);
+  --clr-grey: rgb(173, 168, 168);
+  --clr-grey-light: #e7e9ec;
+  --clr-grey-extralight: #f9fafb;
+
+  --clr-green: #84d463;
+
+  /* FONT FAMILIES */
   --ff-base: "Inter", sans-serif;
   --ff-accent: "Young Serif", serif;
-  /*Font Weights*/
+
+  /* FONT WEIGHTS */
   --fw-normal: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-black: 800;
-  /* Font Sizes */
-  --fs--h1: 5.25rem;
-  --fs--h2: 4.75rem;
-  --fs--h3: 4.25rem;
-  --fs--h4: 3.75rem;
-  --fs--h5: 2.25rem;
-  --fs--h6: 1.75rem;
-  --fs-200: 0.75rem;
-  --fs-300: 1rem;
-  --fs-400: 1.125rem;
-  --fs-500: 1.375rem;
-  --fs-600: 1.75rem;
-  --fs-700: 2.25rem;
-  /* Padding */
-  --p-base: 8vh 6vw;
-  /* Width */
-  --w-sidebar: 50px;
-  /* Border */
-  --br-base: 8px;
-  --b-primary: 2px solid rgb(247, 247, 247);
-  /* Shdaows */
-  --bs-base: rgba(0, 0, 0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
-  --bs-secondary: 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --bs--card: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
-    0px 3px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* FONT SIZES */
+  --fs-h1: 5.25rem;
+  --fs-h2: 4.75rem;
+  --fs-h3: 4.25rem;
+  --fs-h4: 3.75rem;
+  --fs-h5: 2.25rem;
+  --fs-h6: 1.75rem;
+
+  /* PADDING */
+  --pdg-base: 8vh 6vw;
+
+  /* WIDTH */
+
+  /* BORDER */
+  --bdr-base: 2px solid rgb(247, 247, 247);
+
+  /* SHADOWS */
+  --shdw-base: rgba(0, 0, 0, 0.05) 0 6px 24px, rgba(217, 216, 216, 0.08) 0 0 0 1px;
+  --shdw-light: 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  /*GRADIENT*/
+ --grdt-base: radial-gradient(at 20% 80%, rgba(247, 223, 203, 0.4) 20px, rgba(252, 208, 246, 0.247) 30%, var(--clr-base) 50%), url('/bg_landing.png');
+
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --clr-base: #1B1C22;
+    --clr-base-text: #F9F8F8;
+    --clr-base-accent: rgba(68, 65, 65, 0.945);
+
+     /*GRADIENT*/
+    --grdt-base: radial-gradient(at 20% 30%, rgb(255, 230, 230) 30px, rgb(255, 255, 219) 30%, var(--clr-base) 50%), url('/bg_landing.png');
+
   }
+}
+
+:root.dark {
+  --clr-base: #1B1C22;
+  --clr-base-text: #F9F8F8;
+  --clr-base-accent: rgba(68, 65, 65, 0.945);
+
+   /*GRADIENT*/
+   --grdt-base: radial-gradient(at 20% 30%, rgba(247, 119, 119, 0.4) 10px, rgba(245, 144, 231, 0.247) 30%, var(--clr-base) 50%), url('/bg_landing.png');
+
 }
 
 @media screen and (max-width: 960px) {
   :root {
     /*Font Sizes */
-    --fs--h1: calc(5.25rem * 0.8);
-    --fs--h2: calc(4.75rem * 0.8);
-    --fs--h3: calc(4.25rem * 0.8);
-    --fs--h4: calc(3.75rem * 0.8);
-    --fs--h5: calc(2.25rem * 0.8);
-    --fs--h6: calc(1.75rem * 0.8);
-    --w-sidebar: 0px;
+    --fs-h1: calc(5.25rem * 0.8);
+    --fs-h2: calc(4.75rem * 0.8);
+    --fs-h3: calc(4.25rem * 0.8);
+    --fs-h4: calc(3.75rem * 0.8);
+    --fs-h5: calc(2.25rem * 0.8);
+    --fs-h6: calc(1.75rem * 0.8);
   }
 }
 
 * {
-  /* color: var(--clr-text); */
+  color: var(--clr-base-text);
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 svg {
   box-sizing: content-box;
+  fill: var(--clr-base-text);
 }
 
 body {
-  font-size: 1.125rem;
   line-height: 1.5;
+  background: var(--grdt-base);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
 }
+
 
 main {
   width: min(120ch, 100% - 4rem);
   margin-inline: auto;
-  padding-top: 5vh;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   line-height: 1;
   font-weight: var(--fw-semibold);
 }
@@ -147,16 +158,27 @@ p {
   font-size: var(--fs-300);
 }
 
-a,
-li a {
+a, li a {
   cursor: pointer;
 }
 
-img,
-svg,
-video {
+img, svg, video {
   max-width: 100%;
   display: block;
+}
+
+/*SCROLLBAR STYLES*/
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Define the styles for the scrollbar */

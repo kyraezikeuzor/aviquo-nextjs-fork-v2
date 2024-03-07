@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../app/(external)/database/components/SearchBar";
 
 type ModalProps = {
   children: React.ReactNode;

@@ -20,15 +20,15 @@
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.7.1",
     "@vercel/blob": "^0.16.1",
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "framer-motion": "^10.16.16",
     "lucia": "^2.7.6",
-    "next": "14.0.4",
+    "next": "^14.1.0",
     "next-auth": "^4.24.5",
     "prettier": "^3.1.1",
     "pusher": "^5.2.0",
     "pusher-js": "^8.4.0-rc2",
-    "react": "^18",
+    "react": "^18.2.0",
     "react-animated-heart": "^0.0.8",
     "react-dom": "^18",
     "react-heart": "^1.0.6",
@@ -36,6 +36,7 @@
     "react-icons": "^4.2.0",
     "react-pro-sidebar": "^0.6.0",
     "sass": "^1.69.5",
+    "tailwind": "^4.0.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -53,6 +54,6 @@
     "postcss": "^8",
     "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5.3.3"
   }
 }
